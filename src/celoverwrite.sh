@@ -20,7 +20,7 @@ echo -e "$GRE Нажмите любую клавишу чтобы вернуть
 read -s -n 1
 }
 
-workdir='/root/menu/src'
+workdir='/root/setupmenu/src'
 
 #Начало работы
 clear

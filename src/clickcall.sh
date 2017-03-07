@@ -21,7 +21,7 @@ read -s -n 1
 }
 
 #Рабочая папка
-workdir='/root/menu/src'
+workdir='/root/setupmenu/src'
 
 echo "Начинаем..."
 cp $workdir/chcall.php /var/www/html

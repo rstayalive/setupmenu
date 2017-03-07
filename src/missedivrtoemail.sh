@@ -23,7 +23,7 @@ read -s -n 1
 #Переменные callerid и nodest
 callerid='${CALLERID(num)}'
 nodest='${NODEST}'
-workdir='/root/menu/src'
+workdir='/root/setupmenu/src'
 
 #Запросы
 echo -e "\n$GREС какого email будем отправлять письма?$DEF"

@@ -32,7 +32,7 @@ echo
 done
 eval $1=$temp
 }
-workdir='/root/menu/src'
+workdir='/root/setupmenu/src'
 
 #Начало работы
 clear

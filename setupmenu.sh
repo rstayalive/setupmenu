@@ -6,7 +6,6 @@
 #Писалось на коленке, так что как то так.
 #Обновления выходят тогда, когда находятся ошибки или нужен новый функционал.
 #Ну дальше везде каменты есть, разберетесь что к чему.
-#Скрипт можете использовать и распространять как хотите, но обязательно запускайте его из /tmp так как идет привязка скриптов к /tmp.
 #На фтп просьба не ломиться и не херить там все, там кроме скриптов нихрена нет.
 title="Скрипт автоматизации развертывания freepbx"
 ver="Версия 3.5"
@@ -17,9 +16,8 @@ GRE=\\e[92m
 DEF=\\e[0m
 
 #Пути на закачку и тд
-updpath=''
-path='/root/menu/src/'
-workdir='/root/menu/'
+updpath='https://raw.githubusercontent.com/rstayalive/setupmenu/master/setupmenu.sh'
+path='/root/setupmenu/src/'
 scupd='setupmenu.sh'
 postfixsetup='postfixsetup.sh'
 xtablessetup='xtables_geoip.sh'
@@ -43,8 +41,8 @@ zvonilka='zvonilka.sh'
 #Обновление скрипта
 updatescript()
 {
-cd /tmp
-wget $updpath/$scupd -r -N -nd
+cd $path
+wget $updpath -r -N -nd
 chmod 777 $scupd
 repeat=false
 sh $0
@@ -216,11 +214,11 @@ fi
 }
 
 #Очистка остаточных файлов после работы скрипта
-cleanup()
-{
-cd $workdir
-rm -rf zvonki* postfix* xtables* auto* disable* freepbx* stat* firewall* missed* russian* isoft* prostiezvonki* asternic*  celoverwrite* iprules* callback* click2call*
-}
+#cleanup()
+#{
+#cd $workdir
+#rm -rf zvonki* postfix* xtables* auto* disable* freepbx* stat* firewall* missed* russian* isoft* prostiezvonki* asternic*  celoverwrite* iprules* callback* click2call*
+#}
 
 #sysinfo
 arc=`arch`

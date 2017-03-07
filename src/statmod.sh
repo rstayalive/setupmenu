@@ -17,19 +17,18 @@ waitend()
 echo -e "$GRE Нажмите любую клавишу чтобы вернуться в меню $DEF"
 read -s -n 1
 }
-workdir='/root/menu/src'
+workdir='/root/setupmenu/src'
 
 clear
 echo "Начинаю установку модуля расширенной статистики звонков"
+cp $workdir/asternic_cdr-1.6.3.tgz /tmp
 cd /tmp
-wget ftp://ftp:Profesora448912@46.72.255.6/asternic_cdr-1.6.3.tgz
 tar -zxvf asternic_cdr-1.6.3.tgz
 cp -R asternic_cdr /var/www/html/admin/modules/
 fwconsole chown
 fwconsole moduleadmin install asternic_cdr
 fwconsole reload
-br
+rm -rf /tmp/asternic*
 echo "Модуль установлен и активирован, в веб интерфейсе freepbx Вкладка reports"
 sleep 2
-br
 waitend
