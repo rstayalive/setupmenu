@@ -17,6 +17,7 @@ DEF=\\e[0m
 
 #Пути на закачку и тд
 updpath='https://raw.githubusercontent.com/rstayalive/setupmenu/master/setupmenu.sh'
+workdir='/root/setupmenu/'
 path='/root/setupmenu/src/'
 scupd='setupmenu.sh'
 postfixsetup='postfixsetup.sh'
@@ -41,7 +42,7 @@ zvonilka='zvonilka.sh'
 #Обновление скрипта
 updatescript()
 {
-cd $path
+cd $workdir
 wget $updpath -r -N -nd
 chmod 777 $scupd
 repeat=false
