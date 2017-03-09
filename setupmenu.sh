@@ -52,111 +52,111 @@ exit 0
 #Скрипт настройки postfix для отправки писем с астера
 postfixsetup()
 {
-cd $workdir
+cd $path
 chmod 777 $postfixsetup
 sh $postfixsetup
 }
 #Скрипт установки geoip на iptables
 xtablessetup()
 {
-cd $workdir
+cd $path
 chmod 777 $xtablessetup
 sh $xtablessetup
 }
 #Скрипт настройки автообновления системы
 autoupdatesys()
 {
-cd $workdir
+cd $path
 chmod 777 $autoupdatesys
 sh $autoupdatesys
 }
 #Скрипт отключения ненужных модулей freepbx
 disablemodules()
 {
-cd $workdir
+cd $path
 chmod 777 $disablemodules
 sh $disablemodules
 }
 # Скрипт обновления freepbx
 freepbxupd()
 {
-cd $workdir
+cd $path
 chmod 777 $freepbxupd
 sh $freepbxupd
 }
 # Скрипт установки модуля статистики asternic
 statmod()
 {
-cd $workdir
+cd $path
 chmod 777 $statmod
 sh $statmod
 }
 #Скрипт который переписывает cel.conf
 celoverwrite()
 {
-cd $workdir
+cd $path
 chmod 777 $celoverwrite
 sh $celoverwrite
 }
 # Скрипт установки софта
 isoft()
 {
-cd $workdir
+cd $path
 chmod 777 $isoft
 sh $isoft
 }
 # Скрипт простых звонков
 prostiezvonki()
 {
-cd $workdir
+cd $path
 chmod 777 $prostiezvonki
 sh $prostiezvonki
 }
 #Уведомление о пропущенном звонке из групп, очередей и ivr меню
 missedivrtoemail()
 {
-cd $workdir
+cd $path
 chmod 777 $missedivrtoemail
 bash $missedivrtoemail
 }
 #Отчет каждый день на почту о пропущенных звонках в 23:59
 missedreport()
 {
-cd $workdir
+cd $path
 chmod 777 $missedreport
 bash $missedreport
 }
 zvonilka()
 {
-cd $workdir
+cd $path
 chmod 777 $zvonilka
 bash $zvonilka
 }
 #Настройка callback с сайта
 callback()
 {
-cd $workdir
+cd $path
 chmod 777 $callback
 bash $callback
 }
 #Скрипт установки стандартных правил для FreePBX
 iprulesdef()
 {
-cd $workdir
+cd $path
 chmod 777 $iprulesdef
 bash $iprulesdef
 }
 #Скрипт установки расширеных правил безопасности
 iprulesgeoip()
 {
-cd $workdir
+cd $path
 chmod 777 $iprulesgeoip
 bash $iprulesgeoip
 }
 #Реализация change log
 changelog()
 {
-cd $workdir
+cd $path
 cat changelog.txt | less
 br
 }
