@@ -53,7 +53,6 @@ exit 0
 postfixsetup()
 {
 cd $workdir
-wget $path/$postfixsetup -r -N -nd
 chmod 777 $postfixsetup
 sh $postfixsetup
 }
@@ -61,7 +60,6 @@ sh $postfixsetup
 xtablessetup()
 {
 cd $workdir
-wget $path/$xtablessetup -r -N -nd
 chmod 777 $xtablessetup
 sh $xtablessetup
 }
@@ -69,7 +67,6 @@ sh $xtablessetup
 autoupdatesys()
 {
 cd $workdir
-wget $path/$autoupdatesys -r -N -nd
 chmod 777 $autoupdatesys
 sh $autoupdatesys
 }
@@ -77,7 +74,6 @@ sh $autoupdatesys
 disablemodules()
 {
 cd $workdir
-wget $path/$disablemodules -r -N -nd
 chmod 777 $disablemodules
 sh $disablemodules
 }
@@ -85,7 +81,6 @@ sh $disablemodules
 freepbxupd()
 {
 cd $workdir
-wget $path/$freepbxupd -r -N -nd
 chmod 777 $freepbxupd
 sh $freepbxupd
 }
@@ -93,7 +88,6 @@ sh $freepbxupd
 statmod()
 {
 cd $workdir
-wget $path/$statmod -r -N -nd
 chmod 777 $statmod
 sh $statmod
 }
@@ -101,7 +95,6 @@ sh $statmod
 celoverwrite()
 {
 cd $workdir
-wget $path/$celoverwrite -r -N -nd
 chmod 777 $celoverwrite
 sh $celoverwrite
 }
@@ -109,7 +102,6 @@ sh $celoverwrite
 isoft()
 {
 cd $workdir
-wget $path/$isoft -r -N -nd
 chmod 777 $isoft
 sh $isoft
 }
@@ -117,7 +109,6 @@ sh $isoft
 prostiezvonki()
 {
 cd $workdir
-wget $path/$prostiezvonki -r -N -nd
 chmod 777 $prostiezvonki
 sh $prostiezvonki
 }
@@ -125,7 +116,6 @@ sh $prostiezvonki
 missedivrtoemail()
 {
 cd $workdir
-wget $path/$missedivrtoemail -r -N -nd
 chmod 777 $missedivrtoemail
 bash $missedivrtoemail
 }
@@ -133,14 +123,12 @@ bash $missedivrtoemail
 missedreport()
 {
 cd $workdir
-wget $path/$missedreport -r -N -nd
 chmod 777 $missedreport
 bash $missedreport
 }
 zvonilka()
 {
 cd $workdir
-wget $path/$zvonilka -r -N -nd
 chmod 777 $zvonilka
 bash $zvonilka
 }
@@ -148,7 +136,6 @@ bash $zvonilka
 callback()
 {
 cd $workdir
-wget $path/$callback -r -N -nd
 chmod 777 $callback
 bash $callback
 }
@@ -156,7 +143,6 @@ bash $callback
 iprulesdef()
 {
 cd $workdir
-wget $path/$iprulesdef -r -N -nd
 chmod 777 $iprulesdef
 bash $iprulesdef
 }
@@ -164,7 +150,6 @@ bash $iprulesdef
 iprulesgeoip()
 {
 cd $workdir
-wget $path/$iprulesgeoip -r -N -nd
 chmod 777 $iprulesgeoip
 bash $iprulesgeoip
 }
@@ -172,7 +157,6 @@ bash $iprulesgeoip
 changelog()
 {
 cd $workdir
-wget $path/changelog.txt -r -N -nd
 cat changelog.txt | less
 br
 }
