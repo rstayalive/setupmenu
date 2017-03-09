@@ -32,7 +32,7 @@ echo -e "\n$GREНа какой ящик отправлять?$DEF"
 read emailto ;
 
 #Выкачиваем sendEmail.pl и кладем его в /usr/local/bin/
-cp $nodest/sendEmail.pl /usr/local/bin/
+cp $workdir/sendEmail.pl /usr/local/bin/
 cd /usr/local/bin/
 chmod 777 sendEmail.pl
 cd /

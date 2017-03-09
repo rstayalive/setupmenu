@@ -13,7 +13,6 @@ if [ -z `rpm -qa $1` ]; then
 	yum -y install $1
 else
 	echo "Пакет $1 уже установлен"
-	br
 fi
 }
 
