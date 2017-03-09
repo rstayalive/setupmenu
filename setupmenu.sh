@@ -18,7 +18,7 @@ DEF=\\e[0m
 #Пути на закачку и тд
 updpath='https://raw.githubusercontent.com/rstayalive/setupmenu/master/setupmenu.sh'
 workdir='/root/setupmenu/'
-path='/root/setupmenu/src/'
+path='/root/setupmenu/src'
 scupd='setupmenu.sh'
 postfixsetup='postfixsetup.sh'
 xtablessetup='xtables_geoip.sh'
