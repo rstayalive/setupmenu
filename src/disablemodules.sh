@@ -43,6 +43,11 @@ read -s -n 1
 		fwconsole moduleadmin disable sangomacrm
 		fwconsole moduleadmin disable zulu
 		fwconsole moduleadmin disable rmsadmin
+		fwconsole moduleadmin disable webcallback
+		fwconsole moduleadmin disable voicemail_report
+		fwconsole moduleadmin disable vmnotify
+		fwconsole moduleadmin disable faxpro
+		fwconsole moduleadmin disable cos
 		echo "Модули успешно отключены"
 		fwconsole reload
 waitend
