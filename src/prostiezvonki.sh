@@ -159,9 +159,9 @@ echo -e "
         unzip prostiezvonki_freePBX_asterisk11_x64.zip
         echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
-		fwconsole chown
-		fwconsole moduleadmin install prostiezvonki
-		fwconsole reload
+		amportal chown
+		amportal a ma install prostiezvonki
+		amportal reload
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib64/
 		cp libProtocolLib.so /usr/lib/
@@ -170,8 +170,8 @@ echo -e "
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
-		fwconsole chown
-		fwconsole reload
+		amportal chown
+		amportal reload
         echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         cd /etc/asterisk/
@@ -190,9 +190,9 @@ echo -e "
         unzip prostiezvonki_freePBX_asterisk11_x86.zip
         echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
-		fwconsole chown
-		fwconsole moduleadmin install prostiezvonki
-		fwconsole reload
+		amportal chown
+		amportal a ma install prostiezvonki
+		amportal reload
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib/
 		cp libProtocolLib.so /var/lib/
@@ -200,8 +200,8 @@ echo -e "
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
-		fwconsole chown
-		fwconsole reload
+		amportal chown
+		amportal reload
         echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         cd /etc/asterisk/
