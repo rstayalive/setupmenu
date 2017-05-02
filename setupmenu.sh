@@ -34,6 +34,7 @@ callback='callback.sh'
 iprulesdef='iprulesdef.sh'
 iprulesgeoip='iprulesgeoip.sh'
 zvonilka='zvonilka.sh'
+websecure='websecure.sh'
 
 #####################################
 #Функционал разбитый на скрипты
@@ -158,6 +159,13 @@ changelog()
 cd $path
 cat changelog.txt | less
 br
+}
+#.htaccess для httpd
+websecure()
+{
+cd $path
+chmod 777 $websecure
+bash $websecure
 }
 #Y/N
 myread_yn()
@@ -345,6 +353,8 @@ Linux $kern x$arc FreePBX $versionpbx
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ Настроить Postfix       	     │
 │ ├───┼──────────────────────────────────────┤
+├─┤$GRE 5 $DEF│ Настроить htaccess для httpd 	     │
+│ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 0 $DEF│ Выйти в главное меню                 │
   └───┴──────────────────────────────────────┘
 "
@@ -356,8 +366,9 @@ Linux $kern x$arc FreePBX $versionpbx
 	2) disablemodules ;;
 	3) freepbxupd ;;
 	4) postfixsetup;;
+	5) websecure;;
 	0) mainmenu ;;
-	* ) echo "$REDОшибка, выберите 1-4 или 0$DEF"
+	* ) echo "$REDОшибка, выберите 1-5 или 0$DEF"
 	esac
 	done	
 	;;
