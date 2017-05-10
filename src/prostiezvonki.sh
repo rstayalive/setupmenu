@@ -102,8 +102,9 @@ myread_yn version
 		mv dh512.pem dh512.pem_back
         openssl dhparam -out dh512.pem 2048
         echo "Создаю новый сертификат"
-		openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
+	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
+		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
+		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 		2)
 		echo "Ставим простые звонки версию x86 для 11 астериска"
         cd /
@@ -133,8 +134,9 @@ myread_yn version
 		mv dh512.pem dh512.pem_back
         openssl dhparam -out dh512.pem 2048
         echo "Создаю новый сертификат"
-		openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
+	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
+		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
+		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 	esac
 ;;
 	11) 
@@ -179,8 +181,9 @@ echo -e "
 		mv dh512.pem dh512.pem_back
         openssl dhparam -out dh512.pem 2048
         echo "Создаю новый сертификат"
-		openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
+	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
+		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
+		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 	2)
 		echo "Ставим простые звонки x86 для 11 астериска"
 		cd /tmp
@@ -209,8 +212,9 @@ echo -e "
 		mv dh512.pem dh512.pem_back
         openssl dhparam -out dh512.pem 2048
         echo "Создаю новый сертификат"
-		openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
+	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
+        openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
+		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 	esac
 ;;
 esac
