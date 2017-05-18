@@ -43,7 +43,7 @@ echo -n -e "$GREВведите 13 или 11: $DEF"
 read -n 2 temp
 echo
 done
-eval $2=$temp
+eval $1=$temp
 }
 
 #Выполнение
