@@ -17,14 +17,25 @@ echo "Настройка."
 touch /var/www/html/.htaccess
 echo '
 AuthType Basic
-AuthName "restricted area"
+AuthName "fuck closed"
 AuthUserFile /home/asterisk/.htpasswd
-require valid-user' > /var/www/html/.htaccess 
+SetEnvIf Request_URI "^/records/*" allow
+Order allow,deny
+Require valid-user
+Allow from env=allow
+Deny from env=!allow
+Satisfy any
+
+
+<Files .htpasswd>
+deny from all
+</Files>' > /var/www/html/.htaccess 
 
 
 echo -e "\n$GREВведите пароль на доступ к веб интерфейсу$DEF"
 read pass ;
 htpasswd -c -b /home/asterisk/.htpasswd sadmin $pass
+htpasswd - b /home/asterisk/.htpasswd records records
 service httpd restart
 echo -e "$GREНастройка завершена!$DEF"
 waitend
