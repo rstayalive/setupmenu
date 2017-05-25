@@ -110,7 +110,7 @@ prostiezvonki()
 {
 cd $path
 chmod 777 $prostiezvonki
-sh $prostiezvonki
+bash $prostiezvonki
 }
 #Уведомление о пропущенном звонке из групп, очередей и ivr меню
 missedivrtoemail()
@@ -308,7 +308,7 @@ Linux $kern x$arc FreePBX $versionpbx
 │ ┌───┬──────────────────────────────────────┐
 ├─┤$GRE 1 $DEF│ Установить простые звонки	     │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 2 $DEF│ Пересоздать сертификат		     │
+├─┤$GRE 2 $DEF│ Создать сертификат		     │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 3 $DEF│ Установить cel.conf                  │
 │ ├───┼──────────────────────────────────────┤
@@ -326,7 +326,11 @@ Linux $kern x$arc FreePBX $versionpbx
 		1) prostiezvonki ;;
 		2) 
 			cd /etc/asterisk
-			openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
+			echo "Создаю самоподписанный сертификат для простых звонков"
+		mv dh512.pem dh512.pem_back
+        openssl dhparam -out dh512.pem 2048
+        echo "Создаю новый сертификат"
+		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
 			echo -e "$GREВсе готово!$DEF"
 			wait ;;
 		3) celoverwrite ;;
