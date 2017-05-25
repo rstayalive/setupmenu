@@ -80,10 +80,7 @@ myread_yn version
 	echo "распаковка"
 	unzip prostiezvonki_freePBX_asterisk13_x64.zip
 	  echo "Установка"
-           cp -R prostiezvonki /var/www/html/admin/modules
-		fwconsole chown
-		fwconsole moduleadmin install prostiezvonki
-		fwconsole reload
+        cp -R prostiezvonki /var/www/html/admin/modules
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib64/
 		cp libProtocolLib.so /usr/lib/
@@ -97,16 +94,9 @@ myread_yn version
 		fwconsole reload
         echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-        cd /etc/asterisk/
-		echo "Создаю сертификат для простых звонков"
-		mv dh512.pem dh512.pem_back
-        openssl dhparam -out dh512.pem 2048
-        echo "Создаю новый сертификат"
-	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
-		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
+        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 		2)
-		echo "Ставим простые звонки версию x86 для 11 астериска"
+		echo "Ставим простые звонки версию x86 для 13 астериска"
         cd /
         cd /tmp
         echo "Cкачиваю дистрибутив"
@@ -115,9 +105,6 @@ myread_yn version
         unzip prostiezvonki_freePBX_asterisk13_x86.zip
         echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
-		fwconsole chown
-		fwconsole moduleadmin install prostiezvonki
-		fwconsole reload
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib/
 		cp libProtocolLib.so /var/lib/
@@ -126,17 +113,11 @@ myread_yn version
         chown -R asterisk:asterisk modules/
         cd /
 		fwconsole chown
+		fwconsole moduleadmin install prostiezvonki
 		fwconsole reload
         echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-        cd /etc/asterisk/
-		echo "Создаю сертификат для простых звонков"
-		mv dh512.pem dh512.pem_back
-        openssl dhparam -out dh512.pem 2048
-        echo "Создаю новый сертификат"
-	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
-		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
+        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 	esac
 ;;
 	11) 
@@ -161,9 +142,6 @@ echo -e "
         unzip prostiezvonki_freePBX_asterisk11_x64.zip
         echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
-		amportal chown
-		amportal a ma install prostiezvonki
-		amportal reload
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib64/
 		cp libProtocolLib.so /usr/lib/
@@ -173,16 +151,11 @@ echo -e "
         chown -R asterisk:asterisk modules/
         cd /
 		amportal chown
+		amportal a ma install prostiezvonki
 		amportal reload
         echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         cd /etc/asterisk/
-		echo "Создаю сертификат для простых звонков"
-		mv dh512.pem dh512.pem_back
-        openssl dhparam -out dh512.pem 2048
-        echo "Создаю новый сертификат"
-	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
 		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 	2)
 		echo "Ставим простые звонки x86 для 11 астериска"
@@ -193,9 +166,6 @@ echo -e "
         unzip prostiezvonki_freePBX_asterisk11_x86.zip
         echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
-		amportal chown
-		amportal a ma install prostiezvonki
-		amportal reload
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib/
 		cp libProtocolLib.so /var/lib/
@@ -204,16 +174,11 @@ echo -e "
         chown -R asterisk:asterisk modules/
         cd /
 		amportal chown
+		amportal a ma install prostiezvonki
 		amportal reload
         echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         cd /etc/asterisk/
-		echo "Создаю сертификат для простых звонков"
-		mv dh512.pem dh512.pem_back
-        openssl dhparam -out dh512.pem 2048
-        echo "Создаю новый сертификат"
-	#	openssl req -new -x509 -days 7300 -newkey rsa:1024 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -subj "/C=RU/ST=Russia/L=Moscow/O=vedisoft/OU=prostiezvonki/CN=asterisk"
-        openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e "[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk") -extensions req_ext
 		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
 	esac
 ;;
