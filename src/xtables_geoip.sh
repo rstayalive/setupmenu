@@ -31,8 +31,9 @@ else
 	br
 fi
 }
+workdir='/root/setupmenu/src'
 
-#Установить geoip
+#Устанавливаем geoip
 clear
 	echo "Начинаем установку"
 		br
@@ -48,13 +49,13 @@ clear
 				myinstall iptables-devel
 				myinstall epel-release
 				rpm -i ftp://rpmfind.net/linux/dag/redhat/el6/en/x86_64/dag/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-				myinstall perl-Text-CSV_XS
-			br
+				rpm -i $workdir/perl-Text-CSV_XS-0.80-1.el6.rf.x86_64.rpm
+		
 		echo "ставим geoip"
 	br
+		cp $workdir/xtables-addons-1.47.1.tar.xz /tmp
 		cd /tmp
-		wget https://ufpr.dl.sourceforge.net/project/xtables-addons/Xtables-addons/xtables-addons-1.47.1.tar.xz
-		tar xvf xtables-addons-1.47.1.tar.xz 
+		tar xvf xtables-addons-1.47.1.tar.xz
 		cd xtables-addons-1.47.1 
 		./configure
 		cd /lib/modules/$(uname -r)/build/include/linux/
