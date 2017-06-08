@@ -34,6 +34,7 @@ fi
 
 workdir='/root/setupmenu/src'
 arc=`arch`
+conf='/lib/modules/$(uname -r)/build/include/linux/autoconf.h'
 
 #Начало установки
 clear
@@ -88,7 +89,13 @@ clear
 		cd xtables-addons-1.47.1 
 		./configure
 		cd /lib/modules/$(uname -r)/build/include/linux/
+		if [[ 'grep '#define CONFIG_IP6_NF_IPTABLES_MODULE 1' $conf' ]];
+		then 
 		replace "#define CONFIG_IP6_NF_IPTABLES_MODULE 1" "/*#define CONFIG_IP6_NF_IPTABLES_MODULE 1*/" -- autoconf.h
+		echo "Заменили строку"
+		else 
+		echo "уже отредактирована, пропускаю"
+		fi
 		cd /tmp/xtables-addons-1.47.1
 		echo "Запускаю компиляцию модуля"
 		make && make install
