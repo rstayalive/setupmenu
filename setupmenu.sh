@@ -43,7 +43,9 @@ websecure='websecure.sh'
 updatescript()
 {
 cd $workdir
-wget $updpath -r -N -nd
+git fetch
+git reset --hard origin
+git pull
 chmod 777 $scupd
 repeat=false
 sh $0
