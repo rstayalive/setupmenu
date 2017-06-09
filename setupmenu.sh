@@ -35,6 +35,7 @@ iprulesdef='iprulesdef.sh'
 iprulesgeoip='iprulesgeoip.sh'
 zvonilka='zvonilka.sh'
 websecure='websecure.sh'
+selfcert='selfsignedsert.sh'
 
 #####################################
 #Функционал разбитый на скрипты
@@ -168,6 +169,13 @@ websecure()
 cd $path
 chmod 777 $websecure
 bash $websecure
+}
+#Создание самоподписанного сертификата
+selfcert()
+{
+cd $path
+chmod 777 $selfcert
+bash $selfcert
 }
 #Y/N
 myread_yn()
@@ -326,15 +334,7 @@ Linux $kern x$arc FreePBX $versionpbx
     echo ""
     case $menu1 in
 		1) prostiezvonki ;;
-		2) 
-			cd /etc/asterisk
-			echo "Создаю самоподписанный сертификат для простых звонков"
-		mv dh512.pem dh512.pem_back
-        openssl dhparam -out dh512.pem 2048
-        echo "Создаю новый сертификат"
-		openssl req -new -x509 -days 1095 -newkey rsa:1024 -sha256 -nodes -keyform PEM -keyout privkey1.pem -outform PEM -out newsert.pem -config <(echo -e '[req]\nprompt=no\nreq_extensions=req_ext\ndistinguished_name=dn\n[dn]\nC=RU\nST=Russia\nL=Moscow\nO=vedisoft\nOU=prostiezvonki\nCN=asterisk\n[req_ext]\nsubjectAltName=DNS:asterisk') -extensions req_ext
-			echo -e "$GREВсе готово!$DEF"
-			wait ;;
+		2) selfcert ;;
 		3) celoverwrite ;;
 		4) callback ;;
 		5) zvonilka ;;
