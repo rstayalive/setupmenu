@@ -16,11 +16,11 @@ read -s -n 1
 echo "Начинаем..."
 #выкидываем старые ключи в oldkeys в /etc/asterisk
 cd /etc/asterisk/
-mkdir -p oldkeys
+mkdir -p oldkeysdir
 chown asterisk:asterisk /etc/asterisk/oldkeys
 mv newsert.pem /etc/asterisk/oldkeys
 mv privkey1.pem /etc/asterisk/oldkeys
-md dh512.pem /etc/asterisk/oldkeys
+mv dh512.pem /etc/asterisk/oldkeys
 #Спрашиваем домен, закидываем новые ключи в /etc/asterisk
 echo -e "\nВведите sip.домен"
 read sipdom ;
