@@ -16,7 +16,7 @@ read -s -n 1
 echo "Начинаем..."
 #выкидываем старые ключи в oldkeys в /etc/asterisk
 cd /etc/asterisk/
-mkrid -p oldkeys
+mkdir -p oldkeys
 chown asterisk:asterisk /etc/asterisk/oldkeys
 mv newsert.pem /etc/asterisk/oldkeys
 mv privkey1.pem /etc/asterisk/oldkeys
