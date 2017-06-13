@@ -7,7 +7,7 @@
 #Обновления выходят тогда, когда находятся ошибки или нужен новый функционал.
 #Ну дальше везде каменты есть, разберетесь что к чему.
 title="Скрипт автоматизации развертывания freepbx"
-ver="Версия 4.2"
+ver="Версия 4.3"
 
 #Цвета
 RED=\\e[91m
@@ -15,7 +15,6 @@ GRE=\\e[92m
 DEF=\\e[0m
 
 #Пути на закачку и тд
-updpath='https://raw.githubusercontent.com/rstayalive/setupmenu/master/setupmenu.sh'
 workdir='/root/setupmenu/'
 path='/root/setupmenu/src'
 scupd='setupmenu.sh'
@@ -36,6 +35,8 @@ iprulesgeoip='iprulesgeoip.sh'
 zvonilka='zvonilka.sh'
 websecure='websecure.sh'
 selfcert='selfsignedsert.sh'
+psertupd='psertupd.sh'
+sslcertch='sslcertch.sh'
 
 #####################################
 #Функционал разбитый на скрипты
@@ -176,6 +177,20 @@ selfcert()
 cd $path
 chmod 777 $selfcert
 bash $selfcert
+}
+#Скрипт который обновляет ssl сертификат простых звонк
+psertupd()
+{
+cd $path
+chmod 777 $psertupd
+bash $psertupd
+}
+#Скрипт тупой проверки ssl сертификата
+sslcertch()
+{
+cd $path
+chmod 777 $sslcertch
+bash $sslcertch
 }
 #Y/N
 myread_yn()
@@ -326,9 +341,13 @@ Linux $kern x$arc FreePBX $versionpbx
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 5 $DEF│ Установить click2call		     │
 │ ├───┼──────────────────────────────────────┤
+├─┤$GRE 6 $DEF│ Проверить ssl сертификат		     │
+│ ├───┼──────────────────────────────────────┤
+├─┤$GRE 7 $DEF│ Обновить сертификат простых звонков		     │
+│ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 0 $DEF│ Выйти в главное меню		     │
   └───┴──────────────────────────────────────┘
-"		
+"
 	echo -n "Выберите пункт меню: "
     read -s -n 1 menu1
     echo ""
@@ -338,8 +357,10 @@ Linux $kern x$arc FreePBX $versionpbx
 		3) celoverwrite ;;
 		4) callback ;;
 		5) zvonilka ;;
+		6) sslcertch ;;
+		7) psertupd ;;
 		0) mainmenu ;;
-		*) echo "$REDОшибка, выберите 1-5 или 0$DEF"
+		*) echo -e "$REDОшибка, выберите 1-7 или 0$DEF"
     esac
 	done
 	;;
