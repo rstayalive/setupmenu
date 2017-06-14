@@ -29,7 +29,7 @@ chown asterisk:asterisk chcall.php
 echo -e "\nВведите IP астериска"
 read astip ;
 replace "asteriskip" "$astip" -- call.php
-echo e "\nВведите номер очереди или группы куда отдавать звонок формат XXX"
+echo -e "\nВведите номер очереди или группы куда отдавать звонок формат XXX"
 read numb ;
 replace "999" "$numb" -- call.php
 echo "Готово!"
