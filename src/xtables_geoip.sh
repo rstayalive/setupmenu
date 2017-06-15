@@ -102,7 +102,6 @@ clear
 		echo "Настраиваю.... готово."
 		replace "#define CONFIG_IP6_NF_IPTABLES_MODULE 1" "/*#define CONFIG_IP6_NF_IPTABLES_MODULE 1*/" -- autoconf.h
 	fi
-
 		cd /tmp/xtables-addons-1.47.1
 		echo "Запускаю компиляцию модуля"
 		make && make install
@@ -124,10 +123,10 @@ clear
 		then
 		echo "все ок"
 		else
-		replace "build_TARPIT=m" "#build_TARPIT=m" --mconfig
+		replace "build_TARPIT=m" "#build_TARPIT=m" -- /tmp/xtables-addons-2.5/mconfig
 		echo "подменили"
 	fi
-		
+		./configure
 		echo "Запускаю компиляцию модуля"
 		make && make install
 		sleep 5
