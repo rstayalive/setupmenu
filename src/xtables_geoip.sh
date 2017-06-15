@@ -35,6 +35,7 @@ fi
 workdir='/root/setupmenu/src'
 arc=`arch`
 
+
 #Начало установки
 clear
 	echo "Начинаем установку"
@@ -65,40 +66,42 @@ clear
 #На всякий случай проверяем, поставился perl-Text-CSV_XS из репозитория или нет, если не поставился, то ставим из rpm SRC директории скрипта.		
 		PKG_OK=$(rpm -qa | grep perl-Text-CSV_XS)
 		echo Checking for somelib: $PKG_OK
-		if [ "" == "$PKG_OK" ];  #проверяем поставился perl-Text-CSV_XS из репозитория или нет
+	if [ "" == "$PKG_OK" ];  #проверяем поставился perl-Text-CSV_XS из репозитория или нет
 		then
 		echo "Не найден в репозитории, ставим из rpm"
-		if [ "$arc" == "x86_64" ]; #проверяем разрядность, чтобы не гадать и не спрашивать какую версию ставить.
+	if [ "$arc" == "x86_64" ]; #проверяем разрядность, чтобы не гадать и не спрашивать какую версию ставить.
 		then
 		rpm -i $workdir/perl-Text-CSV_XS-0.80-1.el6.rf.x86_64.rpm
 		echo "установлена x64 версия"
 		else
 		rpm -i $workdir/perl-Text-CSV_XS-0.85-1.el6.i686.rpm
 		echo "установлена x86 версия"
-		fi
+	fi
 		else
 		echo "Уже установлено, пропускаем"
-		fi
+	fi
 		
-#Если все ок, то ставим сам уже geoip модуль.
-		echo "ставим geoip"
+#Проверяем что за система установлена на серваке если centos 6 ставим xtables-addons-1.47 если centos 7 ставим 2.X
+		system='grep -F 'el16' /proc/verison'
+	if [ "$system" == ""];
+		then
+		echo "ставлю xtables для Centos 6"
 		cp $workdir/xtables-addons-1.47.1.tar.xz /tmp
 		cd /tmp
 		tar xvf xtables-addons-1.47.1.tar.xz
 		cd xtables-addons-1.47.1 
 		./configure
-		
 #Ищем точную строку /*#define CONFIG_IP6_NF_IPTABLES_MODULE 1*/ в autoconf.h файле, если такая строка есть пропускаем, если нет, заменяем стандартную на нужную
 #Это нужно для того если скрипт запускался и что-то пошло не так и строка уже была заменена.
 		echo "Подменяем строку в autoconf.h"
 		cd /lib/modules/$(uname -r)/build/include/linux/
-		if grep -F -x '/*#define CONFIG_IP6_NF_IPTABLES_MODULE 1*/' /lib/modules/$(uname -r)/build/include/linux/autoconf.h;
+	if grep -F -x '/*#define CONFIG_IP6_NF_IPTABLES_MODULE 1*/' /lib/modules/$(uname -r)/build/include/linux/autoconf.h;
 		then
 		echo "Не требуется, пропускаем."
 		else
 		echo "Настраиваю.... готово."
 		replace "#define CONFIG_IP6_NF_IPTABLES_MODULE 1" "/*#define CONFIG_IP6_NF_IPTABLES_MODULE 1*/" -- autoconf.h
-		fi
+	fi
 
 		cd /tmp/xtables-addons-1.47.1
 		echo "Запускаю компиляцию модуля"
@@ -110,9 +113,33 @@ clear
 		mkdir -p /usr/share/xt_geoip/ 
 		cp -r {BE,LE} /usr/share/xt_geoip/
 		modprobe xt_geoip
-	br
 		echo "Модуль geoip установлен"
-	br
+		else
+		echo "Ставлю xtables для Centos 7"
+		cp $workdir/xtables-addons-2.5.tar.xz /tmp
+		cd /tmp
+		tar -xJf xtables-addons-2.5.tar.xz
+		cd xtables-addons-2.5
+	if grep -F -x '#build_TARPIT=m' /tmp/xtables-addons-2.5/mconfig;
+		then
+		echo "все ок"
+		else
+		replace "build_TARPIT=m" "#build_TARPIT=m" --mconfig
+		echo "подменили"
+	fi
+		
+		echo "Запускаю компиляцию модуля"
+		make && make install
+		sleep 5
+		cd geoip/ 
+		./xt_geoip_dl 
+		./xt_geoip_build GeoIPCountryWhois.csv 
+		mkdir -p /usr/share/xt_geoip/ 
+		cp -r {BE,LE} /usr/share/xt_geoip/
+		modprobe xt_geoip
+		echo "Модуль geoip установлен"
+	fi
+		br
 	 echo "Подчищаем за собой"
 	 mkdir -p /root/garbage
 	 rm -rf /tmp/xtables*
