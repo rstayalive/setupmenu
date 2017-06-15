@@ -83,7 +83,7 @@ clear
 		
 #Проверяем что за система установлена на серваке если centos 6 ставим xtables-addons-1.47 если centos 7 ставим 2.X
 		system='grep -F 'el16' /proc/version'
-	if [ "$system" == ""];
+	if [ "$system" == "" ];
 		then
 		echo "ставлю xtables для Centos 6"
 		cp $workdir/xtables-addons-1.47.1.tar.xz /tmp
