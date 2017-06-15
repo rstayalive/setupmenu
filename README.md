@@ -5,7 +5,7 @@ Language: only RU
 
 Script work with FreePBX 11/13 CentOS 6.X under root
 
-UPD. Now this script support Centos 7 with asterisk 13. (This is beta)
+UPD. Now this script support Centos 7 with FreePBX 14. (This is beta)
 
 usage:
 
