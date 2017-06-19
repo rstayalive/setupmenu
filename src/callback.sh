@@ -25,7 +25,7 @@ workdir='/root/setupmenu/src'
 echo "Начинаем..."
 cp $workdir/call.php /var/www/html
 cd /var/www/html
-chown asterisk:asterisk chcall.php
+chown asterisk:asterisk call.php
 echo -e "\nВведите IP астериска"
 read astip ;
 replace "asteriskip" "$astip" -- call.php
