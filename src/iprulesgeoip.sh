@@ -67,7 +67,6 @@ case "$lhans" in
 l|L)
 iptables -A INPUT -p icmp -m icmp --icmp-type address-mask-request -j DROP
 iptables -A INPUT -p icmp -m icmp --icmp-type timestamp-request -j DROP
-iptables -A INPUT -p icmp -m icmp -m limit --limit 1/second -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p TCP -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A INPUT -p UDP -m state --state RELATED,ESTABLISHED -j ACCEPT
