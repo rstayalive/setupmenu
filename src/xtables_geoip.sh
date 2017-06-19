@@ -115,15 +115,15 @@ clear
 		echo "Модуль geoip установлен"
 		else
 		echo "Ставлю xtables для Centos 7"
-		cp $workdir/xtables-addons-2.5.tar.xz /tmp
+		cp $workdir/xtables-addons-2.10.tar.xz /tmp
 		cd /tmp
-		tar -xJf xtables-addons-2.5.tar.xz
-		cd xtables-addons-2.5
-	if grep -F -x '#build_TARPIT=m' /tmp/xtables-addons-2.5/mconfig;
+		tar -xJf xtables-addons-2.10.tar.xz
+		cd xtables-addons-2.10
+	if grep -F -x '#build_TARPIT=m' /tmp/xtables-addons-2.10/mconfig;
 		then
 		echo "все ок"
 		else
-		replace "build_TARPIT=m" "#build_TARPIT=m" -- /tmp/xtables-addons-2.5/mconfig
+		replace "build_TARPIT=m" "#build_TARPIT=m" -- /tmp/xtables-addons-2.10/mconfig
 		echo "подменили"
 	fi
 		./configure
