@@ -70,6 +70,7 @@ echo "RESULT ---------------------------------<br>";
 $total = count($noansw);
 $counter = 0;
 $counter3 = 0;
+$propcount = 0;
 
 foreach($noansw as $key => $value){
   $counter++;
@@ -89,9 +90,9 @@ foreach($noansw as $key => $value){
   }
 }
 
-if ($propcount > 0) {
+if ($counter3 > 0) {
 mail("$email", 'Пропущенные звонки за  ' .$data.'', $mes, $headers);
-echo "No Answer Count = $propcount<br>";
+echo "No Answer Count = $counter3<br>";
 }
 else
 {
