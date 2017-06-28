@@ -70,7 +70,6 @@ echo "RESULT ---------------------------------<br>";
 $total = count($noansw);
 $counter = 0;
 $counter3 = 0;
-$propcount = 0;
 
 foreach($noansw as $key => $value){
   $counter++;
