@@ -1,85 +1,49 @@
 #!/bin/bash
-#Скрипт установки простых звонков для астериска
+#Бета версия скрипта установки простых звонков
 
 #Алиасы
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
 
-#wait
-wait()
-{
-echo -e "$GRE Нажмите любую клавишу $DEF"
-read -s -n 1
-}
-
 #Конечный wait
 waitend()
 {
-echo -e "$GRE Нажмите любую клавишу чтобы вернуться в меню $DEF"
+echo -e "$GREНажмите любую клавишу чтобы вернуться в меню $DEF"
 read -s -n 1
 }
 
-#Запрос циферного значения 1/2
-myread_yn()
-{
-temp=""
-while [[ "$temp" != "1" && "$temp" != "1" && "$temp" != "2" && "$temp" != "2" ]] #запрашиваем значение, пока не будет "1" или "2"
-do
-echo -n -e "$GREВвведите 1 или 2: $DEF"
-read -n 1 temp
-echo
-done
-eval $1=$temp
-}
+arc=`arch`
+prosto=$(fwconsole ma list | grep -ow prostiezvonki)
+astver=$(asterisk -V | grep -woE [0-9]+\.)
 
-#Запрос циферного значения 13/11
-myread_ast()
-{
-temp=""
-while [[ "$temp" != "13" && "$temp" != "13" && "$temp" != "11" && "$temp" != "11" ]] #запрашиваем значение, пока не будет "13" или "11"
-do
-echo -n -e "$GREВведите 13 или 11: $DEF"
-read -n 2 temp
-echo
-done
-eval $1=$temp
-}
 
-#Выполнение
-clear
-echo -e "
-● Для какого астера ставим?
-│
-│ ┌─────────────────────────────────────────────┐
-├─┤Для asterisk 13 нажмите 13			│
-│ ├─────────────────────────────────────────────┤
-├─┤Для asterisk 11 нажмите 11			│
-  └─────────────────────────────────────────────┘
-"
-myread_ast ast
-	case "$ast" in
-	13) clear
-echo -e "
-● Выбран 13 asterisk, какая разрядность?
-│
-│ ┌─────────────────────────────────────────────┐
-├─┤Для x64 нажмите 1				│
-│ ├─────────────────────────────────────────────┤
-├─┤Для x86 нажмите 2				│
-  └─────────────────────────────────────────────┘
-"
-myread_yn version
-	case "$version" in
-	1)
-	echo "Ставим простые звонки версию x64 для 13 астериска"
+#Скрываем вывод скрипта, чтобы глаза отдыхали и запускаем выполнение.
+echo "Устанавливаю простые звонки...."
+{
+#Чистим старую установку на случай если уже пытались ставить простые звонки
+if [ "$prosto" == "prostiezvonki" ];
+	then
+	fwconsole ma uninstall prostiezvonki
+	fwconsole ma delete prostiezvonki
+	rm -rvf /var/www/html/admin/modules/prostiezvonki
+	rm -rvf /usr/lib64/libProtocolLib.so
+	rm -rvf /usr/lib/libProtocolLib.so
+	rm -rvf /var/lib/libProtocolLib.so
+	rm -rvf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
+	rm -rvf /tmp/prostiezvonki*
+	unlink /var/www/html/records
+fi
+#Смотрим что за астериск установлен, смотрим разрядность системы и начинаем установку соответствующей версии
+if [ "$astver" == "13" ];
+then
+if [ "$arc" == "x86_64" ];
+	then
+#Для 13 x64
 	cd /
-	cd /tmp
-	echo "Cкачиваю дистрибутив"
-	wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x64.zip
-	echo "распаковка"
-	unzip prostiezvonki_freePBX_asterisk13_x64.zip
-	  echo "Установка"
+		cd /tmp
+		wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x64.zip
+		unzip prostiezvonki_freePBX_asterisk13_x64.zip
         cp -R prostiezvonki /var/www/html/admin/modules
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib64/
@@ -92,18 +56,13 @@ myread_yn version
 		fwconsole chown
 		fwconsole ma install prostiezvonki
 		fwconsole reload
-        echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
-		2)
-		echo "Ставим простые звонки версию x86 для 13 астериска"
-        cd /
+else
+#Для 13 x86
+		cd /
         cd /tmp
-        echo "Cкачиваю дистрибутив"
-        wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x86.zip
-        echo "распаковка"
+	    wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x86.zip
         unzip prostiezvonki_freePBX_asterisk13_x86.zip
-        echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib/
@@ -115,32 +74,16 @@ myread_yn version
 		fwconsole chown
 		fwconsole moduleadmin install prostiezvonki
 		fwconsole reload
-        echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-        echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
-	esac
-;;
-	11) 
-echo -e "
-● Выбран 11 asterisk, какую разрядность будем ставить?
-│
-│ ┌─────────────────────────────────────────────┐
-├─┤Для x64 нажмите 1				│
-│ ├─────────────────────────────────────────────┤
-├─┤Для x86 нажмите 2				│
-  └─────────────────────────────────────────────┘
-"
-	myread_yn version2
-	case "$version2" in
-	1)
-        echo "Ставим простые звонки версию x64 для 11 астериска"
-        cd /
+fi
+	else
+#Для 11 x64
+if [ "$arc" == "x86_64" ];
+	then
+		cd /
         cd /tmp
-        echo "Cкачиваю дистрибутив"
         wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk11_x64.zip
-        echo "распаковка"
         unzip prostiezvonki_freePBX_asterisk11_x64.zip
-        echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib64/
@@ -153,18 +96,13 @@ echo -e "
 		amportal chown
 		amportal a ma install prostiezvonki
 		amportal reload
-        echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         cd /etc/asterisk/
-		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
-	2)
-		echo "Ставим простые звонки x86 для 11 астериска"
+#Для 13 x86
+	else
 		cd /tmp
-        echo "Cкачиваю дистрибутив"
 		wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk11_x86.zip
-        echo "распаковка"
         unzip prostiezvonki_freePBX_asterisk11_x86.zip
-        echo "Установка"
         cp -R prostiezvonki /var/www/html/admin/modules
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib/
@@ -176,11 +114,10 @@ echo -e "
 		amportal chown
 		amportal a ma install prostiezvonki
 		amportal reload
-        echo "Создаю символьную ссылку на записи разговоров в /var/www/html/records"
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         cd /etc/asterisk/
-		echo "Все готово! ОБЯЗАТЕЛЬНО!!!!!! настройте модуль в вебморде" ;;
-	esac
-;;
-esac
+fi
+fi
+} &> /dev/null
+echo "Установлена версия для asterisk $astver"
 waitend
