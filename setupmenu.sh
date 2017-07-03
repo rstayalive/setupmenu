@@ -433,7 +433,7 @@ Linux $kern x$arc FreePBX $versionpbx
 	until [ "$menu4" = "0" ]; do
 	clear
     echo -e "
-● Дополнительно:
+● Настройка безопасности:
 │
 │ ┌───┬──────────────────────────────────────┐
 ├─┤$GRE 1 $DEF│ Удалить модуль Firewall из FreePBX   │
