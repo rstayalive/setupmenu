@@ -3,9 +3,7 @@ FreePBX deployment script
 
 Language: only RU
 
-Script work with FreePBX 11/13 CentOS 6.X under root
-
-UPD. Now this script support Centos 7 with FreePBX 14. (This is beta)
+Script work with FreePBX 11/13/14 CentOS 6.X/7.X under root
 
 usage:
 
