@@ -12,4 +12,4 @@ usage:
 3. git clone https://github.com/rstayalive/setupmenu
 4. cd setupmenu
 5. chmod 777 setupmenu.sh
-6. ./setupmenu
+6. ./setupmenu.sh
