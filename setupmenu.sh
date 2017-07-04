@@ -2,12 +2,14 @@
 #Скрипт автоматизации развертывания FreePBX
 #Пожелания и ошибки кидайте на почту rstayalive@gmail.com
 #Этот скрипт поможет вам меньше нажимать кнопок.
-#А Так же сократит время настройки в разы.
+#А так же сократит время настройки в разы.
 #Писалось на коленке, так что как то так.
 #Обновления выходят тогда, когда находятся ошибки или нужен новый функционал.
 #Ну дальше везде каменты есть, разберетесь что к чему.
+#Подпишитесь на бота в телеграме !!!!!!! @rstgithubbot
+#Подписавшись на бота вы будете всегда в курсе последних обнов.
 title="Скрипт автоматизации развертывания freepbx"
-ver="Версия 4.3"
+ver="Версия 4.5"
 
 #Цвета
 RED=\\e[91m
@@ -35,8 +37,9 @@ iprulesgeoip='iprulesgeoip.sh'
 zvonilka='zvonilka.sh'
 websecure='websecure.sh'
 selfcert='selfsignedsert.sh'
-psertupd='psertupd.sh'
-sslcertch='sslcertch.sh'
+certcheck='checksslsertificate.sh'
+certupd='certificate update.sh'
+certautoupd='certificate_autoupdate.sh'
 
 #####################################
 #Функционал разбитый на скрипты
@@ -178,19 +181,26 @@ cd $path
 chmod 777 $selfcert
 bash $selfcert
 }
-#Скрипт который обновляет ssl сертификат простых звонк
-psertupd()
+#Скрипт который обновляет ssl сертификат простых звонков
+certupd()
 {
 cd $path
-chmod 777 $psertupd
-bash $psertupd
+chmod 777 $certupd
+bash $certupd
 }
 #Скрипт тупой проверки ssl сертификата
-sslcertch()
+certcheck()
 {
 cd $path
-chmod 777 $sslcertch
-bash $sslcertch
+chmod 777 $certcheck
+bash $certcheck
+}
+#Скрипт настраивает автообновление сертификата простых звонков на каждый месяц.(freepbx сам обновляет сертификат letsencrypt каждые 2 месяца)
+certautoupd()
+{
+cd $path
+chmod 777 $certautoupd
+bash $certautoupd
 }
 #Y/N
 myread_yn()
@@ -204,7 +214,6 @@ echo
 done
 eval $1=$temp
 }
-
 #Сохранить или нет (для блока Iptables)
 save()
 {
@@ -218,7 +227,6 @@ echo -e "$GREПравила успешно добавлены в iptables и п�
  echo -e "$REDИзменения сделаны, но не применены!$DEF" ;;
  esac
 }
-
 #Проверка, установлен пакет или нет
 myinstall()
 {
@@ -229,31 +237,20 @@ else
 	br
 fi
 }
-
-#Очистка остаточных файлов после работы скрипта
-#cleanup()
-#{
-#cd $workdir
-#rm -rf zvonki* postfix* xtables* auto* disable* freepbx* stat* firewall* missed* russian* isoft* prostiezvonki* asternic*  celoverwrite* iprules* callback* click2call*
-#}
-
 #sysinfo
 arc=`arch`
 if [ "$arc" == "x86_64" ];
 then arc=64 #В теории возможно обозначение "IA-64" и "AMD64", но я не встречал
 else arc=86 #Чтобы не перебирать все возможные IA-32, x86, i686, i586 и т.д.
 fi
-
 #определяем версию ядра Linux
 kern=`uname -r | sed -e "s/-/ /" | awk {'print $1'}`
-
 #Заголовок
 title()
 {
 clear
 echo -e "$title"
 }
-
 #Инфа о freepbx
 versionpbx=`cat /etc/schmooze/pbx-version`
 versionpbx()
@@ -261,7 +258,8 @@ versionpbx()
 clear
 echo "$versionpbx"
 }
-
+#Версия астериска
+astver=$(asterisk -V | grep -woE [0-9]+\.)
 #wait
 wait()
 {
@@ -292,7 +290,7 @@ do
 clear
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $title $ver 
-Linux $kern x$arc FreePBX $versionpbx
+Linux $kern x$arc FreePBX $versionpbx asterisk
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo -e "
 ● Главное меню:
@@ -357,8 +355,8 @@ Linux $kern x$arc FreePBX $versionpbx
 		3) celoverwrite ;;
 		4) callback ;;
 		5) zvonilka ;;
-		6) sslcertch ;;
-		7) psertupd ;;
+		6) certcheck ;;
+		7) certupd ;;
 		0) mainmenu ;;
 		*) echo -e "$REDОшибка, выберите 1-7 или 0$DEF"
     esac
@@ -372,15 +370,17 @@ Linux $kern x$arc FreePBX $versionpbx
 ● Настройки:
 │
 │ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ Настроить автоадейт системы 	     │
+├─┤$GRE 1 $DEF│ Настроить автоадейт системы          │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 2 $DEF│ Отключить модули FreePBX	     │
+├─┤$GRE 2 $DEF│ Отключить модули FreePBX             │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 3 $DEF│ Обновить FreePBX	  	     │
+├─┤$GRE 3 $DEF│ Обновить FreePBX                     │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 4 $DEF│ Настроить Postfix       	     │
+├─┤$GRE 4 $DEF│ Настроить Postfix                    │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│ Настроить htaccess для httpd 	     │
+├─┤$GRE 5 $DEF│ Настроить htaccess для httpd         │
+│ ├───┼──────────────────────────────────────┤
+├─┤$GRE 6 $DEF│ АвтоОбн. Серт. Простых звонков       │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 0 $DEF│ Выйти в главное меню                 │
   └───┴──────────────────────────────────────┘
@@ -392,8 +392,9 @@ Linux $kern x$arc FreePBX $versionpbx
 	1) autoupdatesys ;;
 	2) disablemodules ;;
 	3) freepbxupd ;;
-	4) postfixsetup;;
-	5) websecure;;
+	4) postfixsetup ;;
+	5) websecure ;;
+    6) certautoupd ;;
 	0) mainmenu ;;
 	* ) echo "$REDОшибка, выберите 1-5 или 0$DEF"
 	esac
