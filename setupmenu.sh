@@ -38,7 +38,7 @@ zvonilka='zvonilka.sh'
 websecure='websecure.sh'
 selfcert='selfsignedsert.sh'
 certcheck='checksslsertificate.sh'
-certupd='certificate update.sh'
+certupd='certificate_update.sh'
 certautoupd='certificate_autoupdate.sh'
 
 #####################################
