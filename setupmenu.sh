@@ -290,7 +290,7 @@ do
 clear
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $title $ver 
-Linux $kern x$arc FreePBX $versionpbx asterisk
+Linux $kern x$arc FreePBX $versionpbx asterisk $astver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo -e "
 ● Главное меню:
