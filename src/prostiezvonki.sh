@@ -24,15 +24,15 @@ echo "Устанавливаю простые звонки...."
 #Чистим старую установку на случай если уже пытались ставить простые звонки
 if [ "$prosto" == "prostiezvonki" ];
 	then
-	fwconsole ma uninstall prostiezvonki
-	fwconsole ma delete prostiezvonki
-	rm -rvf /var/www/html/admin/modules/prostiezvonki
-	rm -rvf /usr/lib64/libProtocolLib.so
-	rm -rvf /usr/lib/libProtocolLib.so
-	rm -rvf /var/lib/libProtocolLib.so
-	rm -rvf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
-	rm -rvf /tmp/prostiezvonki*
-	unlink /var/www/html/records
+        fwconsole ma uninstall prostiezvonki
+        fwconsole ma delete prostiezvonki
+        rm -rvf /var/www/html/admin/modules/prostiezvonki
+        rm -rvf /usr/lib64/libProtocolLib.so
+        rm -rvf /usr/lib/libProtocolLib.so
+        rm -rvf /var/lib/libProtocolLib.so
+        rm -rvf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
+        rm -rvf /tmp/prostiezvonki*
+        unlink /var/www/html/records
 fi
 #Смотрим что за астериск установлен, смотрим разрядность системы и начинаем установку соответствующей версии
 if [ "$astver" == "13" ];
@@ -57,7 +57,7 @@ if [ "$arc" == "x86_64" ];
 		fwconsole ma install prostiezvonki
 		fwconsole reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-else
+    else
 #Для 13 x86
 		cd /
         cd /tmp
