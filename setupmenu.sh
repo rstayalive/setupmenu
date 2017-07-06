@@ -308,7 +308,7 @@ echo -e "
 │<___/\___.  |_|  \___||  _/|_|_|_|\___.|_|_|\___|│
 │                      |_|                        │
 │$ver Asterisk $astver                           │
-│Linux $kern x$arc FreePBX $versionpbx             │
+│Linux $kern x$arc FreePBX $versionpbx      │
 └─────────────────────────────────────────────────┘"
 echo -e "
 ┌──────────────● Главное меню:
