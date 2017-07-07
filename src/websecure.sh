@@ -35,7 +35,7 @@ deny from all
 echo -e "\n$GREВведите пароль на доступ к веб интерфейсу$DEF"
 read pass ;
 htpasswd -c -b /home/asterisk/.htpasswd sadmin $pass
-htpasswd - b /home/asterisk/.htpasswd records records
+htpasswd -b /home/asterisk/.htpasswd records records
 service httpd restart
 echo -e "$GREНастройка завершена!$DEF"
 waitend
