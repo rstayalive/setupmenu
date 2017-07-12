@@ -10,7 +10,7 @@ $strChannel = "Local/100@from-internal";
 $strExten = $_POST['txtphonenumber'];
 $strExten=preg_replace("/[^01-9]/","",$strExten);
 
-#РЎРѕРµРґРёРЅРµРЅРёРµ СЃ ami, СЃРѕР·РґР°РЅРёРµ Р·РІРѕРЅРєР°.
+#Соединение с ami, создание звонка.
 if (strlen($strExten) == 11 && is_numeric($strExten))
 {
 $socket = fsockopen($strHost, 5038, $errnum, $errdesc) or die("Connection to host failed");
@@ -30,7 +30,7 @@ fputs($socket, "Async: yes\r\n\r\n" );
 fputs($socket, "Action: Logoff\r\n\r\n");
 sleep (1);
 $wrets=fgets($socket,128);
-echo "Р’РѕР·СЊРјРёС‚Рµ С‚СЂСѓР±РєСѓ";
+echo "Возьмите трубку";
 }else{
 	echo "ERROR -".strlen($strExten)."-";
 }
