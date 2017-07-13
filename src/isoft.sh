@@ -48,6 +48,7 @@ echo "Начинаем установку софта, можешь опусти�
 	myinstall autoconf
 	myinstall automake
 	myinstall iptraf
+    myinstall ccze
 echo "Ставлю sngrep"
 cd /usr/src
 git clone https://github.com/irontec/sngrep
