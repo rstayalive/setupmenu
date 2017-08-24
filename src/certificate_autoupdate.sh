@@ -26,7 +26,7 @@ echo "уже есть такой файл, пропускаю"
 else
 echo -e "\nВведите email на который будет приходить письмо с обновленной датой сертификата"
 read mailto ;
-replace "myemail" "$mailto" -- autoconf.h
+replace "myemail" "$mailto" -- /root/certificate_autoupdate_cron.sh
 cp $workdir/$prosto /root/
 chmod +x /root/$prosto
 #Проверяем есть ли уже такая запись в кроне или нет.
