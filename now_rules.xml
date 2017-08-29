@@ -239,7 +239,309 @@
       <NODE NAME="LogBlocked" TYPE="number" VALUE="0" />
       <NODE NAME="ReportStartupChangesDefaultOff" TYPE="number" VALUE="0" />
      </ITEM>
-     <ITEM NAME="rules" DELETE="1" />
+     <ITEM NAME="rules" DELETE="1">
+      <ITEM NAME="1">
+       <NODE NAME="enabled" TYPE="number" VALUE="1" />
+       <NODE NAME="name" TYPE="string" VALUE="explorer cs/ws script exec block" />
+       <NODE NAME="priority" TYPE="number" VALUE="80" />
+       <NODE NAME="action" TYPE="number" VALUE="2" />
+       <NODE NAME="log" TYPE="number" VALUE="1" />
+       <NODE NAME="notify" TYPE="number" VALUE="1" />
+       <NODE NAME="allAppSources" TYPE="number" VALUE="0" />
+       <ITEM NAME="appSources" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="C:\Windows\System32\wscript.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="C:\Windows\System32\cscript.exe" />
+        <NODE NAME="3" TYPE="string" VALUE="C:\Windows\System32\ntvdm.exe" />
+        <NODE NAME="4" TYPE="string" VALUE="C:\Windows\SysWOW64\wscript.exe" />
+        <NODE NAME="5" TYPE="string" VALUE="C:\Windows\SysWOW64\cscript.exe" />
+       </ITEM>
+       <NODE NAME="hasFileTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasRegTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="fileOperations">
+        <NODE NAME="File_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Modify" TYPE="number" VALUE="0" />
+        <NODE NAME="File_DirectDiskAccess" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_GlobalHook" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_LoadDriver" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="regOperations">
+        <NODE NAME="Registry_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_ModifyStartup" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Rename" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="peOperations">
+        <NODE NAME="Process_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Debug" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Hook" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Stop" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Create" TYPE="number" VALUE="1" />
+        <NODE NAME="Application_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <NODE NAME="allFileTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="fileTargets" DELETE="1" />
+       <NODE NAME="allRegTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="regTargets" DELETE="1" />
+       <NODE NAME="allPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="peTargets" DELETE="1" />
+      </ITEM>
+      <ITEM NAME="2">
+       <NODE NAME="enabled" TYPE="number" VALUE="1" />
+       <NODE NAME="name" TYPE="string" VALUE="ie cs/ws script exec block" />
+       <NODE NAME="priority" TYPE="number" VALUE="80" />
+       <NODE NAME="action" TYPE="number" VALUE="2" />
+       <NODE NAME="log" TYPE="number" VALUE="1" />
+       <NODE NAME="notify" TYPE="number" VALUE="1" />
+       <NODE NAME="allAppSources" TYPE="number" VALUE="0" />
+       <ITEM NAME="appSources" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="C:\Windows\SysWOW64\explorer.exe" />
+       </ITEM>
+       <NODE NAME="hasFileTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasRegTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="fileOperations">
+        <NODE NAME="File_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Modify" TYPE="number" VALUE="0" />
+        <NODE NAME="File_DirectDiskAccess" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_GlobalHook" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_LoadDriver" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="regOperations">
+        <NODE NAME="Registry_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_ModifyStartup" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Rename" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="peOperations">
+        <NODE NAME="Process_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Debug" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Hook" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Stop" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Create" TYPE="number" VALUE="1" />
+        <NODE NAME="Application_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <NODE NAME="allFileTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="fileTargets" DELETE="1" />
+       <NODE NAME="allRegTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="regTargets" DELETE="1" />
+       <NODE NAME="allPeTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="peTargets" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="c:\windows\system32\wscript.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="c:\windows\system32\cscript.exe" />
+        <NODE NAME="3" TYPE="string" VALUE="c:\windows\syswow64\wscript.exe" />
+        <NODE NAME="4" TYPE="string" VALUE="c:\windows\syswow64\cscript.exe" />
+       </ITEM>
+      </ITEM>
+      <ITEM NAME="3">
+       <NODE NAME="enabled" TYPE="number" VALUE="1" />
+       <NODE NAME="name" TYPE="string" VALUE="regsvr secure" />
+       <NODE NAME="priority" TYPE="number" VALUE="80" />
+       <NODE NAME="action" TYPE="number" VALUE="2" />
+       <NODE NAME="log" TYPE="number" VALUE="1" />
+       <NODE NAME="notify" TYPE="number" VALUE="1" />
+       <NODE NAME="allAppSources" TYPE="number" VALUE="0" />
+       <ITEM NAME="appSources" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="C:\Windows\System32\regsvr32.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="C:\Windows\SysWOW64\regsvr32.exe" />
+       </ITEM>
+       <NODE NAME="hasFileTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasRegTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="fileOperations">
+        <NODE NAME="File_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Modify" TYPE="number" VALUE="0" />
+        <NODE NAME="File_DirectDiskAccess" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_GlobalHook" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_LoadDriver" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="regOperations">
+        <NODE NAME="Registry_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_ModifyStartup" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Rename" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="peOperations">
+        <NODE NAME="Process_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Debug" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Hook" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Stop" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Create" TYPE="number" VALUE="1" />
+        <NODE NAME="Application_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <NODE NAME="allFileTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="fileTargets" DELETE="1" />
+       <NODE NAME="allRegTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="regTargets" DELETE="1" />
+       <NODE NAME="allPeTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="peTargets" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="c:\windows\system32\cmd.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="c:\windows\system32\wscript.exe" />
+        <NODE NAME="3" TYPE="string" VALUE="c:\windows\system32\cscript.exe" />
+        <NODE NAME="4" TYPE="string" VALUE="c:\windows\system32\ntvdm.exe" />
+        <NODE NAME="5" TYPE="string" VALUE="c:\windows\system32\windowspowershell\v1.0\powershell.exe" />
+        <NODE NAME="6" TYPE="string" VALUE="c:\windows\system32\rundll32.exe" />
+        <NODE NAME="7" TYPE="string" VALUE="c:\windows\syswow64\cmd.exe" />
+        <NODE NAME="8" TYPE="string" VALUE="c:\windows\syswow64\wscript.exe" />
+        <NODE NAME="9" TYPE="string" VALUE="c:\windows\syswow64\cscript.exe" />
+        <NODE NAME="A" TYPE="string" VALUE="c:\windows\syswow64\rundll32.exe" />
+        <NODE NAME="B" TYPE="string" VALUE="c:\windows\syswow64\windowspowershell\v1.0\powershell.exe" />
+       </ITEM>
+      </ITEM>
+      <ITEM NAME="4">
+       <NODE NAME="enabled" TYPE="number" VALUE="1" />
+       <NODE NAME="name" TYPE="string" VALUE="mshta secure" />
+       <NODE NAME="priority" TYPE="number" VALUE="80" />
+       <NODE NAME="action" TYPE="number" VALUE="2" />
+       <NODE NAME="log" TYPE="number" VALUE="1" />
+       <NODE NAME="notify" TYPE="number" VALUE="1" />
+       <NODE NAME="allAppSources" TYPE="number" VALUE="0" />
+       <ITEM NAME="appSources" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="C:\Windows\System32\mshta.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="C:\Windows\SysWOW64\mshta.exe" />
+       </ITEM>
+       <NODE NAME="hasFileTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasRegTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="fileOperations">
+        <NODE NAME="File_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Modify" TYPE="number" VALUE="0" />
+        <NODE NAME="File_DirectDiskAccess" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_GlobalHook" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_LoadDriver" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="regOperations">
+        <NODE NAME="Registry_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_ModifyStartup" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Rename" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="peOperations">
+        <NODE NAME="Process_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Debug" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Hook" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Stop" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Create" TYPE="number" VALUE="1" />
+        <NODE NAME="Application_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <NODE NAME="allFileTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="fileTargets" DELETE="1" />
+       <NODE NAME="allRegTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="regTargets" DELETE="1" />
+       <NODE NAME="allPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="peTargets" DELETE="1" />
+      </ITEM>
+      <ITEM NAME="5">
+       <NODE NAME="enabled" TYPE="number" VALUE="1" />
+       <NODE NAME="name" TYPE="string" VALUE="rundll32 secure" />
+       <NODE NAME="priority" TYPE="number" VALUE="80" />
+       <NODE NAME="action" TYPE="number" VALUE="2" />
+       <NODE NAME="log" TYPE="number" VALUE="1" />
+       <NODE NAME="notify" TYPE="number" VALUE="1" />
+       <NODE NAME="allAppSources" TYPE="number" VALUE="0" />
+       <ITEM NAME="appSources" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="C:\Windows\SysWOW64\rundll32.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="C:\Windows\System32\rundll32.exe" />
+       </ITEM>
+       <NODE NAME="hasFileTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasRegTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="fileOperations">
+        <NODE NAME="File_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Modify" TYPE="number" VALUE="0" />
+        <NODE NAME="File_DirectDiskAccess" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_GlobalHook" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_LoadDriver" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="regOperations">
+        <NODE NAME="Registry_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_ModifyStartup" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Rename" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="peOperations">
+        <NODE NAME="Process_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Debug" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Hook" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Stop" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Create" TYPE="number" VALUE="1" />
+        <NODE NAME="Application_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <NODE NAME="allFileTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="fileTargets" DELETE="1" />
+       <NODE NAME="allRegTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="regTargets" DELETE="1" />
+       <NODE NAME="allPeTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="peTargets" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="c:\windows\system32\cmd.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="c:\windows\system32\wscript.exe" />
+        <NODE NAME="3" TYPE="string" VALUE="c:\windows\system32\cscript.exe" />
+        <NODE NAME="4" TYPE="string" VALUE="c:\windows\system32\ntvdm.exe" />
+        <NODE NAME="5" TYPE="string" VALUE="c:\windows\system32\windowspowershell\v1.0\powershell.exe" />
+        <NODE NAME="6" TYPE="string" VALUE="c:\windows\system32\regsvr32.exe" />
+        <NODE NAME="7" TYPE="string" VALUE="c:\windows\syswow64\cmd.exe" />
+        <NODE NAME="8" TYPE="string" VALUE="c:\windows\syswow64\wscript.exe" />
+        <NODE NAME="9" TYPE="string" VALUE="c:\windows\syswow64\cscript.exe" />
+        <NODE NAME="A" TYPE="string" VALUE="c:\windows\syswow64\regsvr32.exe" />
+        <NODE NAME="B" TYPE="string" VALUE="c:\windows\syswow64\windowspowershell\v1.0\powershell.exe" />
+       </ITEM>
+      </ITEM>
+      <ITEM NAME="6">
+       <NODE NAME="enabled" TYPE="number" VALUE="1" />
+       <NODE NAME="name" TYPE="string" VALUE="poweshell secure" />
+       <NODE NAME="priority" TYPE="number" VALUE="80" />
+       <NODE NAME="action" TYPE="number" VALUE="2" />
+       <NODE NAME="log" TYPE="number" VALUE="1" />
+       <NODE NAME="notify" TYPE="number" VALUE="1" />
+       <NODE NAME="allAppSources" TYPE="number" VALUE="0" />
+       <ITEM NAME="appSources" DELETE="1">
+        <NODE NAME="1" TYPE="string" VALUE="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" />
+        <NODE NAME="2" TYPE="string" VALUE="C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe" />
+       </ITEM>
+       <NODE NAME="hasFileTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasRegTargets" TYPE="number" VALUE="0" />
+       <NODE NAME="hasPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="fileOperations">
+        <NODE NAME="File_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="File_Modify" TYPE="number" VALUE="0" />
+        <NODE NAME="File_DirectDiskAccess" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_GlobalHook" TYPE="number" VALUE="0" />
+        <NODE NAME="Image_LoadDriver" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="regOperations">
+        <NODE NAME="Registry_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_ModifyStartup" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Delete" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Rename" TYPE="number" VALUE="0" />
+        <NODE NAME="Registry_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <ITEM NAME="peOperations">
+        <NODE NAME="Process_AllOperations" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Debug" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Hook" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Stop" TYPE="number" VALUE="0" />
+        <NODE NAME="Application_Create" TYPE="number" VALUE="1" />
+        <NODE NAME="Application_Modify" TYPE="number" VALUE="0" />
+       </ITEM>
+       <NODE NAME="allFileTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="fileTargets" DELETE="1" />
+       <NODE NAME="allRegTargets" TYPE="number" VALUE="0" />
+       <ITEM NAME="regTargets" DELETE="1" />
+       <NODE NAME="allPeTargets" TYPE="number" VALUE="1" />
+       <ITEM NAME="peTargets" DELETE="1" />
+      </ITEM>
+     </ITEM>
      <NODE NAME="eraAgentProtection" TYPE="number" VALUE="0" />
     </ITEM>
    </ITEM>
@@ -2662,7 +2964,7 @@
       <NODE NAME="QuarantineUpdateScan" TYPE="number" VALUE="1" />
       <NODE NAME="CorporateInstallation" TYPE="number" VALUE="2" />
       <NODE NAME="ServerInstallation" TYPE="number" VALUE="2" />
-      <NODE NAME="LockPassword" TYPE="number" VALUE="8A7F74E" />
+      <NODE NAME="LockPassword" TYPE="number" VALUE="68DBAF89" />
       <NODE NAME="IncomingEmailTagLevel" TYPE="number" VALUE="1" />
       <NODE NAME="IncomingEmailSubjectModify" TYPE="number" VALUE="1" />
       <NODE NAME="OutgoingEmailTagLevel" TYPE="number" VALUE="1" />
@@ -4627,7 +4929,7 @@
     </ITEM>
     <ITEM NAME="2">
      <NODE NAME="Id" TYPE="number" VALUE="80000100" />
-     <NODE NAME="LastExec" TYPE="number" VALUE="59A50DC5" />
+     <NODE NAME="LastExec" TYPE="number" VALUE="59A51BD6" />
     </ITEM>
     <ITEM NAME="3">
      <NODE NAME="Id" TYPE="number" VALUE="80000101" />
@@ -4643,7 +4945,7 @@
     </ITEM>
     <ITEM NAME="6">
      <NODE NAME="Id" TYPE="number" VALUE="80000004" />
-     <NODE NAME="LastExec" TYPE="number" VALUE="59A51967" />
+     <NODE NAME="LastExec" TYPE="number" VALUE="59A52053" />
     </ITEM>
     <ITEM NAME="7">
      <NODE NAME="Id" TYPE="number" VALUE="80000005" />
@@ -4686,7 +4988,7 @@
   </ITEM>
   <ITEM NAME="gui">
    <ITEM NAME="UI_CONFIG" VERSION="1">
-    <NODE NAME="ShowSplash" TYPE="number" VALUE="1" />
+    <NODE NAME="ShowSplash" TYPE="number" VALUE="0" />
     <NODE NAME="ShowAlert" TYPE="number" VALUE="1" />
     <NODE NAME="FullScreenMode" TYPE="number" VALUE="1" />
     <NODE NAME="ShowMomentaryMessageBox" TYPE="number" VALUE="1" />
@@ -4696,7 +4998,7 @@
     <NODE NAME="DesktopAlertTransparency" TYPE="number" VALUE="14" />
     <NODE NAME="ShowAlertStatus" TYPE="number" VALUE="10000000" />
     <NODE NAME="CustomerCareNoSubmitConfirm" TYPE="number" VALUE="0" />
-    <NODE NAME="PlaySound" TYPE="number" VALUE="1" />
+    <NODE NAME="PlaySound" TYPE="number" VALUE="0" />
     <NODE NAME="ShowSchedulerSystemTasks" TYPE="number" VALUE="0" />
     <NODE NAME="SupportFirstName" TYPE="string" VALUE="" />
     <NODE NAME="SupportLastName" TYPE="string" VALUE="" />
