@@ -24,6 +24,7 @@ else
 fi
 #начинаем установку
 tar -zxvf /tmp/zabbix-3.4.1.tar.gz
+cd /tmp/zabbix-3.4.1
 bash configure --enable-agent
 make install
 #Создаем лог файл, а то будет ругаться.
