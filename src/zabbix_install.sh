@@ -19,8 +19,8 @@ if grep -F 'zabbix' /etc/passwd | cut -f1 -d":" &> /dev/null ;
 then
 echo "zabbix уже существует, пропускаю..."
 else
-groupadd zabbix
-useradd -g zabbix zabbix
+/usr/sbin/groupadd zabbix
+/usr/sbin/useradd -g zabbix zabbix
 fi
 #начинаем установку
 tar -zxvf /tmp/zabbix-3.4.1.tar.gz
