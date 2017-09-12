@@ -41,6 +41,7 @@ certcheck='checksslsertificate.sh'
 certupd='certificate_update.sh'
 certautoupd='certificate_autoupdate.sh'
 sshsecure='ssh_secure.sh'
+zabbix="zabbix_install.sh"
 
 #####################################
 #Функционал разбитый на скрипты
@@ -209,6 +210,13 @@ sshsecure()
 cd $path
 chmod 777 $sshsecure
 bash $sshsecure
+#установка Zabbix агента
+}
+zabbix()
+{
+cd $path
+chmod 777 $zabbix
+bash $zabbix
 }
 #Y/N
 myread_yn()
@@ -434,6 +442,8 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ Настроить Доп. защиту ssh            │
 │ ├───┼──────────────────────────────────────┤
+├─┤$GRE 5 $DEF│ Установить zabbix агент              │
+│ ├───┼──────────────────────────────────────┤
 └─┤$GRE 0 $DEF│ Выйти в главное меню                 │
   └───┴──────────────────────────────────────┘
 "	
@@ -445,6 +455,7 @@ echo -e "
 	2) statmod ;;
 	3) missedivrtoemail ;;
     4) sshsecure ;;
+    5) zabbix ;;
 	0) mainmenu ;;
 	*) echo "$REDОшибка, выберите 1-3 или 0$DEF"
     esac
