@@ -15,11 +15,12 @@ hostn=`hostname`
 cd /tmp
 cp $workdir/zabbix-3.4.1.tar.gz /tmp
 #Проверяем есть пользователь zabbix в системе или нет, если нет его, тогда добавляем
-if grep -F 'zabbix' /etc/passwd | cut -f1 -d":" &> /dev/null ;
+if grep -F 'zabbix' /etc/passwd | cut -f1 -d":" ;
 then
 echo "zabbix уже существует, пропускаю..."
 else
 /usr/sbin/groupadd zabbix
+sleep 1
 /usr/sbin/useradd -g zabbix zabbix
 fi
 #начинаем установку
