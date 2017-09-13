@@ -20,7 +20,6 @@ then
 echo "zabbix уже существует, пропускаю..."
 else
 /usr/sbin/groupadd zabbix
-sleep 1
 /usr/sbin/useradd -g zabbix zabbix
 fi
 #начинаем установку
@@ -28,9 +27,6 @@ tar -zxvf /tmp/zabbix-3.4.1.tar.gz
 cd /tmp/zabbix-3.4.1
 bash configure --enable-agent
 make install
-#Создаем лог файл, а то будет ругаться.
-touch /var/log/zabbix_agentd.log
-chown zabbix:zabbix /var/log/zabbix_agentd.log
 #Удаляем дефолтный конфиг, подкидываем свой настроенный конфиг.
 rm -rvf /usr/local/etc/zabbix_agentd.conf
 cp $workdir/zabbix_agentd.conf /usr/local/etc/zabbix_agentd.conf
@@ -45,6 +41,11 @@ echo "Вношу hostname $hostn в конфиг zabbix"
 replace "Hostname=" "Hostname=$hostn" -- /usr/local/etc/zabbix_agentd.conf
 fi
 ps -ef | grep zabbix | grep -v grep | awk '{print $2}' | xargs kill
-/usr/local/sbin/zabbix_agentd
-echo "Zabbix agent запущен!"
+#временный костыль
+groupadd zabbix
+useradd -g zabbix zabbix
+#Создаем лог файл, а то будет ругаться.
+touch /var/log/zabbix_agentd.log
+chown zabbix:zabbix /var/log/zabbix_agentd.log
+echo "Все готово! запустите Zabbix Agent!"
 end
