@@ -34,16 +34,17 @@ chown zabbix:zabbix /var/log/zabbix_agentd.log
 #Удаляем дефолтный конфиг, подкидываем свой настроенный конфиг.
 rm -rvf /usr/local/etc/zabbix_agentd.conf
 cp $workdir/zabbix_agentd.conf /usr/local/etc/zabbix_agentd.conf
-if [ "$domain" == "localhost.localdomain" ];
+if [ "$hostn" == "localhost.localdomain" ];
 then
 echo -e "\nВведите hostname сервера"
 read host;
 replace "Hostname=" "Hostname=$host" -- /usr/local/etc/zabbix_agentd.conf
-zabbix_agentd
+echo "Внесли $host в конфиг файл zabbix agent"
 else
 echo "Вношу hostname $hostn в конфиг zabbix"
 replace "Hostname=" "Hostname=$hostn" -- /usr/local/etc/zabbix_agentd.conf
-zabbix_agentd
 fi
-echo "Готово"
+ps -ef | grep zabbix | grep -v grep | awk '{print $2}' | xargs kill
+/usr/local/sbin/zabbix_agentd
+echo "Zabbix agent запущен!"
 end
