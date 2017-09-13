@@ -10,8 +10,6 @@
 # Default:
 # PidFile=/tmp/zabbix_agentd.pid
 
-PidFile=/var/run/zabbix/zabbix_agentd.pid
-
 ### Option: LogType
 #	Specifies where log messages are written to:
 #		system  - syslog
@@ -20,7 +18,7 @@ PidFile=/var/run/zabbix/zabbix_agentd.pid
 #
 # Mandatory: no
 # Default:
-# LogType=file
+LogType=file
 
 ### Option: LogFile
 #	Log file name for LogType 'file' parameter.
@@ -29,7 +27,7 @@ PidFile=/var/run/zabbix/zabbix_agentd.pid
 # Default:
 # LogFile=
 
-LogFile=/var/log/zabbix/zabbix_agentd.log
+LogFile=/var/log/zabbix_agentd.log
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
@@ -39,8 +37,6 @@ LogFile=/var/log/zabbix/zabbix_agentd.log
 # Range: 0-1024
 # Default:
 # LogFileSize=1
-
-LogFileSize=0
 
 ### Option: DebugLevel
 #	Specifies debug level:
@@ -54,7 +50,7 @@ LogFileSize=0
 # Mandatory: no
 # Range: 0-5
 # Default:
-# DebugLevel=3
+DebugLevel=0
 
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
@@ -70,7 +66,7 @@ LogFileSize=0
 #
 # Mandatory: no
 # Default:
-# EnableRemoteCommands=0
+EnableRemoteCommands=1
 
 ### Option: LogRemoteCommands
 #	Enable logging of executed shell commands as warnings.
@@ -102,7 +98,7 @@ Server=212.237.60.35
 # Mandatory: no
 # Range: 1024-32767
 # Default:
-# ListenPort=10050
+ListenPort=10050
 
 ### Option: ListenIP
 #	List of comma delimited IP addresses that the agent should listen on.
@@ -119,7 +115,7 @@ Server=212.237.60.35
 # Mandatory: no
 # Range: 0-100
 # Default:
-StartAgents=0
+# StartAgents=3
 
 ##### Active checks related
 
@@ -166,7 +162,7 @@ Hostname=
 # Range: 0-255 characters
 # Default:
 # HostMetadata=
-HostMetadata=linux
+HostMetadata=Linux
 
 ### Option: HostMetadataItem
 #	Optional parameter that defines an item used for getting host metadata.
@@ -185,7 +181,7 @@ HostMetadata=linux
 # Mandatory: no
 # Range: 60-3600
 # Default:
-RefreshActiveChecks=120
+RefreshActiveChecks=60
 
 ### Option: BufferSend
 #	Do not keep data longer than N seconds in buffer.
@@ -264,8 +260,6 @@ RefreshActiveChecks=120
 # Mandatory: no
 # Default:
 # Include=
-
-Include=/etc/zabbix/zabbix_agentd.d/*.conf
 
 # Include=/usr/local/etc/zabbix_agentd.userparams.conf
 # Include=/usr/local/etc/zabbix_agentd.conf.d/
