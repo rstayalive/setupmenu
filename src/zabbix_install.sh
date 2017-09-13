@@ -40,7 +40,6 @@ else
 echo "Вношу hostname $hostn в конфиг zabbix"
 replace "Hostname=" "Hostname=$hostn" -- /usr/local/etc/zabbix_agentd.conf
 fi
-ps -ef | grep zabbix | grep -v grep | awk '{print $2}' | xargs kill
 #временный костыль
 groupadd zabbix
 useradd -g zabbix zabbix
