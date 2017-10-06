@@ -67,6 +67,7 @@ iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport $sipport -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
+iptables -A INPUT -s 176.192.230.26 -j ACCEPT
 iptables -A INPUT -s $localnet -j ACCEPT
 
 echo -e "$GREЕсть внешний IP? Y/N$DEF"
