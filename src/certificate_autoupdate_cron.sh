@@ -18,6 +18,6 @@ chown -R asterisk:asterisk /etc/asterisk/
 } &> /dev/null
 #Проверяем сертификат и кладем в /tmp/certlog.txt который отправляем на почту
 curl --insecure -v https://$domain:10150 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }' >> /tmp/certlog.txt
-mail -s "Обновлен сертификат на $domain" -a /tmp/certlog.txt -r asterisk rstayalive@gmail.com < /dev/null
+mail -s "Обновлен сертификат на $domain" -a /tmp/certlog.txt -r asterisk $email < /dev/null
 rm -rf /tmp/certlog.txt
 exit 0
