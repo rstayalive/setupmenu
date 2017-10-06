@@ -47,7 +47,8 @@ clear
 				myinstall unzip 
 				myinstall zip 
 				myinstall xz 
-				myinstall kernel-devel-$(uname -r) 
+				myinstall kernel-devel-$(uname -r)
+                myinstall kernel-devel.x86_64
 				myinstall iptables-devel
 				myinstall epel-release
 				
