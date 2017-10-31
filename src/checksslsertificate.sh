@@ -7,7 +7,7 @@ DEF=\\e[0m
 #end
 end()
 {
-echo -e "$GRE Для продолжения нажмите любую клавишу $DEF"
+echo -e "$GREДля продолжения нажмите любую клавишу $DEF"
 read -s -n 1
 }
 domain=`hostname`
@@ -18,7 +18,6 @@ then
 echo -e "$REDДоменный сертификат не настроен или не изменен hostname, продолжить невозможно! Получите сначала сертификат и измените hostname! выходим...$DEF"
 else
 clear
-echo "Проверяю Ваш сертификат"
 curl --insecure -v https://127.0.0.1:10150 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }' >> /tmp/certlog.txt
 echo -e "$REDДата истечения сертификата$DEF"
 grep 'expire date' /tmp/certlog.txt
