@@ -19,10 +19,9 @@ echo -e "$REDДоменный сертификат не настроен или 
 else
 clear
 echo "Проверяю Ваш сертификат"
-curl --insecure -v https://$domain:10150 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }' >> /tmp/certlog.txt
+curl --insecure -v https://127.0.0.1:10150 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }' >> /tmp/certlog.txt
 echo -e "$REDДата истечения сертификата$DEF"
 grep 'expire date' /tmp/certlog.txt
 rm -rf /tmp/cert*
-mail -s testemail $email < /dev/null
 fi
 end
