@@ -1,5 +1,5 @@
 #!/bin/bash
-#Скрипт автоматизации развертывания FreePBX
+#Скрипт автоматизации развертывания FreePBX на базе centos 6.x/7.x
 #Пожелания и ошибки кидайте на почту rstayalive@gmail.com
 #Этот скрипт поможет вам меньше нажимать кнопок.
 #А так же сократит время настройки в разы.
@@ -9,13 +9,11 @@
 #Подпишитесь на бота в телеграме !!!!!!! @rstgithubbot
 #Подписавшись на бота вы будете всегда в курсе последних обнов.
 title="Скрипт автоматизации развертывания freepbx"
-ver="Версия 4.6"
-
+ver="Версия скрипта 4.6"
 #Цвета
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
-
 #Пути на закачку и тд
 workdir='/root/setupmenu/'
 path='/root/setupmenu/src'
@@ -41,10 +39,8 @@ certcheck='checksslsertificate.sh'
 certupd='certificate_update.sh'
 certautoupd='certificate_autoupdate.sh'
 sshsecure='ssh_secure.sh'
-
 #####################################
 #Функционал разбитый на скрипты
-
 #Обновление скрипта
 updatescript()
 {
