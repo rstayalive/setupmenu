@@ -41,7 +41,6 @@ echo -e "$GREПравила успешно добавлены в iptables и п�
  echo -e "$REDИзменения сделаны, но не применены!$DEF" ;;
  esac
 }
-iptables -F
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 iptables -A INPUT -m state --state INVALID -j DROP
