@@ -60,5 +60,7 @@ sleep 3
 make
 speep 3
 make install
+alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'
+echo export NCURSES_NO_UTF8_ACS=1 >> /etc/environment
 echo "Установлено, можешь теперь жать кнопки"
 waitend
