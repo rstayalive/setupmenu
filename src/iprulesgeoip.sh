@@ -55,6 +55,8 @@ iptables -I INPUT -p udp --dport 5060 -m string --string "eyeBeam" --algo bm -j 
 iptables -I INPUT -p udp --dport 5060 -m string --string "VaxSIPUserAgent" --algo bm -j DROP
 iptables -I INPUT -p udp --dport 5060 -m string --string "sip:nm@nm" --algo bm -j DROP
 iptables -I INPUT -p udp --dport 5060 -m string --string "sip:carol@chicago.com" --algo bm -j DROP
+iptables -I INPUT -p udp --dport 5060 -m string --string "FPBX" --algo bm -j DROP
+iptables -I INPUT -p udp --dport 5060 -m string --string "Z 3.14.38765 rv2.8.3" --algo bm -j DROP
 iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --tcp-flags ALL ACK,RST,SYN,FIN -j DROP
 iptables -A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP
