@@ -18,7 +18,7 @@ then
 echo -e "$REDДоменный сертификат не настроен или не изменен hostname, продолжить невозможно! Получите сначала сертификат и измените hostname! выходим...$DEF"
 else
 clear
-curl --insecure -v https://127.0.0.1:10150 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }' >> /tmp/certlog.txt
+curl --insecure -v https://127.0.0.1:10150 2>&1 | grep "start date" && curl --insecure -v https://127.0.0.1:10150 2>&1 | grep "expire date" >> /tmp/certlog.txt
 echo -e "$REDДата истечения сертификата$DEF"
 grep 'expire date' /tmp/certlog.txt
 sleep 2
