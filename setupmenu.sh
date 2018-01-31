@@ -292,7 +292,7 @@ do
 until [ "$mainmenu" = "0" ]; 
 do
 clear
-echo -e "
+echo -e "Asterisk $astver Linux $kern x$arc FreePBX $versionpbx
 ┌─────────────────────────────────────────────────┐
   ___                 ___  ___ __  _              
  | __> _ _  ___  ___ | . \| . >\ \/               
@@ -303,8 +303,7 @@ echo -e "
  \__ \/ ._>  | |  | | || . \|     |/ ._>| ' || | |
  <___/\___.  |_|  \___||  _/|_|_|_|\___.|_|_|\___|
                       |_|                        
- $ver Asterisk $astver
- Linux $kern x$arc FreePBX $versionpbx
+ $ver
 └─────────────────────────────────────────────────┘"
 echo -e "
 ┌──────────────● Главное меню:
