@@ -6,20 +6,41 @@ RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
 
-#Конечный wait
+#end
 waitend()
 {
 echo -e "$GREНажмите любую клавишу чтобы вернуться в меню $DEF"
 read -s -n 1
 }
 
+#Y/N
+myread_yn()
+{
+temp=""
+while [[ "$temp" != "y" && "$temp" != "Y" && "$temp" != "n" && "$temp" != "N" ]] #запрашиваем значение, пока не будет "y" или "n"
+do
+echo -n "y/n: "
+read -n 1 temp
+echo
+done
+eval $1=$temp
+}
+
 arc=`arch`
+if [ "$arc" == "x86_64" ];
+then arc=64 #В теории возможно обозначение "IA-64" и "AMD64", но я не встречал
+else arc=86 #Чтобы не перебирать все возможные IA-32, x86, i686, i586 и т.д.
+fi
 prosto=$(fwconsole ma list | grep -ow prostiezvonki)
 astver=$(asterisk -V | grep -woE [0-9]+\.)
 
-
+#Сделано на случай, если случайно нажал в скрипте 1 и можно было отменить.
+echo -e "$GREНачать установку простых звонков? Y/N$DEF"
+myread_yn setupyn
+case "$setupyn" in
+y|Y)
 #Скрываем вывод скрипта, чтобы глаза отдыхали и запускаем выполнение.
-echo "Устанавливаю простые звонки...."
+echo "Устанавливаю простые звонки.... Процесс установки займет ~5минут."
 {
 #Чистим старую установку на случай если уже пытались ставить простые звонки
 if [ "$prosto" == "prostiezvonki" ];
@@ -119,5 +140,8 @@ if [ "$arc" == "x86_64" ];
 fi
 fi
 } &> /dev/null
-echo "Установлена версия для asterisk $astver"
+echo "Установлена версия для asterisk $astver x$arc" ;;
+n|N)
+echo "Отмена установки" ;;
+esac
 waitend
