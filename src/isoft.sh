@@ -23,7 +23,7 @@ echo -e "$GRE Нажмите любую клавишу $DEF"
 read -s -n 1
 }
 
-#Конечный wait
+#end
 waitend()
 {
 echo -e "$GRE Нажмите любую клавишу чтобы вернуться в меню $DEF"
@@ -60,7 +60,7 @@ sleep 3
 make
 speep 3
 make install
-alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'
+echo "alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'" >> ~/.bashrc
 echo export NCURSES_NO_UTF8_ACS=1 >> /etc/environment
 echo "Установлено, можешь теперь жать кнопки"
 waitend
