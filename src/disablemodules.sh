@@ -48,6 +48,8 @@ read -s -n 1
 		fwconsole moduleadmin disable vmnotify
 		fwconsole moduleadmin disable faxpro
 		fwconsole moduleadmin disable cos
+        fwconsole moduleadmin disable endpoint
+        fwconsole moduleadmin disable reminder
 		echo "Модули успешно отключены"
 		fwconsole reload
 waitend
