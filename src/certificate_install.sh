@@ -10,7 +10,7 @@ end()
 echo -e "$GREДля продолжения нажмите любую клавишу $DEF"
 read -s -n 1
 }
-Делаем простым звонкам запрос
+#Делаем простым звонкам запрос
 startdate=$(curl --insecure -v https://127.0.0.1:10150 2>&1 | grep 'start date')
 expiredate=$(curl --insecure -v https://127.0.0.1:10150 2>&1 | grep 'expire date')
 #Проверяем настроен доменный сертификат или нет (тупо чекаем hostname, т.к при получении сертификата через certificate management нужно задавать hostname согласно сделанной A записи на домене)
