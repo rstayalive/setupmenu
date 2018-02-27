@@ -55,7 +55,7 @@ git clone https://github.com/irontec/sngrep
 cd sngrep
 ./bootstrap.sh
 sleep 3
-./configure
+./configure --with-openssl --enable-unicode
 sleep 3
 make
 speep 3
