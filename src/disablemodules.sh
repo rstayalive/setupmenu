@@ -18,38 +18,42 @@ read -s -n 1
 }
 
 #Начало работы
-		echo "Отключаю модули"
-		fwconsole moduleadmin disable bria
-		fwconsole moduleadmin disable broadcast
-		fwconsole moduleadmin disable bulkdids
-		fwconsole moduleadmin disable callerid
-		fwconsole moduleadmin disable calllimit
-		fwconsole moduleadmin disable conferencespro
-		fwconsole moduleadmin disable dahdiconfig
-		fwconsole moduleadmin disable cxpanel
-		fwconsole moduleadmin disable digium_phones
-		fwconsole moduleadmin disable freepbx_ha
-		fwconsole moduleadmin disable irc
-		fwconsole moduleadmin disable pagingpro
-		fwconsole moduleadmin disable parkpro
-		fwconsole moduleadmin disable pinsetspro
-		fwconsole moduleadmin disable recording_report
-		fwconsole moduleadmin disable restapps
-		fwconsole moduleadmin disable sipstation
-		fwconsole moduleadmin disable sng_mcu
-		fwconsole moduleadmin disable ucpnode
-		fwconsole moduleadmin disable vqplus
-		fwconsole moduleadmin disable xmpp
-		fwconsole moduleadmin disable sangomacrm
-		fwconsole moduleadmin disable zulu
-		fwconsole moduleadmin disable rmsadmin
-		fwconsole moduleadmin disable webcallback
-		fwconsole moduleadmin disable voicemail_report
-		fwconsole moduleadmin disable vmnotify
-		fwconsole moduleadmin disable faxpro
-		fwconsole moduleadmin disable cos
-        fwconsole moduleadmin disable endpoint
-        fwconsole moduleadmin disable reminder
-		echo "Модули успешно отключены"
-		fwconsole reload
+ echo "Отключаю модули"
+    fwconsole moduleadmin disablebria
+    fwconsole moduleadmin disablebroadcast
+    fwconsole moduleadmin disablebulkdids
+    fwconsole moduleadmin disablebulkextensions
+    fwconsole moduleadmin disablecallerid
+    fwconsole moduleadmin disablecalllimit
+    fwconsole moduleadmin disableconferencespro
+    fwconsole moduleadmin disablecxpanel
+    fwconsole moduleadmin disabledahdiconfig
+    fwconsole moduleadmin disabledigium_phones
+    fwconsole moduleadmin disableendpoint
+    fwconsole moduleadmin disablefaxpro
+    fwconsole moduleadmin disablefreepbx_ha
+    fwconsole moduleadmin disablepagingpro
+    fwconsole moduleadmin disableparkpro
+    fwconsole moduleadmin disablepinsetspro
+    fwconsole moduleadmin disablerecording_report
+    fwconsole moduleadmin disablerestapps
+    fwconsole moduleadmin disablesangomacrm
+    fwconsole moduleadmin disablesipstation
+    fwconsole moduleadmin disableucpnode
+    fwconsole moduleadmin disablevmnotify
+    fwconsole moduleadmin disablevoicemail_report
+    fwconsole moduleadmin disablevqplus
+    fwconsole moduleadmin disablewebcallback
+    fwconsole moduleadmin disablexmpp
+    fwconsole moduleadmin disablezulu
+    fwconsole moduleadmin disableirc
+    fwconsole moduleadmin disablesng_mcu
+    fwconsole moduleadmin disableucpnode
+    fwconsole moduleadmin disablesangomacrm
+    fwconsole moduleadmin disablermsadmin
+    fwconsole moduleadmin disablevmnotify
+    fwconsole moduleadmin disablecos
+    fwconsole moduleadmin disablereminder
+ echo "Модули успешно отключены"
+    fwconsole reload
 waitend
