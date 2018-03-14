@@ -66,11 +66,11 @@ if [ "$arc" == "x86_64" ];
 		wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x64.zip
 		unzip prostiezvonki_freePBX_asterisk13_x64.zip
         cp -R prostiezvonki /var/www/html/admin/modules
-		cd /var/www/html/admin/modules/prostiezvonki/module/
-        cp libProtocolLib.so /usr/lib64/
-		cp libProtocolLib.so /usr/lib/
-		cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
-        cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib64/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
+        cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+        cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
@@ -85,10 +85,9 @@ if [ "$arc" == "x86_64" ];
 	    wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x86.zip
         unzip prostiezvonki_freePBX_asterisk13_x86.zip
         cp -R prostiezvonki /var/www/html/admin/modules
-		cd /var/www/html/admin/modules/prostiezvonki/module/
-        cp libProtocolLib.so /usr/lib/
-		cp libProtocolLib.so /var/lib/
-		cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
@@ -106,11 +105,10 @@ if [ "$arc" == "x86_64" ];
         wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk11_x64.zip
         unzip prostiezvonki_freePBX_asterisk11_x64.zip
         cp -R prostiezvonki /var/www/html/admin/modules
-		cd /var/www/html/admin/modules/prostiezvonki/module/
-        cp libProtocolLib.so /usr/lib64/
-		cp libProtocolLib.so /usr/lib/
-		cp libProtocolLib.so /var/lib/
-		cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+        cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib64/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
@@ -126,9 +124,9 @@ if [ "$arc" == "x86_64" ];
         unzip prostiezvonki_freePBX_asterisk11_x86.zip
         cp -R prostiezvonki /var/www/html/admin/modules
 		cd /var/www/html/admin/modules/prostiezvonki/module/
-        cp libProtocolLib.so /usr/lib/
-		cp libProtocolLib.so /var/lib/
-		cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
+        cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
+		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
