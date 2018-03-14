@@ -69,8 +69,8 @@ if [ "$arc" == "x86_64" ];
 		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp libProtocolLib.so /usr/lib64/
 		cp libProtocolLib.so /usr/lib/
-		cp libProtocolLib.so /var/lib/
 		cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+        cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
         cd /var/www/html/admin/
         chown -R asterisk:asterisk modules/
         cd /
