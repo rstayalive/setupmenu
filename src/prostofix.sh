@@ -14,6 +14,7 @@ end()
 echo -e "Нажмите любую клавишу чтобы вернуться в меню"
 read -s -n 1
 }
+#Останавливаем астериск на всякий случай, по завершинии подмены запускаем обратно.
 service asterisk stop
 #Сносим старые сошки
 rm -rvf /usr/lib/asterisk/modules/cel_prostiezvonki.so
@@ -78,6 +79,7 @@ fi
 #Чистим за собой
 rm -rvf /tmp/prost*
 #Проверяем смотрим чтобы поднялся порт 10150
+asterisk -rx "module show like cel_prostiezvonki.so"
 netstat -tulpn | grep 10150
 echo "Обновлены so файлы для asterisk $astver x$arc"
 end
