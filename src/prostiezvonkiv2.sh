@@ -63,12 +63,11 @@ cd /tmp
 wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cp -R prostiezvonki /var/www/html/admin/modules
-cd /var/www/html/admin/modules/prostiezvonki/
-cd so/64/
-cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
-cp libProtocolLib.so /usr/lib/
-cp libProtocolLib.so /usr/lib64/
+cd /var/www/html/admin/modules/prostiezvonki/so/64/
+cp /var/www/html/admin/modules/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+cp /var/www/html/admin/modules/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+cp /var/www/html/admin/modules/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
+cp /var/www/html/admin/modules/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
 touch /var/www/html/admin/modules/prostiezvonki/module/dh512.pem
 touch /var/www/html/admin/modules/prostiezvonki/module/newsert.pem
 touch /var/www/html/admin/modules/prostiezvonki/module/privkey1.pem
@@ -85,10 +84,9 @@ cd /tmp
 wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cp -R prostiezvonki /var/www/html/admin/modules
-cd /var/www/html/admin/modules/prostiezvonki/
-cd so/32/
-cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-cp libProtocolLib.so /usr/lib/
+cd /var/www/html/admin/modules/prostiezvonki/so/32/
+cp /var/www/html/admin/modules/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+cp /var/www/html/admin/modules/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
 touch /var/www/html/admin/modules/prostiezvonki/module/dh512.pem
 touch /var/www/html/admin/modules/prostiezvonki/module/newsert.pem
 touch /var/www/html/admin/modules/prostiezvonki/module/privkey1.pem
@@ -108,12 +106,11 @@ fi
     wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk11.zip
     unzip prostiezvonki_asterisk11.zip
     cp -R prostiezvonki /var/www/html/admin/modules
-    cd /var/www/html/admin/modules/prostiezvonki/
-    cd so/64/
-    cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-    cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
-    cp libProtocolLib.so /usr/lib/
-    cp libProtocolLib.so /usr/lib64/
+    cd /var/www/html/admin/modules/prostiezvonki/so/64/
+    cp /var/www/html/admin/modules/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+    cp /var/www/html/admin/modules/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+    cp /var/www/html/admin/modules/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
+    cp /var/www/html/admin/modules/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
     touch /var/www/html/admin/modules/prostiezvonki/module/dh512.pem
     touch /var/www/html/admin/modules/prostiezvonki/module/newsert.pem
     touch /var/www/html/admin/modules/prostiezvonki/module/privkey1.pem
@@ -132,9 +129,9 @@ fi
     unzip prostiezvonki_asterisk11.zip
     cp -R prostiezvonki /var/www/html/admin/modules
     cd /var/www/html/admin/modules/prostiezvonki/
-    cd so/32/
-    cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-    cp libProtocolLib.so /usr/lib/
+    cd /var/www/html/admin/modules/prostiezvonki/so/32/
+    cp /var/www/html/admin/modules/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+    cp /var/www/html/admin/modules/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
     touch /var/www/html/admin/modules/prostiezvonki/module/dh512.pem
     touch /var/www/html/admin/modules/prostiezvonki/module/newsert.pem
     touch /var/www/html/admin/modules/prostiezvonki/module/privkey1.pem
