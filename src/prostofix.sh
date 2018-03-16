@@ -75,6 +75,7 @@ fi
 #Чистим за собой
 rm -rvf /tmp/prost*
 #Проверяем смотрим чтобы поднялся порт 10150
+sleep 2
 asterisk -rx "module show like cel_prostiezvonki.so"
 netstat -tulpn | grep 10150
 echo "Обновлены so файлы для asterisk $astver x$arc"
