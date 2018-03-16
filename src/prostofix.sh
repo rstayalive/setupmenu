@@ -9,6 +9,12 @@ fi
 prosto=$(fwconsole ma list | grep -ow prostiezvonki)
 astver=$(asterisk -V | grep -woE [0-9]+\.)
 
+end()
+{
+echo -e "Нажмите любую клавишу чтобы вернуться в меню"
+read -s -n 1
+}
+
 #Сносим старые сошки
 rm -rvf /usr/lib/asterisk/modules/cel_prostiezvonki.so
 rm -rvf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
@@ -76,3 +82,4 @@ rm -rvf /tmp/prost*
 #Проверяем смотрим чтобы поднялся порт 10150
 netstat -tulpn | grep 10150
 echo "Обновлены so файлы для asterisk $astver x$arc"
+end
