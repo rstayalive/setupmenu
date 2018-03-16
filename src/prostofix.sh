@@ -20,9 +20,8 @@ rm -rvf /usr/lib/asterisk/modules/cel_prostiezvonki.so
 rm -rvf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
 rm -rvf /usr/lib/libProtocolLib.so
 rm -rvf /usr/lib64/libProtocolLib.so
+rm -rvf /tmp/prost*
 echo "обновляем файлы для $astver x$arc"
-#Скрываем вывод скрипта, чтобы глаза отдыхали и запускаем выполнение.
-{
 #Проверяем версию астериска и разрядность, закидываем новые файлы
 if [ "$astver" == "13" ];
 then
@@ -76,7 +75,6 @@ fi
     service asterisk restart
     fi
 fi
-} &> /dev/null
 #Чистим за собой
 rm -rvf /tmp/prost*
 #Проверяем смотрим чтобы поднялся порт 10150
