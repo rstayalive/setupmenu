@@ -14,7 +14,7 @@ end()
 echo -e "Нажмите любую клавишу чтобы вернуться в меню"
 read -s -n 1
 }
-
+service asterisk stop
 #Сносим старые сошки
 rm -rvf /usr/lib/asterisk/modules/cel_prostiezvonki.so
 rm -rvf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
@@ -37,7 +37,7 @@ cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
 cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
 cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
 fwconsole reload
-service asterisk restart
+service asterisk start
 else
 #Для 13 x86
 cd /tmp
@@ -47,7 +47,7 @@ cd /tmp/prostiezvonki/so/32/
 cp /tmp/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
 cp /tmp/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
 fwconsole reload
-service asterisk restart
+service asterisk start
 fi
     else
     #Для 11 x64
@@ -62,7 +62,7 @@ fi
     cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
     cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
     fwconsole reload
-    service asterisk restart
+    service asterisk start
     else
     #Для 11 x86
     cd /tmp
@@ -72,7 +72,7 @@ fi
     cp /tmp/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
     cp /tmp/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
     fwconsole reload
-    service asterisk restart
+    service asterisk start
     fi
 fi
 #Чистим за собой
