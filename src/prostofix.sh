@@ -37,7 +37,6 @@ cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib/asterisk/modules/
 cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
 cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
 cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
-fwconsole reload
 service asterisk start
 else
 #Для 13 x86
@@ -47,7 +46,6 @@ unzip prostiezvonki_asterisk13.zip
 cd /tmp/prostiezvonki/so/32/
 cp /tmp/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
 cp /tmp/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
-fwconsole reload
 service asterisk start
 fi
     else
@@ -62,7 +60,6 @@ fi
     cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
     cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
     cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
-    fwconsole reload
     service asterisk start
     else
     #Для 11 x86
@@ -72,7 +69,6 @@ fi
     cd /tmp/prostiezvonki/so/32/
     cp /tmp/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
     cp /tmp/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
-    fwconsole reload
     service asterisk start
     fi
 fi
