@@ -1,15 +1,9 @@
 #!/bin/bash
-#Бета версия скрипта установки простых звонков
+#Скрипт установки простыхзвонков
 
-#Алиасы
-RED=\\e[91m
-GRE=\\e[92m
-DEF=\\e[0m
-
-#end
-waitend()
+end()
 {
-echo -e "$GREНажмите любую клавишу чтобы вернуться в меню $DEF"
+echo -e "Нажмите любую клавишу чтобы вернуться в меню"
 read -s -n 1
 }
 
@@ -68,33 +62,31 @@ if [ "$arc" == "x86_64" ];
         cp -R prostiezvonki /var/www/html/admin/modules
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib64/
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
-        cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
         cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
-        cd /var/www/html/admin/
-        chown -R asterisk:asterisk modules/
-        cd /
+        chown -R asterisk:asterisk /var/www/html/admin/modules/
+        chown -R asterisk:asterisk /etc/asterisk
 		fwconsole chown
 		fwconsole ma install prostiezvonki
 		fwconsole reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+        service asterisk restart
     else
 #Для 13 x86
 		cd /
         cd /tmp
 	    wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk13_x86.zip
         unzip prostiezvonki_freePBX_asterisk13_x86.zip
-        cp -R prostiezvonki /var/www/html/admin/modules
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
-        cd /var/www/html/admin/
-        chown -R asterisk:asterisk modules/
-        cd /
+        chown -R asterisk:asterisk /var/www/html/admin/modules/
+        chown -R asterisk:asterisk /etc/asterisk
 		fwconsole chown
 		fwconsole moduleadmin install prostiezvonki
 		fwconsole reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+        service asterisk restart
 fi
 	else
 #Для 11 x64
@@ -107,34 +99,30 @@ if [ "$arc" == "x86_64" ];
         cp -R prostiezvonki /var/www/html/admin/modules
         cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib64/
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
-		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
-        cd /var/www/html/admin/
-        chown -R asterisk:asterisk modules/
+        chown -R asterisk:asterisk /var/www/html/admin/modules/
+        chown -R asterisk:asterisk /etc/asterisk
         cd /
 		amportal chown
 		amportal a ma install prostiezvonki
 		amportal reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-        cd /etc/asterisk/
-#Для 13 x86
+        service asterisk restart
+#Для 11 x86
 	else
 		cd /tmp
 		wget http://prostiezvonki.ru/installs/prostiezvonki_freePBX_asterisk11_x86.zip
         unzip prostiezvonki_freePBX_asterisk11_x86.zip
         cp -R prostiezvonki /var/www/html/admin/modules
-		cd /var/www/html/admin/modules/prostiezvonki/module/
         cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
-		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
-        cd /var/www/html/admin/
-        chown -R asterisk:asterisk modules/
-        cd /
+        chown -R asterisk:asterisk /var/www/html/admin/modules/
+        chown -R asterisk:asterisk /etc/asterisk
 		amportal chown
 		amportal a ma install prostiezvonki
 		amportal reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-        cd /etc/asterisk/
+        service asterisk restart
 fi
 fi
 } &> /dev/null
@@ -142,4 +130,4 @@ echo "Установлена версия для asterisk $astver x$arc" ;;
 n|N)
 echo "Отмена установки" ;;
 esac
-waitend
+end
