@@ -20,7 +20,7 @@ echo "обновляем файлы для $astver x$arc"
 #Проверяем версию астериска и разрядность, закидываем новые файлы
 if [ "$astver" == "13" ];
 then
-if [ "$arc" == "x86_64" ];
+if [ "$arc" == "64" ];
 	then
 #Для 13 x64
 cd /tmp
@@ -46,7 +46,7 @@ service asterisk restart
 fi
     else
     #Для 11 x64
-    if [ "$arc" == "x86_64" ];
+    if [ "$arc" == "64" ];
 	then
     cd /tmp
     wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk11.zip
