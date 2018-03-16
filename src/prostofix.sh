@@ -27,10 +27,10 @@ cd /tmp
 wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cd /tmp/prostiezvonki/so/64/
-cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
-cp libProtocolLib.so /usr/lib/
-cp libProtocolLib.so /usr/lib64/
+cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
+cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
 fwconsole reload
 service asterisk restart
 else
@@ -39,8 +39,8 @@ cd /tmp
 wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cd /tmp/prostiezvonki/so/32/
-cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-cp libProtocolLib.so /usr/lib/
+cp /tmp/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+cp /tmp/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
 fwconsole reload
 service asterisk restart
 fi
@@ -52,10 +52,10 @@ fi
     wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk11.zip
     unzip prostiezvonki_asterisk11.zip
     cd /tmp/prostiezvonki/so/64/
-    cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-    cp cel_prostiezvonki.so /usr/lib64/asterisk/modules/
-    cp libProtocolLib.so /usr/lib/
-    cp libProtocolLib.so /usr/lib64/
+    cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+    cp /tmp/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+    cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib/
+    cp /tmp/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
     fwconsole reload
     service asterisk restart
     else
@@ -64,8 +64,8 @@ fi
     wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk11.zip
     unzip prostiezvonki_asterisk11.zip
     cd /tmp/prostiezvonki/so/32/
-    cp cel_prostiezvonki.so /usr/lib/asterisk/modules/
-    cp libProtocolLib.so /usr/lib/
+    cp /tmp/prostiezvonki/so/32/cel_prostiezvonki.so /usr/lib/asterisk/modules/
+    cp /tmp/prostiezvonki/so/32/libProtocolLib.so /usr/lib/
     fwconsole reload
     service asterisk restart
     fi
