@@ -1,11 +1,5 @@
 #!/bin/bash
 #Скрипт установки софта, все из-за лени
-
-#Цвета
-RED=\\e[91m
-GRE=\\e[92m
-DEF=\\e[0m
-
 #Проверка, установлен пакет или нет
 myinstall()
 {
@@ -15,21 +9,18 @@ else
 	echo "Пакет $1 уже установлен"
 fi
 }
-
 #wait
 wait()
 {
-echo -e "$GRE Нажмите любую клавишу $DEF"
+echo -e "Нажмите любую клавишу"
 read -s -n 1
 }
-
 #end
-waitend()
+end()
 {
-echo -e "$GRE Нажмите любую клавишу чтобы вернуться в меню $DEF"
+echo -e "Нажмите любую клавишу чтобы вернуться в меню"
 read -s -n 1
 }
-
 #Начало работы
 clear
 echo "Начинаем установку софта, можешь опустить свои ленивые руки"
@@ -49,6 +40,7 @@ echo "Начинаем установку софта, можешь опусти�
 	myinstall automake
 	myinstall iptraf
     myinstall ccze
+    myinstall smartmontools
 echo "Ставлю sngrep"
 cd /usr/src
 git clone https://github.com/irontec/sngrep
@@ -63,4 +55,7 @@ make install
 echo "alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'" >> ~/.bashrc
 echo export NCURSES_NO_UTF8_ACS=1 >> /etc/environment
 echo "Установлено, можешь теперь жать кнопки"
-waitend
+#включаем smartmontools чтобы мониторить смарт
+service smartd start
+chkconfig smartd on 
+end
