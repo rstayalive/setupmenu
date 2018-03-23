@@ -65,12 +65,12 @@ if [ "$arc" == "64" ];
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
         cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
         chown -R asterisk:asterisk /var/www/html/admin/modules/
-        chown -R asterisk:asterisk /etc/asterisk
-		fwconsole chown
+        fwconsole chown
 		fwconsole ma install prostiezvonki
 		fwconsole reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         service asterisk restart
+        chown -R asterisk:asterisk /etc/asterisk/
     else
 #Для 13 x86
         cd /tmp
@@ -81,12 +81,12 @@ if [ "$arc" == "64" ];
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /var/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
         chown -R asterisk:asterisk /var/www/html/admin/modules/
-        chown -R asterisk:asterisk /etc/asterisk
-		fwconsole chown
+        fwconsole chown
 		fwconsole moduleadmin install prostiezvonki
 		fwconsole reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         service asterisk restart
+        chown -R asterisk:asterisk /etc/asterisk/
 fi
 	else
 #Для 11 x64
@@ -101,13 +101,13 @@ if [ "$arc" == "64" ];
 		cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
         chown -R asterisk:asterisk /var/www/html/admin/modules/
-        chown -R asterisk:asterisk /etc/asterisk
         cd /
 		amportal chown
 		amportal a ma install prostiezvonki
 		amportal reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         service asterisk restart
+        chown -R asterisk:asterisk /etc/asterisk/
 #Для 11 x86
 	else
 		cd /tmp
@@ -117,12 +117,12 @@ if [ "$arc" == "64" ];
         cp /var/www/html/admin/modules/prostiezvonki/module/libProtocolLib.so /usr/lib/
 		cp /var/www/html/admin/modules/prostiezvonki/module/cel_prostiezvonki.so /usr/lib/asterisk/modules/
         chown -R asterisk:asterisk /var/www/html/admin/modules/
-        chown -R asterisk:asterisk /etc/asterisk
 		amportal chown
 		amportal a ma install prostiezvonki
 		amportal reload
         ln -s /var/spool/asterisk/monitor/ /var/www/html/records
         service asterisk restart
+        chown -R asterisk:asterisk /etc/asterisk/
 fi
 fi
 } &> /dev/null
