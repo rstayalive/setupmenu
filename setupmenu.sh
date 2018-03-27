@@ -9,7 +9,7 @@
 #Подпишитесь на бота в телеграме !!!!!!! @rstgithubbot
 #Подписавшись на бота вы будете всегда в курсе последних обнов.
 title="Скрипт автоматизации развертывания freepbx"
-ver="v4.7"
+ver="v4.8"
 #Цвета
 RED=\\e[91m
 GRE=\\e[92m
@@ -26,7 +26,8 @@ freepbxupd='freepbxupd.sh'
 statmod='statmod.sh'
 celoverwrite='celoverwrite.sh'
 isoft='isoft.sh'
-prostiezvonki='prostiezvonki.sh'
+prostiezvonki='prostiezvonkiv2.sh'
+prostoupd='prostoupd.sh'
 missedivrtoemail='missedivrtoemail.sh'
 missedreport='missedreport.sh'
 callback='callback.sh'
@@ -109,12 +110,19 @@ cd $path
 chmod 777 $isoft
 sh $isoft
 }
-# Скрипт простых звонков
+#Скрипт установки простых звонков
 prostiezvonki()
 {
 cd $path
 chmod 777 $prostiezvonki
 bash $prostiezvonki
+}
+#Скрипт обновления простых звонков
+prostoupd()
+{
+cd $path
+chmod 777 $prostoupd
+bash $prostoupd
 }
 #Уведомление о пропущенном звонке из групп, очередей и ivr меню
 missedivrtoemail()
@@ -344,7 +352,7 @@ echo -e "
 │ ┌───┬──────────────────────────────────────┐
 ├─┤$GRE 1 $DEF│ Установить простые звонки	     │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 2 $DEF│ Создать самоподписанный сертификат   │
+├─┤$GRE 2 $DEF│ Обновить простые звонки		     │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 3 $DEF│ Установить cel.conf                  │
 │ ├───┼──────────────────────────────────────┤
@@ -364,7 +372,7 @@ echo -e "
     echo ""
     case $menu1 in
 		1) prostiezvonki ;;
-		2) selfcert ;;
+		2) prostoupd ;;
 		3) celoverwrite ;;
 		4) callback ;;
 		5) zvonilka ;;
