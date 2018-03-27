@@ -60,7 +60,7 @@ if [ "$arc" == "64" ];
 	then
 #Для 13 x64
 cd /tmp
-wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk13.zip
+wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cp -R prostiezvonki /var/www/html/admin/modules
 cd /var/www/html/admin/modules/prostiezvonki/so/64/
@@ -74,14 +74,14 @@ touch /var/www/html/admin/modules/prostiezvonki/module/privkey1.pem
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
 chown -R asterisk:asterisk /var/www/html/admin/modules/
 yes | cp -rfi /root/cel_prostiezvonki.conf /etc/asterisk/
-chown -R asterisk:asterisk /etc/asteirsk/
 fwconsole ma install prostiezvonki
 fwconsole reload
 service asterisk restart
+chown -R asterisk:asterisk /etc/asterisk/
 else
 #Для 13 x86
 cd /tmp
-wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk13.zip
+wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cp -R prostiezvonki /var/www/html/admin/modules
 cd /var/www/html/admin/modules/prostiezvonki/so/32/
@@ -93,17 +93,17 @@ touch /var/www/html/admin/modules/prostiezvonki/module/privkey1.pem
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
 yes | cp -rfi /root/cel_prostiezvonki.conf /etc/asterisk/
 chown -R asterisk:asterisk /var/www/html/admin/modules/
-chown -R asterisk:asterisk /etc/asteirsk/
 fwconsole ma install prostiezvonki
 fwconsole reload
 service asterisk restart
+chown -R asterisk:asterisk /etc/asterisk/
 fi
     else
     #Для 11 x64
     if [ "$arc" == "64" ];
 	then
     cd /tmp
-    wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk11.zip
+    wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk11.zip
     unzip prostiezvonki_asterisk11.zip
     cp -R prostiezvonki /var/www/html/admin/modules
     cd /var/www/html/admin/modules/prostiezvonki/so/64/
@@ -117,15 +117,15 @@ fi
     ln -s /var/spool/asterisk/monitor/ /var/www/html/records
     chown -R asterisk:asterisk /var/www/html/admin/modules/
     yes | cp -rfi /root/cel_prostiezvonki.conf /etc/asterisk/
-    chown -R asterisk:asterisk /etc/asteirsk/
     amportal chown
     amportal a ma install prostiezvonki
     amportal reload
     ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+    chown -R asterisk:asterisk /etc/asterisk/
     else
     #Для 11 x86
     cd /tmp
-    wget http://office.vedisoft.ru/files/all/prostiezvonki_asterisk11.zip
+    wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk11.zip
     unzip prostiezvonki_asterisk11.zip
     cp -R prostiezvonki /var/www/html/admin/modules
     cd /var/www/html/admin/modules/prostiezvonki/
@@ -138,12 +138,12 @@ fi
     ln -s /var/spool/asterisk/monitor/ /var/www/html/records
     chown -R asterisk:asterisk /var/www/html/admin/modules/
     yes | cp -rfi /root/cel_prostiezvonki.conf /etc/asterisk/
-    chown -R asterisk:asterisk /etc/asteirsk/
     amportal chown
     amportal a ma install prostiezvonki
     amportal reload
     ln -s /var/spool/asterisk/monitor/ /var/www/html/records
     service asterisk restart
+    chown -R asterisk:asterisk /etc/asterisk/
     fi
 fi
 } &> /dev/null
