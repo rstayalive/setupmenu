@@ -4,14 +4,8 @@
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
-#wait
-wait()
-{
-echo -e "$GRE Нажмите любую клавишу $DEF"
-read -s -n 1
-}
-#Конечный wait
-waitend()
+#end
+end()
 {
 echo -e "$GRE Нажмите любую клавишу чтобы вернуться в меню $DEF"
 read -s -n 1
@@ -67,4 +61,4 @@ echo "Правила успешно добавлены"
 save
 clear
 iptables -L -v -n
-waitend
+end
