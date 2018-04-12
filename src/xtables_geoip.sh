@@ -34,7 +34,10 @@ fi
 
 workdir='/root/setupmenu/src'
 arc=`arch`
-
+if [ "$arc" == "x86_64" ];
+then arc=64 #В теории возможно обозначение "IA-64" и "AMD64", но я не встречал
+else arc=86 #Чтобы не перебирать все возможные IA-32, x86, i686, i586 и т.д.
+fi
 
 #Начало установки
 clear
@@ -55,7 +58,7 @@ clear
 #Весь ниже написанный головняк связан исключительно с пакетом perl-Text-CSV_XS
 
 #Проверяем разрядность для установки репозитория
-		if [ "$arc" == "x86_64" ];
+		if [ "$arc" == "64" ];
 		then rpm -i ftp://rpmfind.net/linux/dag/redhat/el6/en/x86_64/dag/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 		else rpm -i ftp://rpmfind.net/linux/dag/redhat/el6/en/i386/dag/RPMS/rpmforge-release-0.5.3-1.el6.rf.i686.rpm
 		fi
@@ -70,7 +73,7 @@ clear
 	if [ "" == "$PKG_OK" ];  #проверяем поставился perl-Text-CSV_XS из репозитория или нет
 		then
 		echo "Не найден в репозитории, ставим из rpm"
-	if [ "$arc" == "x86_64" ]; #проверяем разрядность, чтобы не гадать и не спрашивать какую версию ставить.
+	if [ "$arc" == "64" ]; #проверяем разрядность, чтобы не гадать и не спрашивать какую версию ставить.
 		then
 		rpm -i $workdir/perl-Text-CSV_XS-0.80-1.el6.rf.x86_64.rpm
 		echo "установлена x64 версия"
