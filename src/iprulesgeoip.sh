@@ -58,6 +58,7 @@ iptables -A OUTPUT -p tcp --tcp-flags ALL NONE -j DROP
 iptables -P OUTPUT ACCEPT
 iptables -P INPUT DROP
 echo "Правила успешно добавлены"
+service fail2ban restart
 save
 clear
 iptables -L -v -n
