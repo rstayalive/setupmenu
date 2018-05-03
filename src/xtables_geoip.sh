@@ -130,6 +130,7 @@ clear
 		replace "build_TARPIT=m" "#build_TARPIT=m" -- /tmp/xtables-addons-2.14/mconfig
 		echo "подменили"
 	fi
+    ln -s /usr/src/kernels/$(uname -r)/ /lib/modules/$(uname -r)/build
 		./configure
 		echo "Запускаю компиляцию модуля"
 		make && make install
