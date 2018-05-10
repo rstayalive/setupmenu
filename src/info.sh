@@ -17,6 +17,7 @@ out="/tmp/outputinfo.txt"
 uname=`uname -r`
 red=`cat /etc/redhat-release`
 deb=`cat /etc/debian_version`
+pbxfirm=`cat /etc/schmooze/pbx-version`
 ip=`fwconsole extip`
 freepbx=`rpm -qa | grep freepbx`
 
@@ -27,6 +28,7 @@ then echo "$deb" >> $out
 else echo "$red" >> $out
 fi
 echo "$freepbx" >> $out
+echo "$pbxfirm" >> $out
 echo "asterisk $astver" >> $out
 echo "arch x$arc" >> $out
 echo "$ip" >> $out
