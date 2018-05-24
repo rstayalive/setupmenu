@@ -31,7 +31,7 @@ prostoupd='prostoupd.sh'
 missedivrtoemail='missedivrtoemail.sh'
 missedreport='missedreport.sh'
 callback='callback.sh'
-iprulesdef='iprulesdef.sh'
+iprules='iprulesv5.sh'
 iprulesgeoip='iprulesgeoip.sh'
 zvonilka='zvonilka.sh'
 websecure='websecure.sh'
@@ -152,18 +152,19 @@ chmod 777 $callback
 bash $callback
 }
 #Скрипт установки стандартных правил для FreePBX
-iprulesdef()
+iprules()
 {
 cd $path
-chmod 777 $iprulesdef
-bash $iprulesdef
+chmod 777 $iprules
+bash $iprules
 }
 #Скрипт установки расширеных правил безопасности
 iprulesgeoip()
 {
-cd $path
-chmod 777 $iprulesgeoip
-bash $iprulesgeoip
+echo "опция отключена из-за ненадобновсти, правила были объеденены в один пункт."
+#cd $path
+#chmod 777 $iprulesgeoip
+#bash $iprulesgeoip
 }
 #Реализация change log
 changelog()
@@ -497,7 +498,7 @@ echo -e "
 	3) iptables -F 
 		echo "Правила iptables сброшены!"
 		wait ;;
-	4) iprulesdef ;;
+	4) iprules ;;
 	5) iprulesgeoip ;;
 	6) 
 		echo -e "\nВведите IP или Сеть формат - 8.8.8.8 или 192.168.0.0/24"
