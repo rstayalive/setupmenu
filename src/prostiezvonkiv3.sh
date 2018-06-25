@@ -33,4 +33,6 @@ else
     amportal chown
     echo "Установлены простые звонки для asterisk $astver"
 fi
+#Создаем символьную ссылку для записей
+ln -s /var/spool/asterisk/monitor/ /var/www/html/records
 end
