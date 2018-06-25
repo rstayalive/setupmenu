@@ -20,16 +20,22 @@ deb=`cat /etc/debian_version`
 pbxfirm=`cat /etc/schmooze/pbx-version`
 ip=`fwconsole extip`
 freepbx=`rpm -qa | grep freepbx`
+cpu=`cat /proc/cpuinfo`
+mem=`free -m`
 
 #gathering system and asterisk info
 echo "linux $uname" >> $out
 if ! [ -f /etc/redhat-release ];
-then echo "$deb" >> $out
-else echo "$red" >> $out
+then
+echo "$deb" >> $out
+else
+echo "$red" >> $out
 fi
 echo "$freepbx" >> $out
 echo "$pbxfirm" >> $out
 echo "asterisk $astver" >> $out
 echo "arch x$arc" >> $out
 echo "$ip" >> $out
+echo "$cpu" >> $out
+echo "$mem" >> $out
 end
