@@ -8,9 +8,9 @@ $strUser = "callback";
 $strSecret = "TQXhW9tAQxM8";
 $strChannel = "Local/100@from-internal";
 $strExten = $_POST['txtphonenumber'];
+$strName = 'WebCall - '.$_POST['txtphonenumber'].'';
 $strExten=preg_replace("/[^01-9]/","",$strExten);
 
-#Соединение с ami, создание звонка.
 if (strlen($strExten) == 11 && is_numeric($strExten))
 {
 $socket = fsockopen($strHost, 5038, $errnum, $errdesc) or die("Connection to host failed");
@@ -21,7 +21,7 @@ sleep (1);
 
 fputs($socket, "Action: Originate\r\n" );
 fputs($socket, "Channel: Local/999@from-internal\r\n" );
-fputs($socket, "Callerid: $strExten\r\n");
+fputs($socket, "Callerid: $strName\r\n");
 fputs($socket, "Exten: $strExten\r\n" );
 fputs($socket, "Timeout: 20000\r\n" );
 fputs($socket, "Context: from-internal\r\n" );
