@@ -68,4 +68,52 @@ read -s -n 1
     fwconsole ma disable vega
  echo "Модули успешно отключены"
     fwconsole reload
+echo "Начинаю удаление модулей"    
+    fwconsole ma remove disa
+    fwconsole ma remove endpoint
+    fwconsole ma remove extensionroutes
+    fwconsole ma remove faxpro
+    fwconsole ma remove freepbx_ha
+    fwconsole ma remove pagingpro
+    fwconsole ma remove parkpro
+    fwconsole ma remove pinsetspro
+    fwconsole ma remove queuestats
+    fwconsole ma remove qxact_reports
+    fwconsole ma remove recording_report
+    fwconsole ma remove restapps
+    fwconsole ma remove sangomacrm
+    fwconsole ma remove sipstation
+    fwconsole ma remove sms
+    fwconsole ma remove tts
+    fwconsole ma remove ttsengines
+    fwconsole ma remove vega
+    fwconsole ma remove vmnotify
+    fwconsole ma remove voicemail_report
+    fwconsole ma remove vqplus
+    fwconsole ma remove webcallback
+    fwconsole ma remove webrtc
+    fwconsole ma remove xmpp
+    fwconsole ma remove zulu
+    fwconsole ma remove areminder
+    fwconsole ma remove broadcast
+    fwconsole ma remove callerid
+    fwconsole ma remove calllimit
+    fwconsole ma remove conferencespro
+    fwconsole ma remove configedit
+    fwconsole ma remove contactmanager
+    fwconsole ma remove cos
+    fwconsole ma remove customappsreg
+    fwconsole ma remove cxpanel
+    fwconsole ma remove dahdiconfig
+    fwconsole ma remove daynight
+    fwconsole ma remove directory
+    fwconsole ma remove digium_phones
+    fwconsole ma remove dundicheck
+    fwconsole ma remove hotelwakeup
+    fwconsole ma remove irc
+    fwconsole ma remove motif
+    fwconsole ma remove pbdirectory
+    fwconsole ma disable ucp
+    fwconsole reload
+ echo "готово"
 waitend
