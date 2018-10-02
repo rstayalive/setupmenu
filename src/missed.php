@@ -6,7 +6,7 @@ $data = date('d-m-Y H:i:s');
 $email = "myemail";
 echo "NO ANSWERED ---------------------------------<br>";
 
-$result = mysql_query("select src, calldate from cdr where disposition = 'NO ANSWER' and calldate >='$today 00:00:00' and calldate <='$today 23:59:59' and duration >10 and LENGTH(src) >3;", $link);
+$result = mysql_query("select distinct src, calldate from cdr where disposition = 'NO ANSWER' and calldate >='$today 00:00:00' and calldate <='$today 23:59:59' and duration >10 and LENGTH(src) >3;", $link);
 $counter=1;
 
 while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
@@ -19,7 +19,7 @@ while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 
 echo "ANSWERED ---------------------------------<br>";
 
-$result = mysql_query("select src, calldate from cdr where disposition = 'ANSWERED' and calldate >='$today 00:00:00' and calldate <='$today 23:59:59' and LENGTH(src) >3;", $link);
+$result = mysql_query("select distinct src, calldate from cdr where disposition = 'ANSWERED' and calldate >='$today 00:00:00' and calldate <='$today 23:59:59' and LENGTH(src) >3;", $link);
 $counter=1;
 while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 
