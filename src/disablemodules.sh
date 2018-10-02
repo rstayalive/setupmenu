@@ -113,6 +113,7 @@ echo "Начинаю удаление модулей"
     fwconsole ma remove irc
     fwconsole ma remove motif
     fwconsole ma remove pbdirectory
+    fwconsole ma disable ucpnode
     fwconsole ma disable ucp
     fwconsole reload
  echo "готово"
