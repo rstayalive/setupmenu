@@ -39,18 +39,21 @@ echo -e "\nВведите sip port астериска или диапазон п
 read sipport ;
 echo -e "\nВведите локальную сеть, которую нужно добавить в исключения формат 192.168.0.0/24"
 read localnet ;
-#Создаем 2 новых chain, один для обработки портов в $sipport другой для обработки входящего трафика в SIPACL по юзерагентам, которые будут #попадать в chain SIPJUNK и сражу дропаться. На всякий случай для тех кто не шарит и будет читать это говно.
-#В SIPACL мы дропаем всех кто попадает по юзерагентам как и писал ранее, потом дропаем все тех кто не из Росиии, остальным разрешаем.
-#Дальше открываем стандартные для работы http/s/ssh/sip/rtp порты, неограничиваем $localnet, закрываем доступ всех кто не из России.
+#Создаем 2 новых chain, один(SIPACL) для фильтрации трафика для порта в $sipport, другой(SIPJUNK) для дропа трафика который попал в chain SIPACL на user agent. Тоесть те кто попал на юзерагент будут закинуты в chain SIPJUNK, залогированы и дропнуты. Это на всякий случай для тех кто не шарит и будет читать это говно.
+#В SIPACL мы разрешаем #localnet, ipшники сип провайдеров, свои IP если хотим тестить звонки через $sipport. Это что касается телефонии
+#Сам INPUT дефолтный 
 iptables -N SIPACL
 iptables -N SIPJUNK
+iptables -A INPUT -s 176.192.230.26 -j ACCEPT
+iptables -A INPUT -s 213.176.233.0/24 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport $sipport -j SIPACL
 iptables -A SIPACL -s $localnet -j ACCEPT
-iptables -A SIPACL -s 213.176.233.0/24 -j ACCEPT
 iptables -A SIPACL -s 176.192.230.26 -j ACCEPT
+iptables -A SIPACL -s 213.176.233.0/24 -j ACCEPT
 iptables -A SIPACL -j LOG --log-prefix "SIPACL: "
 iptables -A SIPACL -p all -m string --string "friendly-scanner" --algo bm --to 65535 -j SIPJUNK
 iptables -A SIPACL -p all -m string --string "friendly-request" --algo bm --to 65535 -j SIPJUNK
@@ -73,11 +76,7 @@ iptables -A SIPACL -m geoip ! --src-cc RU -j DROP
 iptables -A SIPACL -j ACCEPT
 iptables -A SIPJUNK -j LOG --log-prefix "SIPJUNK: " --log-level 6 
 iptables -A SIPJUNK -j DROP
-iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
-iptables -A INPUT -s 176.192.230.26 -j ACCEPT
-iptables -A INPUT -s 213.176.233.0/24 -j ACCEPT
 iptables -A INPUT -s $localnet -j ACCEPT
-
 echo -e "$GREЕсть внешний IP? Y/N$DEF"
 myread_yn externip
 case "$externip" in

@@ -8,7 +8,6 @@ $strUser = "callback";
 $strSecret = "TQXhW9tAQxM8";
 $strChannel = "Local/100@from-internal";
 $strExten = $_POST['txtphonenumber'];
-$strName = 'WebCall - '.$_POST['txtphonenumber'].'';
 $strExten=preg_replace("/[^01-9]/","",$strExten);
 
 if (strlen($strExten) == 11 && is_numeric($strExten))
@@ -21,16 +20,16 @@ sleep (1);
 
 fputs($socket, "Action: Originate\r\n" );
 fputs($socket, "Channel: Local/999@from-internal\r\n" );
-fputs($socket, "Callerid: $strName\r\n");
-fputs($socket, "Exten: $strExten\r\n" );
-fputs($socket, "Timeout: 20000\r\n" );
 fputs($socket, "Context: from-internal\r\n" );
+fputs($socket, "Exten: $strExten\r\n" );
+fputs($socket, "Timeout: 30000\r\n" );
+fputs($socket, "Callerid: $strExten\r\n");
 fputs($socket, "Priority: 1\r\n" );
 fputs($socket, "Async: yes\r\n\r\n" );
 fputs($socket, "Action: Logoff\r\n\r\n");
 sleep (1);
 $wrets=fgets($socket,128);
-echo "Возьмите трубку";
+echo "calling...";
 }else{
 	echo "ERROR -".strlen($strExten)."-";
 }
