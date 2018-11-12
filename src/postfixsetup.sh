@@ -56,7 +56,7 @@ echo "
 		echo "Настройка завершена. Теперь проверим что все работает."
         echo -e "\nВведите Email куда отправить тестовое письмо"
         read email ;
-        echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r asterisk.maildelivery@gmail.com $email 
+        echo "Проверка тела письма." | mail -s "Проверка почты" -r asterisk.maildelivery@gmail.com $email 
         echo "отправлено тестовое письмо на $email проверьте почту" ;;
  n|N)
 		echo -e "$REDЕсли используете yandex или google аккаунт, обязательно создайте пароль приложения в настройках безопасности и в пароль впишите его, а не пароль от аккаунта иначе работать не будет!!!$DEF"
@@ -84,7 +84,7 @@ echo "
         echo "Настройка завершена. Теперь проверим что все работает."
         echo -e "\nВведите Email куда отправить тестовое письмо"
         read email ;
-        echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r $login $email
+        echo "Проверка тела письма." | mail -s "Проверка почты" -r $login $email
         echo "отправлено тестовое письмо на $email проверьте почту"
         else
         echo "
@@ -99,7 +99,7 @@ echo "
         echo "Настройка завершена. Теперь проверим что все работает."
         echo -e "\nВведите Email куда отправить тестовое письмо"
         read email ;
-        echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r $login $email
+        echo "Проверка тела письма." | mail -s "Проверка почты" -r $login $email
         echo "отправлено тестовое письмо на $email проверьте почту"
         fi
 		echo "Готово! почта настроена для $login" ;;
