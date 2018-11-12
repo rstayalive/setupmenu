@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Скрипт настройки postfix для отправки уведомлений на почту
 
 #Алиасы
@@ -36,7 +36,7 @@ echo "
 	echo -e "$GREИспользовать email (Y)asterisk.maildelivery@gmail.com или (N)свой email?$DEF"
 	myread_yn ans
 	case "$ans" in
-		y|Y)
+ y|Y)
 		touch /etc/postfix/sasl_passwd
 		echo -e "\nВведите сгенерированный пароль почты!"
 		read epasswd ;
@@ -52,8 +52,13 @@ echo "
         smtp_sasl_security_options = noanonymous
         smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
         " >> /etc/postfix/main.cf
-		echo "Готово!" ;;
-		n|N)
+        service postfix restart
+		echo "Настройка завершена. Теперь проверим что все работает."
+        echo -e "\nВведите Email куда отправить тестовое письмо"
+        read email ;
+        echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r asterisk.maildelivery@gmail.com $email 
+        echo "отправлено тестовое письмо на $email проверьте почту" ;;
+ n|N)
 		echo -e "$REDЕсли используете yandex или google аккаунт, обязательно создайте пароль приложения в настройках безопасности и в пароль впишите его, а не пароль от аккаунта иначе работать не будет!!!$DEF"
 		echo -e "\nВведите логин. формат blablabla@gmail.com"
 		read login ;
@@ -75,6 +80,12 @@ echo "
         smtp_sasl_security_options = noanonymous
         smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
         " >> /etc/postfix/main.cf
+        service postfix restart
+        echo "Настройка завершена. Теперь проверим что все работает."
+        echo -e "\nВведите Email куда отправить тестовое письмо"
+        read email ;
+        echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r $login $email
+        echo "отправлено тестовое письмо на $email проверьте почту"
         else
         echo "
         relayhost = [smtp.yandex.com]:587
@@ -84,18 +95,13 @@ echo "
         smtp_sasl_security_options = noanonymous
         smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
         " >> /etc/postfix/main.cf
+        service postfix restart
+        echo "Настройка завершена. Теперь проверим что все работает."
+        echo -e "\nВведите Email куда отправить тестовое письмо"
+        read email ;
+        echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r $login $email
+        echo "отправлено тестовое письмо на $email проверьте почту"
         fi
-		echo "Готово! почта настроена для $sender" ;;
+		echo "Готово! почта настроена для $login" ;;
 esac
-		
-# Перезапуск и тест работы
-service postfix restart
-echo -e "\nВведите Email для тествого письма"
-read email ;
-echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r $login $email
-#mail -s testmailsend $email < /dev/null
-echo -e "$GREПроверяю лог файл на успешную отправку $DEF"
-sleep 7
-tail /var/log/maillog | grep status=sent
-echo -e "$GREЕсли все правильно ввели, письмо должно уже было прийти! $DEF"
 waitend
