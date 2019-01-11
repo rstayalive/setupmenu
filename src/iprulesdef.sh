@@ -45,7 +45,6 @@ read localnet ;
 iptables -N SIPACL
 iptables -N SIPJUNK
 iptables -A INPUT -s 176.192.230.26 -j ACCEPT
-iptables -A INPUT -s 213.176.233.0/24 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
@@ -53,7 +52,6 @@ iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport $sipport -j SIPACL
 iptables -A SIPACL -s $localnet -j ACCEPT
 iptables -A SIPACL -s 176.192.230.26 -j ACCEPT
-iptables -A SIPACL -s 213.176.233.0/24 -j ACCEPT
 iptables -A SIPACL -j LOG --log-prefix "SIPACL: "
 iptables -A SIPACL -p all -m string --string "friendly-scanner" --algo bm --to 65535 -j SIPJUNK
 iptables -A SIPACL -p all -m string --string "friendly-request" --algo bm --to 65535 -j SIPJUNK
