@@ -26,7 +26,7 @@ else
     cd /tmp
     wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk11.zip
     unzip rostiezvonki_asterisk11.zip
-    cd rostiezvonki
+    cd prostiezvonki
     bash install
     amportal a ma install prostiezvonki
     amportal reload
