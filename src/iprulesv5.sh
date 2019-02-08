@@ -35,8 +35,8 @@ echo
 done
 eval $1=$temp
 }
-echo -e "\nВведите sip port астериска или диапазон портов, формат 5060:5061 для диапазона, либо 5060 для одного порта"
-read sipport ;
+#echo -e "\nВведите sip port астериска или диапазон портов, формат 5060:5061 для диапазона, либо 5060 для одного порта"
+#read sipport ;
 echo -e "\nВведите локальную сеть, которую нужно добавить в исключения формат 192.168.0.0/24"
 read localnet ;
 echo -e "\nВведите Страну или страны из которых можно подключаться к астериску, пример RU,LV,US без пробела"
@@ -55,7 +55,6 @@ iptables -A INPUT -p tcp -m tcp --dport 10150 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport 5060:5160 -j SIPACL
 iptables -A SIPACL -s $localnet -j ACCEPT
-iptables -A SIPACL -s 213.176.233.0/24 -j ACCEPT
 iptables -A SIPACL -s 176.192.230.26 -j ACCEPT
 iptables -A SIPACL -j LOG --log-prefix "SIPACL: "
 iptables -A SIPACL -p all -m string --string "friendly-scanner" --algo bm --to 65535 -j SIPJUNK
@@ -80,7 +79,6 @@ iptables -A SIPACL -j ACCEPT
 iptables -A SIPJUNK -j LOG --log-prefix "SIPJUNK: " --log-level 6 
 iptables -A SIPJUNK -j DROP
 iptables -A INPUT -s $localnet -j ACCEPT
-iptables -A INPUT -s 213.176.233.0/24 -j ACCEPT
 iptables -A INPUT -s 176.192.230.26 -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
