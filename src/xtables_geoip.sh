@@ -111,8 +111,13 @@ clear
 		make && make install
 		sleep 5
 		cd geoip/ 
-		./xt_geoip_dl 
-		./xt_geoip_build GeoIPCountryWhois.csv 
+        wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
+        unzip GeoLite2-Country-CSV.zip
+        mv mv GeoLite2-Country-CSV*/ geoiplite
+        cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-1.47.1/geoip/
+        cp geoiplite/GeoLite2-Country-Locations-en.csv /tmp/xtables-addons-1.47.1/geoip/
+        ./xt_geoip_build GeoLite2-Country-Blocks-IPv4.csv
+        ./xt_geoip_build GeoLite2-Country-Locations-en.csv
 		mkdir -p /usr/share/xt_geoip/ 
 		cp -r {BE,LE} /usr/share/xt_geoip/
 		modprobe xt_geoip
@@ -136,9 +141,15 @@ clear
 		make && make install
 		sleep 5
 		cd geoip/ 
-		./xt_geoip_dl 
-		./xt_geoip_build GeoIPCountryWhois.csv 
-		mkdir -p /usr/share/xt_geoip/ 
+		#./xt_geoip_dl 
+        wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
+        unzip GeoLite2-Country-CSV.zip
+        mv mv GeoLite2-Country-CSV*/ geoiplite
+        cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-2.14/geoip/
+        cp geoiplite/GeoLite2-Country-Locations-en.csv /tmp/xtables-addons-2.14/geoip/
+        ./xt_geoip_build GeoLite2-Country-Blocks-IPv4.csv
+        ./xt_geoip_build GeoLite2-Country-Locations-en.csv
+		mkdir -p /usr/share/xt_geoip/
 		cp -r {BE,LE} /usr/share/xt_geoip/
 		modprobe xt_geoip
 		echo "Модуль geoip установлен"
