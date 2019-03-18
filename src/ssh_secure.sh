@@ -45,9 +45,9 @@ $GREИз каких стран можно подключаться к ssh?$DEF
 пример: RU UA
 Все заглавными буквами, это обязательно"
 read zone;
-replace "strana" "$zone" -- /root/ssh_defend.sh
 cp $workdir/ssh_defend.sh /root/
 chmod 755 /root/ssh_defend.sh
+replace "strana" "$zone" -- /root/ssh_defend.sh
 echo 'sshd: ALL' >> /etc/hosts.deny
 echo 'sshd: ALL: spawn /root/ssh_defend.sh %a' >> /etc/hosts.allow
 else
