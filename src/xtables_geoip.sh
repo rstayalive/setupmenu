@@ -144,7 +144,7 @@ clear
 		#./xt_geoip_dl 
         wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
         unzip GeoLite2-Country-CSV.zip
-        mv mv GeoLite2-Country-CSV*/ geoiplite
+        mv GeoLite2-Country-CSV*/ geoiplite
         cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-2.14/geoip/
         cp geoiplite/GeoLite2-Country-Locations-en.csv /tmp/xtables-addons-2.14/geoip/
         ./xt_geoip_build GeoLite2-Country-Blocks-IPv4.csv
