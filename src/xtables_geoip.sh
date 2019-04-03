@@ -158,11 +158,6 @@ clear
 	 echo "Подчищаем за собой"
 	 mkdir -p /root/garbage
 	 rm -rf /tmp/xtables*
-	 mv /etc/yum.repos.d/epel.repo /root/garbage/
-	 mv /etc/yum.repos.d/epel-testing.repo /root/garbage/
-	 mv /etc/yum.repos.d/mirrors-rpmforge /root/garbage/
-	 mv /etc/yum.repos.d/mirrors-rpmforge-extras /root/garbage/
-	 mv /etc/yum.repos.d/mirrors-rpmforge-testing /root/garbage/
-	 mv /etc/yum.repos.d/rpmforge.repo /root/garbage/
+	
 	 echo "Все чисто, можно работать дальше"
 waitend
