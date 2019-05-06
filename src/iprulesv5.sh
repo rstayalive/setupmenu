@@ -54,7 +54,7 @@ iptables -A INPUT -p tcp -m tcp --dport 5038 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 10150 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport $sipport -j SIPACL
-iptables -A SIPACL -s $localnet -j ACCEPT
+iptables -I SIPACL 1 -s $localnet -j ACCEPT
 iptables -A SIPACL -s 176.192.230.26 -j ACCEPT
 iptables -A SIPACL -j LOG --log-prefix "SIPACL: "
 iptables -A SIPACL -p all -m string --string "friendly-scanner" --algo bm --to 65535 -j SIPJUNK
@@ -74,7 +74,7 @@ iptables -A SIPACL -p all -m string --string "FPBX" --algo bm --to 65535 -j SIPJ
 iptables -A SIPACL -p all -m string --string "Zfree" --algo bm --to 65535 -j SIPJUNK
 iptables -A SIPACL -p all -m string --string "Z 3.14.38765 rv2.8.3" --algo bm -j SIPJUNK
 iptables -A SIPACL -p all -m string --string "sipcli/v1.8" --algo bm -j SIPJUNK
-iptables -I SIPACL 1 -m geoip ! --src-cc $country -j DROP
+iptables -I SIPACL 2 -m geoip ! --src-cc $country -j DROP
 iptables -A SIPACL -j ACCEPT
 iptables -A SIPJUNK -j LOG --log-prefix "SIPJUNK: " --log-level 6 
 iptables -A SIPJUNK -j DROP
