@@ -74,7 +74,7 @@ iptables -A SIPACL -p all -m string --string "FPBX" --algo bm --to 65535 -j SIPJ
 iptables -A SIPACL -p all -m string --string "Zfree" --algo bm --to 65535 -j SIPJUNK
 iptables -A SIPACL -p all -m string --string "Z 3.14.38765 rv2.8.3" --algo bm -j SIPJUNK
 iptables -A SIPACL -p all -m string --string "sipcli/v1.8" --algo bm -j SIPJUNK
-iptables -I SIPACL 2 -m geoip ! --src-cc $country -j DROP
+iptables -A SIPACL -m geoip ! --src-cc $country -j DROP
 iptables -A SIPACL -j ACCEPT
 iptables -A SIPJUNK -j LOG --log-prefix "SIPJUNK: " --log-level 6 
 iptables -A SIPJUNK -j DROP
