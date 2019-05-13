@@ -102,7 +102,6 @@ iptables -A OUTPUT -p tcp --tcp-flags ALL ALL -j DROP
 iptables -A OUTPUT -p tcp --tcp-flags ALL NONE -j DROP
 iptables -P OUTPUT ACCEPT
 iptables -P INPUT DROP
-
 #Сохраняем правила и запускаем iptables 
 service iptables save
 service iptables start
