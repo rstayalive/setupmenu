@@ -1,9 +1,9 @@
 #!/bin/bash
 #cdr codepage fix
 
-odbc=rpm -qa | grep mysql-connector-odbc
+odbc=`rpm -qa | grep mysql-connector-odbc`
 rpm -e --nodeps $odbc
-yum install mariadb-connector-odbc
+yum install mariadb-connector-odbc -y
 
 if grep -F -x '[MariaDB]' /etc/odbcinst.ini;
 then
