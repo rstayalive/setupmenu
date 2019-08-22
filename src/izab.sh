@@ -15,6 +15,7 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                                         mkdir -p /etc/zabbix/scripts
                                             cp /root/setupmenu/src/AT.zip /etc/zabbix/scripts/
                                                 unzip /etc/zabbix/scripts/AT.zip
+                                                chmod +x /etc/zabbix/scripts/*
                                                 echo 
                                                 "UserParameter=ast.up,/etc/zabbix/scripts/ast_up.sh
 
@@ -48,6 +49,8 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                                     replace "Hostname=Zabbix server" "Hostname=$hname" -- /etc/zabbix/zabbix_agentd.conf
                                         mkdir -p /etc/zabbix/scripts
                                             cp /root/setupmenu/src/AT.zip /etc/zabbix/scripts/
+                                            unzip /etc/zabbix/scripts/AT.zip
+                                            chmod +x /etc/zabbix/scripts/*
                                             echo 
                                             "UserParameter=ast.up,/etc/zabbix/scripts/ast_up.sh
 
