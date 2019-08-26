@@ -19,6 +19,7 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                                     replace "Hostname=Zabbix server" "Hostname=$hname" -- /etc/zabbix/zabbix_agentd.conf
                                         replace "# ListenPort=10050" "ListenPort=$port" -- /etc/zabbix/zabbix_agentd.conf
                                             service zabbix-agent restart
+                                            chkconfig zabbix-agent on
                                                 if [ "$irule" == "$port" ]
                                                 then echo "правило уже есть"
                                                 else 
