@@ -1,13 +1,13 @@
 #!/bin/bash
 #Установка zabbix-agent на старые системы
 hname=`hostname`
-echo -e "\n введите номер порта для zabbix-agent"
+echo -e "\nВведите номер порта для zabbix-agent"
 read port;
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 	if [ "$system" == "6.6" ];
 		then
         rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-release-4.2-2.el6.noarch.rpm
-        yum install zabbix-agent
+        yum install zabbix-agent -y
         if [ -z 'rpm -qa zabbix-agent' ]
                     then echo "Пакет не установился!"
                     exit
