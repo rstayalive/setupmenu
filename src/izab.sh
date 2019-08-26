@@ -1,7 +1,7 @@
 #!/bin/bash
 #Скрипт установки zabbix-agent на хост и его базовая настройка
 hname=`hostname`
-echo -e "\n введите номер порта для zabbix-agent"
+echo -e "\nВведите номер порта для zabbix-agent"
 read port;
 irule=$(iptables -vnL INPUT | grep -oE '$port')
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
@@ -9,9 +9,9 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 		then
             rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-agent-4.2.5-1.el6.x86_64.rpm
                 if [ -z 'rpm -qa zabbix-agent' ]
-                    then echo "Пакет не установился! Запускаю устанвоку второго варианта скрипта"
+                    then echo "Установлен zabbix-agent под $system"
+                        else echo "Пакет не установился! Запускаю устанвоку второго варианта скрипта"
                         bash /root/setupmenu/src/izab2.sh
-                        else echo "Установлен zabbix-agent под $system"
                         fi
                             replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
                                 replace "ServerActive=127.0.0.1" "ServerActive=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
@@ -26,10 +26,10 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                                             fi
         else
             rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/7/x86_64/zabbix-agent-4.2.5-1.el7.x86_64.rpm
-                if [ -z 'rpm -qa zabbix-agent' ]
-                    then echo "Пакет не установился!"
-                    exit
-                        else echo "Установлен zabbix-agent под $system"
+              if [ -z 'rpm -qa zabbix-agent' ]
+                    then echo "Установлен zabbix-agent под $system"
+                        else echo "Пакет не установился! Запускаю устанвоку второго варианта скрипта"
+                        exit
                         fi
                             replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
                                 replace "ServerActive=127.0.0.1" "ServerActive=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
