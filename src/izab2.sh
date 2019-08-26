@@ -19,7 +19,7 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                                     replace "Hostname=Zabbix server" "Hostname=$hname" -- /etc/zabbix/zabbix_agentd.conf
                                         replace "# ListenPort=10050" "ListenPort=$port" -- /etc/zabbix/zabbix_agentd.conf
                                             service zabbix-agent restart
-                                                if [ "$irule" == "10053" ]
+                                                if [ "$irule" == "$port" ]
                                                 then echo "правило уже есть"
                                                 else 
                                                     iptables -A INPUT -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
