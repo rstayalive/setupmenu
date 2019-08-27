@@ -3,13 +3,14 @@
 hname=`hostname`
 echo -e "\nВведите номер порта для zabbix-agent"
 read port;
+Pak=$(yum list installed | grep -oE 'zabbix-agent')
 irule=$(iptables -vnL INPUT | grep -oE '$port')
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 	if [ "$system" == "6.6" ];
 		then
         rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-release-4.2-2.el6.noarch.rpm
         yum install zabbix-agent -y
-        if [ -z 'rpm -qa zabbix-agent' ]
+        if [ "$Pak" == "zabbix-agent" ]
                     then echo "Установлен zabbix-agent под $system"
                         else echo "Пакет не установился!"
                         exit
