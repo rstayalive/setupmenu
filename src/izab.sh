@@ -15,6 +15,7 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                     else 
                         echo "Пакет не установился! Запускаю устанвоку второго варианта скрипта"
                         bash /root/setupmenu/src/izab2.sh
+                        exit
                 fi
                     replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
                         replace "ServerActive=127.0.0.1" "ServerActive=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
