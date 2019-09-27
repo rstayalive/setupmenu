@@ -35,4 +35,7 @@ else
 fi
 #Создаем символьную ссылку для записей
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+mkdir -p /root/src/
+cd /root/src/
+wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
 end
