@@ -64,13 +64,13 @@ echo "
 		read login ;
 		echo -e "\nВведите созданный пароль приложения"
 		read passwd ;
-        echo -e "\nДля yandex напишите yandex, для google напишите $REDgmail$DEF (пожалуйста не пишите .com .ru etc.)"
+        echo -e "\nДля yandex напишите yandex, для google напишите $REDgmail$DEF(пожалуйста не пишите .com .ru etc.)"
         read sender;
 		touch /etc/postfix/sasl_passwd
 		echo "[smtp.$sender.com]:587 $login:$passwd" > /etc/postfix/sasl_passwd
 		chmod 400 /etc/postfix/sasl_passwd
 		postmap /etc/postfix/sasl_passwd
-        if [  "$sender" == "gmail"]
+        if [ "$sender" == "gmail" ]
         then
         echo "
         relayhost = [smtp.gmail.com]:587
