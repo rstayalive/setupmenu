@@ -43,13 +43,13 @@ echo "Используем пакет $pkgchk"
 echo -e "\n
 $GREИз каких стран можно подключаться к ssh?$DEF
 пример: RU UA
-Все заглавными буквами, это обязательно"
+Все заглавными буквами - это обязательно"
 read zone;
-cp $workdir/ssh_defend.sh /root/
-chmod 755 /root/ssh_defend.sh
-replace "strana" "$zone" -- /root/ssh_defend.sh
+cp $workdir/sshfilter.sh /root/
+chmod 755 /root/sshfilter.sh
+replace "${ALLOW_COUNTRIES:-strana}" "${ALLOW_COUNTRIES:-$zone}" -- /root/sshfilter.sh
 echo 'sshd: ALL' >> /etc/hosts.deny
-echo 'sshd: ALL: spawn /root/ssh_defend.sh %a' >> /etc/hosts.allow
+echo 'sshd: ALL: spawn /root/sshfilter.sh %a %d' >> /etc/hosts.allow
 else
 echo -e "$REDНе устанолен пакет GeoIP!$DEF"
 exit 0
