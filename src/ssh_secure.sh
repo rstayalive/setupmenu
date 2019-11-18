@@ -23,7 +23,6 @@ pkgchk=$(rpm -qa | grep -ow GeoIP | head -1)
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 workdir='/root/setupmenu/src'
 echo "Подготавливаю все необходимое..."
-{
 #Проверяем версию системы
 if [ "$system" == "6.6" ];
 then
@@ -35,7 +34,6 @@ myinstall geoip
 else
 myinstall geoip
 fi
-} &> /dev/null
 #Проверяем, что пакеты установлены и можно продолжить, если не установлены выходим
 if [ "$pkgchk" == "GeoIP" ];
 then
@@ -50,6 +48,8 @@ chmod 755 /root/sshfilter.sh
 replace "${ALLOW_COUNTRIES:-strana}" "${ALLOW_COUNTRIES:-$zone}" -- /root/sshfilter.sh
 echo 'sshd: ALL' >> /etc/hosts.deny
 echo 'sshd: ALL: spawn /root/sshfilter.sh %a %d' >> /etc/hosts.allow
+iptables -N BLOCKDYN
+iptables -A BLOCKDYN -s 176.192.230.26 -j ACCEPT
 else
 echo -e "$REDНе устанолен пакет GeoIP!$DEF"
 exit 0
