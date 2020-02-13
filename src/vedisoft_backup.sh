@@ -10,14 +10,15 @@ DEF=\\e[0m
 ASTER_MOD_DIR=$(asterisk -rx "core show settings" | grep "Module directory" | awk '{print $NF}')
 MODDIR=$(ldconfig -p | awk -F"=>" '{print $2}' | grep '/usr/' | head -1 |sed 's/^[ \t]*//' | cut -d'/' -f1-3)
 CONFPATH="/etc/asterisk"
-BACKUPDIR="/root/backup_vedisoft/"
-FPBXPZ="/var/www/html/admin/modules/prostiezvonki/"
+BACKUPDIR="/backup_vedisoft"
+FPBXPZ="/var/www/html/admin/modules/prostiezvonki"
 #Checking backup folder and do some things
-if ! [ -d "/root/backup_vedisoft/" ];
+if ! [ -d "/backup_vedisoft" ];
 then
 function dobackup {
     mkdir -p $BACKUPDIR
-    tar -cvf - $FPBXPZ | lz4 > /root/backup_vedisoft/prostiezvonki.tar.lz4
+    chmod -r asterisk:asterisk $BACKUPDIR
+    tar -cvf - $FPBXPZ | lz4 > /backup_vedisoft/prostiezvonki.tar.lz4
     cp $CONFPATH/cel_prostiezvonki.conf $BACKUPDIR/cel_prostiezvonki.conf
     echo "cel_prostiezvonki.conf backuped"
     cp $MODDIR/libProtocolLib.so $BACKUPDIR/libProtocolLib.so
@@ -51,7 +52,7 @@ else
     fi
     if ! [ -a "$BACKUPDIR/prostiezvonki.tar.lz4" ];
     then
-    tar -cvf - $FPBXPZ | lz4 > /root/backup_vedisoft/prostiezvonki.tar.lz4
+    tar -cvf - $FPBXPZ | lz4 > /backup_vedisoft/prostiezvonki.tar.lz4
     echo "vedisoft freepbx module backuped"
     else
     echo -e "$YEL file prostiezvonki.tar.lz4 already backuped! backup skiped.$DEF"
