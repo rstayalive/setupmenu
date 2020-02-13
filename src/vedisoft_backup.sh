@@ -15,9 +15,7 @@ FPBXPZ="/var/www/html/admin/modules/prostiezvonki"
 #Checking backup folder and do some things
 if ! [ -d "/backup_vedisoft" ];
 then
-function dobackup {
     mkdir -p $BACKUPDIR
-    chmod -r asterisk:asterisk $BACKUPDIR
     tar -cvf - $FPBXPZ | lz4 > /backup_vedisoft/prostiezvonki.tar.lz4
     cp $CONFPATH/cel_prostiezvonki.conf $BACKUPDIR/cel_prostiezvonki.conf
     echo "cel_prostiezvonki.conf backuped"
@@ -25,7 +23,7 @@ function dobackup {
     echo "libProtocolLib.so backuped"
     cp $ASTER_MOD_DIR/cel_prostiezvonki.so $BACKUPDIR/cel_prostiezvonki.so
     echo "cel_prostiezvonki.so backuped"
-} > /dev/null 2>&1
+    chown -R asterisk:asterisk $BACKUPDIR
     echo "all jobs done. Backup saved here $BACKUPDIR"
 else
     echo "Backup Folder exists. Checking files and backuping missing files."
