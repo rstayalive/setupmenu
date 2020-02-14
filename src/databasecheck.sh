@@ -4,7 +4,7 @@ if [ -s "/tmp/corrupt" ];
 then
 echo "bad. Executing fix"
 mysqlcheck --repair --all-databases > /dev/null 2>&1 
-echo "repair done"
+echo "Fixed"
 #checking one more time
 rm -rvf /tmp/corrupt
 mysqlcheck --all-databases | grep Corrupt > /tmp/corrupt
