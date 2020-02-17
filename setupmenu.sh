@@ -208,6 +208,11 @@ vedisoft_o()
 {
 bash $path/$vedisoft_o
 }
+#vedisoft backup
+vedisoft_b()
+{
+bash $path/$vedisoft_b
+}
 #mysql check all databases and fix errors
 sql_cf()
 {
