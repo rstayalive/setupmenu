@@ -1,7 +1,7 @@
 #!/bin/bash
-#Скрипт установки zabbix-agent на хост и его базовая настройка
+#This script setup Zabbix-agent to Centos 7 and configure to our zabbix-server.
 hname=`hostname`
-echo -e "\nВведите номер порта для zabbix-agent"
+echo -e "\nPlease enter the zabbix-agent port.(not zabbix-server port)"
 read port;
 irule=$(iptables -vnL INPUT | grep -oE '$port')
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
@@ -11,9 +11,9 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
 then 
-echo "Установлен zabbix-agent под $system"
+echo "zabbix-agent installed for $system"
 else 
-echo "Пакет не установился! Запускаю устанвоку второго варианта скрипта"
+echo "Package not installed! Trying start another setup script"
 bash /root/setupmenu/src/izab2.sh
 exit
                 fi
@@ -24,7 +24,7 @@ exit
                                     service zabbix-agent restart
                                     chkconfig zabbix-agent on
                                     if [ "$irule" == "$port" ]
-                                        then echo "правило уже есть"
+                                        then echo "This $irule already exists"
                                         else 
                                             iptables -A INPUT -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
                                                 service iptables save
@@ -33,8 +33,8 @@ exit
             rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/7/x86_64/zabbix-agent-4.2.5-1.el7.x86_64.rpm
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
-then echo "Установлен zabbix-agent под $system"
-else echo "Пакет не установился! Запускаю устанвоку второго варианта скрипта"
+then echo "zabbix-agent installed for $system"
+else echo "Package not installed! Trying start another setup script"
 exit
 fi
                             replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
@@ -44,7 +44,7 @@ fi
                                             systemctl restart zabbix-agent
                                             systemctl enable zabbix-agent
                                             if [ "$irule" == "$port" ]
-                                                then echo "правило уже есть"
+                                                then echo "This $irule already exists"
                                                 else 
                                                     iptables -A INPUT -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
                                                         service iptables save

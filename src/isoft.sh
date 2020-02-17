@@ -1,19 +1,12 @@
 #!/bin/bash
-#Скрипт установки софта, все из-за лени
-#Проверка, установлен пакет или нет
+#This script install some admin tools to system
 myinstall()
 {
 if [ -z `rpm -qa $1` ]; then
-	yum -y install $1
+    yum -y install $1
 else
-	echo "Пакет $1 уже установлен"
+    echo "Пакет $1 уже установлен"
 fi
-}
-#wait
-wait()
-{
-echo -e "Нажмите любую клавишу"
-read -s -n 1
 }
 #end
 end()
@@ -21,24 +14,23 @@ end()
 echo -e "Нажмите любую клавишу чтобы вернуться в меню"
 read -s -n 1
 }
-#Начало работы
 clear
 echo "Начинаем установку софта, можешь опустить свои ленивые руки"
-	myinstall mc
-	myinstall mtr
-	myinstall iotop
-	myinstall lm_sensors.x86_64
-	myinstall nmap
-	myinstall ncurses-devel 
-	myinstall make
-	myinstall libpcap-devel
-	myinstall pcre-devel
-	myinstall openssl-devel
-	myinstall git
-	myinstall gcc
-	myinstall autoconf
-	myinstall automake
-	myinstall iptraf
+    myinstall mc
+    myinstall mtr
+    myinstall iotop
+    myinstall lm_sensors.x86_64
+    myinstall nmap
+    myinstall ncurses-devel
+    myinstall make
+    myinstall libpcap-devel
+    myinstall pcre-devel
+    myinstall openssl-devel
+    myinstall git
+    myinstall gcc
+    myinstall autoconf
+    myinstall automake
+    myinstall iptraf
     myinstall ccze
     myinstall smartmontools
     myinstall nmon
@@ -56,7 +48,6 @@ make install
 echo "alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'" >> ~/.bashrc
 echo export NCURSES_NO_UTF8_ACS=1 >> /etc/environment
 echo "Установлено, можешь теперь жать кнопки"
-#включаем smartmontools чтобы мониторить смарт
 service smartd start
-chkconfig smartd on 
+chkconfig smartd on
 end

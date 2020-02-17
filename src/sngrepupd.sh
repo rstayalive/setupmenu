@@ -1,6 +1,5 @@
 #!/bin/bash
 #Скрипт обновления установленного sngrep
-
 cd /usr/src
 git clone https://github.com/irontec/sngrep
 cd sngrep

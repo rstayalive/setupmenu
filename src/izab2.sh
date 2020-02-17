@@ -1,7 +1,7 @@
 #!/bin/bash
-#Установка zabbix-agent на старые системы
+#installing zabbix-agent to Centos 6.6 and configure to our zabbix server
 hname=`hostname`
-echo -e "\nВведите номер порта для zabbix-agent"
+echo -e "\nPlease enter the zabbix-agent port. (not zabbix-server port)"
 read port;
 irule=$(iptables -vnL INPUT | grep -oE '$port')
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
@@ -11,8 +11,8 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
         yum install zabbix-agent -y
         Pak=$(yum list installed | grep -oE 'zabbix-agent')
                     if [ "$Pak" == "zabbix-agent" ]
-                    then echo "Установлен zabbix-agent под $system"
-                        else echo "Пакет не установился!"
+                    then echo "zabbix-agent installed for $system"
+                        else echo "Package not installed!"
                         exit
                     fi
                             replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
@@ -22,12 +22,12 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
                                             service zabbix-agent restart
                                             chkconfig zabbix-agent on
                                                 if [ "$irule" == "$port" ]
-                                                then echo "правило уже есть"
+                                                then echo "This $irule already exists"
                                                 else 
                                                     iptables -A INPUT -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
                                                         service iptables save
                                                 fi
         else
-            echo "У вас свежая система, запускаю обычный скрипт установки"
+            echo "You have installed actual Centos. Starting default setup script"
             bash /root/setupmenu/src/izab.sh
     fi

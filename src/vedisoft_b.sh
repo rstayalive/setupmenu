@@ -28,7 +28,7 @@ then
 else
     echo "Backup Folder exists. Checking files and backuping missing files."
     if ! [ -a "$BACKUPDIR/cel_prostiezvonki.conf" ];
-    then 
+    then
     cp $CONFPATH/cel_prostiezvonki.conf $BACKUPDIR/cel_prostiezvonki.conf
     echo "cel_prostiezvonki.conf backuped"
     else
