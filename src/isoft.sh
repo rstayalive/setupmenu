@@ -34,6 +34,8 @@ echo "Начинаем установку софта, можешь опусти�
     myinstall ccze
     myinstall smartmontools
     myinstall nmon
+	myinstall lz4
+	myinstall lz4-devel
 echo "Ставлю sngrep"
 cd /usr/src
 git clone https://github.com/irontec/sngrep
