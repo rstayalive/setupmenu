@@ -28,12 +28,14 @@ fwconsole ma disable digiumaddoninstaller
 fwconsole ma disable directory
 fwconsole ma disable disa
 fwconsole ma disable dundicheck
+fwconsole ma disable extensionroutes
 fwconsole ma disable endpoint
 fwconsole ma disable fax
 fwconsole ma disable faxpro
 fwconsole ma disable freepbx_ha
 fwconsole ma disable hotelwakeup
 fwconsole ma disable irc
+fwconsole ma disable iotserver
 fwconsole ma disable motif
 fwconsole ma disable pagingpro
 fwconsole ma disable parkpro
@@ -59,6 +61,7 @@ fwconsole ma disable qxact_reports
 fwconsole ma disable vega
 fwconsole ma disable ucpnode
 fwconsole ma disable ucp
+fwconsole ma disable vqplus
 } &> /dev/null
 echo "Disablig modules.Stage $count of 3"
 count=$(( $count + 1 ))
