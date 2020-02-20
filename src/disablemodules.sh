@@ -74,6 +74,9 @@ while [ $count2 -le 3 ]
 do
 {
 fwconsole ma remove disa
+fwconsole ma remove dictate
+fwconsole ma remove digiumaddoninstaller
+fwconsole ma remove fax
 fwconsole ma remove endpoint
 fwconsole ma remove extensionroutes
 fwconsole ma remove faxpro
