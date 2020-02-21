@@ -125,5 +125,5 @@ echo "Removing modules.Stage $count2 of 3"
 count2=$(( $count2 + 1 ))
 done
 echo "Modules removed"
-fwconole reload > /dev/null 2>&1
+fwconsole reload > /dev/null 2>&1
 waitend

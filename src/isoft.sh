@@ -1,21 +1,21 @@
 #!/bin/bash
-#This script install some admin tools to system
+#This script install admin tools to system
 myinstall()
 {
 if [ -z `rpm -qa $1` ]; then
     yum -y install $1
 else
-    echo "Пакет $1 уже установлен"
+    echo "$1 already installed"
 fi
 }
 #end
 end()
 {
-echo -e "Нажмите любую клавишу чтобы вернуться в меню"
+echo -e "Press any key to continue"
 read -s -n 1
 }
 clear
-echo "Начинаем установку софта, можешь опустить свои ленивые руки"
+echo "Installing software... Please relax"
     myinstall mc
     myinstall mtr
     myinstall iotop
@@ -36,7 +36,7 @@ echo "Начинаем установку софта, можешь опусти�
     myinstall nmon
 	myinstall lz4
 	myinstall lz4-devel
-echo "Ставлю sngrep"
+echo "Installing sngrep tool"
 cd /usr/src
 git clone https://github.com/irontec/sngrep
 cd sngrep
@@ -49,7 +49,7 @@ speep 3
 make install
 echo "alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'" >> ~/.bashrc
 echo export NCURSES_NO_UTF8_ACS=1 >> /etc/environment
-echo "Установлено, можешь теперь жать кнопки"
+echo "Job done."
 service smartd start
 chkconfig smartd on
 end
