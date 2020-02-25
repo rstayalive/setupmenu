@@ -111,7 +111,7 @@ clear
 		make && make install
 		sleep 5
 		cd geoip/ 
-        wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
+        cp $workdir/GeoLite2-Country-CSV_20200218.zip .
         unzip GeoLite2-Country-CSV.zip
         mv mv GeoLite2-Country-CSV*/ geoiplite
         cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-1.47.1/geoip/
@@ -142,7 +142,7 @@ clear
 		sleep 5
 		cd geoip/ 
 		#./xt_geoip_dl 
-        wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
+        cp $workdir/GeoLite2-Country-CSV_20200218.zip .
         unzip GeoLite2-Country-CSV.zip
         mv GeoLite2-Country-CSV*/ geoiplite
         cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-2.14/geoip/
