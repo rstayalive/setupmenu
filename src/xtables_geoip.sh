@@ -112,6 +112,7 @@ clear
 		sleep 5
 		cd geoip/ 
         cp $workdir/GeoLite2-Country-CSV_20200218.zip .
+		mv GeoLite2-Country-CSV_*.zip  GeoLite2-Country-CSV.zip
         unzip GeoLite2-Country-CSV.zip
         mv mv GeoLite2-Country-CSV*/ geoiplite
         cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-1.47.1/geoip/
@@ -143,6 +144,7 @@ clear
 		cd geoip/ 
 		#./xt_geoip_dl 
         cp $workdir/GeoLite2-Country-CSV_20200218.zip .
+		mv GeoLite2-Country-CSV_*.zip  GeoLite2-Country-CSV.zip
         unzip GeoLite2-Country-CSV.zip
         mv GeoLite2-Country-CSV*/ geoiplite
         cp geoiplite/GeoLite2-Country-Blocks-IPv4.csv /tmp/xtables-addons-2.14/geoip/
