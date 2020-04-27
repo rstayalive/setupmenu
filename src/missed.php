@@ -6,7 +6,7 @@ $data = date('d-m-Y H:i:s');
 $email = "myemail";
 echo "NO ANSWERED ---------------------------------<br>";
 
-$result = mysql_query("select distinct src, calldate from cdr where disposition = 'NO ANSWER' and calldate >='$today 00:00:00' and calldate <='$today 23:59:59' and duration >10 and LENGTH(src) >3;", $link);
+$result = mysql_query("select distinct src, calldate from cdr where disposition = 'NO ANSWER' and calldate >='$today 00:00:00' and calldate <='$today 23:59:59' and duration >5 and LENGTH(src) >3;", $link);
 $counter=1;
 
 while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
@@ -95,7 +95,7 @@ echo "No Answer Count = $counter3<br>";
 }
 else
 {
-echo "Netu NoAnswer<br>";
+echo "Net No Answer<br>";
 }
 
 

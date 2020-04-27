@@ -221,7 +221,12 @@ bash $path/$sql_cf
 #Repair mysql CDR codepage 
 cdrfix()
 {
-bash $patch/$cdrfix
+bash $path/$cdrfix
+}
+#zabbix agent installation
+izab()
+{
+bash $path/$izab
 }
 fwdel()
 {
