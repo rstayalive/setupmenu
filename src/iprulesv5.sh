@@ -46,11 +46,10 @@ service iptables stop
 iptables -F
 # Правила
 iptables -N SIPACL
-iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp -m multiport --dports 22,80,443,9980 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 5038 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 10150 -j ACCEPT
+iptables -A INPUT -p tcp -m multiport --dports 8077,8078 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 iptables -A INPUT -p udp -m state --state NEW -m udp --dport $sipport -j SIPACL
 iptables -I SIPACL 1 -s $localnet -j ACCEPT
