@@ -46,38 +46,40 @@ service iptables stop
 iptables -F
 # Правила
 iptables -N SIPACL
-iptables -N SIPJUNK
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 5038 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 10150 -j ACCEPT
 iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport $sipport -j SIPACL
+iptables -A INPUT -p udp -m state --state NEW -m udp --dport $sipport -j SIPACL
 iptables -I SIPACL 1 -s $localnet -j ACCEPT
 iptables -A SIPACL -s 176.192.230.26 -j ACCEPT
-iptables -A SIPACL -j LOG --log-prefix "SIPACL: "
-iptables -A SIPACL -p all -m string --string "friendly-scanner" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "friendly-request" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sip-scan" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sundayddr" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "iWar" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sipsak" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sipvicious" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sipcli" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sip-scan" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "eyeBeam" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "VaxSIPUserAgent" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sip:nm@nm" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "smap" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "FPBX" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "Zfree" --algo bm --to 65535 -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "Z 3.14.38765 rv2.8.3" --algo bm -j SIPJUNK
-iptables -A SIPACL -p all -m string --string "sipcli/v1.8" --algo bm -j SIPJUNK
-iptables -A SIPACL -m geoip ! --src-cc $country -j DROP
-iptables -A SIPACL -j ACCEPT
-iptables -A SIPJUNK -j LOG --log-prefix "SIPJUNK: " --log-level 6 
-iptables -A SIPJUNK -j DROP
+iptables -A SIPACL -j LOG --log-prefix "SIPACL:"
+iptables -A SIPACL -p all -m string --string "tel:" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -m string --string "OPTIONS SIP:" --algo bm --to 65 -j ACCEPT
+iptables -A SIPACL -m string --string "INVITE SIP:" --algo bm --to 65 -m hashlimit --hashlimit-upto 4/min --hashlimit-burst 1 --hashlimit-mode srcip,dstport --hashlimit-name sip_i_limit -j ACCEPT
+iptables -A SIPACL -m string --string "REGISTER SIP:" --algo bm --to 65 -m hashlimit --hashlimit-upto 2/min --hashlimit-burst 1 --hashlimit-mode srcip,dstport --hashlimit-name sip_i_limit -j ACCEPT
+iptables -A SIPACL -m hashlimit --hashlimit-upto 10/min --hashlimit-burst 1 --hashlimit-mode srcip,dstport --hashlimit-name sip_o_limit -j ACCEPT
+iptables -A SIPACL -p all -m string --string "friendly-scanner" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "friendly-request" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sip-scan" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sundayddr" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "iWar" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sipsak" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sipvicious" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sipcli" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sip-scan" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "eyeBeam" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "VaxSIPUserAgent" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sip:nm@nm" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "smap" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "FPBX" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "Zfree" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "Z 3.14.38765 rv2.8.3" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -p all -m string --string "sipcli/v1.8" --algo bm --to 65 -j REJECT
+iptables -A SIPACL -m geoip ! --src-cc $country -j REJECT
+iptables -A SIPACL -j REJECT
 iptables -A INPUT -s $localnet -j ACCEPT
 iptables -A INPUT -s 176.192.230.26 -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
