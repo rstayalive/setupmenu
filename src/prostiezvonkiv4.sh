@@ -9,26 +9,40 @@ echo -e "Please press any key"
 read -s -n 1
 }
 astver=$(asterisk -V | grep -woE [0-9]+\.)
-ast16()
+astauto()
 {
-cd /tmp
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk16.zip
-unzip prostiezvonki_asterisk13.zip
+mkdir -p /root/src/
+cd /root/src/
+wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
+unzip prostiezvonki_asterisk$astver.zip
 cd prostiezvonki
 bash install
 fwconsole ma install prostiezvonki
 fwconsole reload
 fwconsole chown
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+echo "PZ installed to asterisk $astver"
+end
+}
+ast16()
+{
 mkdir -p /root/src/
 cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
-echo "PZ installed to asterisk $astver"
+wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk16.zip
+unzip prostiezvonki_asterisk16.zip
+cd prostiezvonki
+bash install
+fwconsole ma install prostiezvonki
+fwconsole reload
+fwconsole chown
+ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+echo "PZ installed to asterisk 16"
 end
 }
 ast13()
 {
-cd /tmp
+mkdir -p /root/src/
+cd /root/src/
 wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk13.zip
 unzip prostiezvonki_asterisk13.zip
 cd prostiezvonki
@@ -37,15 +51,13 @@ fwconsole ma install prostiezvonki
 fwconsole reload
 fwconsole chown
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
-echo "PZ installed to asterisk $astver"
+echo "PZ installed to asterisk 13"
 end
 }
 ast11()
 {
-cd /tmp
+mkdir -p /root/src/
+cd /root/src/
 wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk11.zip
 unzip prostiezvonki_asterisk13.zip
 cd prostiezvonki
@@ -54,16 +66,14 @@ fwconsole ma install prostiezvonki
 fwconsole reload
 fwconsole chown
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
-echo "PZ installed to asterisk $astver"
+echo "PZ installed to asterisk 11"
 end
 }
 ITgro()
 {
 yum install qt5-qtwebsockets.x86_64 qt5-qtwebsockets-devel.x86_64 qt5-qtbase-mysql.x86_64
-cd /tmp
+mkdir -p /root/src/
+cd /root/src/
 curl -k -O https://bx24asterisk.ru/download/autoinstaller_amo.sh
 bash autoinstaller_amo.sh
 echo "ITgro installed"
@@ -86,9 +96,9 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 3 $DEF│ PZ Версия для 11 астериска           │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 4 $DEF│ ITgro                                │
+├─┤$GRE 4 $DEF│ PZ Автоопределение                   │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│                                      │
+├─┤$GRE 5 $DEF│ ITgro                                │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 6 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
@@ -108,8 +118,8 @@ echo -e "
     1) ast16 ;;
     2) ast13 ;;
     3) ast11 ;;
-    4) ITgro ;;
-    5)  ;;
+    4) astauto ;;
+    5) ITgro ;;
     6)  ;;
     7)  ;;
     8)  ;;
