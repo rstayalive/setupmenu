@@ -18,7 +18,7 @@ freepbxupd='freepbxupd.sh'
 statmod='statmod.sh'
 celoverwrite='celoverwrite.sh'
 isoft='isoft.sh'
-prostiezvonki='prostiezvonkiv3.sh'
+prostiezvonki='prostiezvonkiv4.sh'
 prostoupd='prostoupd.sh'
 missedivrtoemail='missedivrtoemail.sh'
 missedreport='missedreport.sh'
@@ -392,7 +392,7 @@ echo -e "
 ┌──────────────● Интеграции:
 │
 │ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ Установить простые звонки            │
+├─┤$GRE 1 $DEF│ Выбрать коннектор                    │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 2 $DEF│ Обновить простые звонки              │
 │ ├───┼──────────────────────────────────────┤
