@@ -18,7 +18,6 @@ fwconsole ma disable conferencespro
 fwconsole ma disable configedit
 fwconsole ma disable contactmanager
 fwconsole ma disable cos
-fwconsole ma disable customappsreg
 fwconsole ma disable cxpanel
 fwconsole ma disable dahdiconfig
 fwconsole ma disable daynight
@@ -109,7 +108,6 @@ fwconsole ma remove conferencespro
 fwconsole ma remove configedit
 fwconsole ma remove contactmanager
 fwconsole ma remove cos
-fwconsole ma remove customappsreg
 fwconsole ma remove cxpanel
 fwconsole ma remove dahdiconfig
 fwconsole ma remove daynight
