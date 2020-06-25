@@ -16,7 +16,7 @@ echo
 done
 eval $1=$temp
 }
-echo -e "\nYou reealy want to delete vedisoft module?"
+echo -e "\nYou realy want to delete vedisoft module?"
 myread_yn ans
 case "$ans" in
 y|Y) 
