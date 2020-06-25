@@ -3,7 +3,7 @@ FreePBX deployment script
 
 Language: only RU
 
-Script work with FreePBX 13/16 asterisk 13/16 CentOS 6.X/7.X under root
+Script work with FreePBX 13-15 asterisk 13/16 CentOS 6.X/7.X under root
 
 usage:
 
