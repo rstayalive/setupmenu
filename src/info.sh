@@ -19,7 +19,7 @@ ip=`fwconsole extip`
 freepbx=`rpm -qa | grep freepbx`
 cpu=`cat /proc/cpuinfo`
 mem=`free -m`
-disk=`df -h | grep SangomaVG-root`
+disk=`df -kh .`
 #gathering system and asterisk info
 echo "linux $uname" >> $out
 if ! [ -f /etc/redhat-release ];
