@@ -6,8 +6,6 @@ echo -e "Please press any key"
 read -s -n 1
 }
 astver=$(asterisk -V | grep -woE [0-9]+\.)
-pzver=`asterisk -rx"module show like cel_prostiezvonki.so"`
-
 echo "make PZ new backup"
 {
 mv /backup_vedisoft /backup_vedisoft_old
@@ -33,5 +31,6 @@ echo "loading module and restart asterisk gracefully"}
 asterisk -rx"module load cel_prostiezvonki.so"
 asterisk -rx"core restart gracefully"
 } &> /dev/null
+pzver=`asterisk -rx"module show like cel_prostiezvonki.so"`
 echo "patch ok, new version $pzver"
 end
