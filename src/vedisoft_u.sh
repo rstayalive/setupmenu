@@ -49,6 +49,7 @@ echo "loading module and restart asterisk gracefully"}
 asterisk -rx"module load cel_prostiezvonki.so"
 asterisk -rx"core restart gracefully"
 } &> /dev/null
+sleep 5
 pzver=`asterisk -rx"module show like cel_prostiezvonki.so"`
 echo "patch ok, new version $pzver"
 end
