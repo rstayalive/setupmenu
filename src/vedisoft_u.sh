@@ -28,10 +28,10 @@ rm -rf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
 cp /root/src/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
 cp /root/src/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
 } &> /dev/null
-echo "loading module and restart asterisk gracefully"
-}
+echo "loading module and restart asterisk gracefully"}
+{
 asterisk -rx"module load cel_prostiezvonki.so"
-astersk -rx"core restart gracefully"
+asterisk -rx"core restart gracefully"
 } &> /dev/null
 echo "patch ok, new version $pzver"
 end
