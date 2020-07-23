@@ -45,12 +45,12 @@ rm -rf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
 cp /root/srcPZ/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
 cp /root/srcPZ/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
 } &> /dev/null
-echo "Loading module and restart asterisk gracefully"
+echo "Loading module and restart asterisk gracefully."
 {
 asterisk -rx"module load cel_prostiezvonki.so"
 asterisk -rx"core restart gracefully"
 } &> /dev/null
 sleep 6
 pzver=`asterisk -rx"module show like cel_prostiezvonki.so"`
-echo "Path installed. New version running $pzver"
+echo "Path installed. New version of running $pzver"
 end
