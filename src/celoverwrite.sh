@@ -31,6 +31,3 @@ events=ALL
 enabled=yes" >> /etc/asterisk/cel_general_custom.conf
 
 end
-
-	
-	
