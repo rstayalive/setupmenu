@@ -15,8 +15,8 @@ bash /root/setupmenu/src/vedisoft_b.sh
 } &> /dev/null
 echo "Downloading new vedisoft version"
 {
-mkdir -p /root/src/
-cd /root/src/
+mkdir -p /root/srcPZ/
+cd /root/srcPZ/
 wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
 } &> /dev/null
 echo "installing patch"
@@ -25,8 +25,8 @@ unzip prostiezvonki_asterisk$astver.zip
 asterisk -rx"module unload cel_prostiezvonki.so"
 rm -rf /usr/lib64/libProtocolLib.so
 rm -rf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
-cp /root/src/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
-cp /root/src/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
+cp /root/srcPZ/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
+cp /root/srcPZ/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
 } &> /dev/null
 echo "loading module and restart asterisk gracefully"}
 {
