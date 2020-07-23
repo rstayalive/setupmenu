@@ -17,7 +17,7 @@ grep contract /etc/asterisk/cel_prostiezvonki.conf >> /backup_vedisoft/conf.txt
 grep channel_type /etc/asterisk/cel_prostiezvonki.conf >> /backup_vedisoft/conf.txt
 }
 astver=$(asterisk -V | grep -woE [0-9]+\.)
-echo "Making PZ new backup"
+echo "Making PZ new backup."
 {
 if ! [ -d "/backup_vedisoft" ];
 then
@@ -27,16 +27,16 @@ mv /backup_vedisoft /backup_vedisoft_old
 mkbackup
 fi
 } &> /dev/null
-echo "Getting some settings from conf"
+echo "Getting some settings from PZ conf..."
 cinfo
-echo "Done. Some setting exported from conf sotorred here /backup_vedisoft/conf.txt"
-echo "Downloading new vedisoft version"
+echo "Done. Some setting exported from conf saved here /backup_vedisoft/conf.txt."
+echo "Downloading new PZ version."
 {
 mkdir -p /root/srcPZ/
 cd /root/srcPZ/
 wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
 } &> /dev/null
-echo "Installing patch"
+echo "Installing patch."
 {
 unzip prostiezvonki_asterisk$astver.zip
 asterisk -rx"module unload cel_prostiezvonki.so"
