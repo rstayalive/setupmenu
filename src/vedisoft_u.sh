@@ -17,7 +17,7 @@ grep contract /etc/asterisk/cel_prostiezvonki.conf >> /backup_vedisoft/conf.txt
 grep channel_type /etc/asterisk/cel_prostiezvonki.conf >> /backup_vedisoft/conf.txt
 }
 astver=$(asterisk -V | grep -woE [0-9]+\.)
-echo "make PZ new backup"
+echo "Making PZ new backup"
 {
 if ! [ -d "/backup_vedisoft" ];
 then
@@ -29,13 +29,14 @@ fi
 } &> /dev/null
 echo "Getting some settings from conf"
 cinfo
+echo "Done. Some setting exported from conf sotorred here /backup_vedisoft/conf.txt"
 echo "Downloading new vedisoft version"
 {
 mkdir -p /root/srcPZ/
 cd /root/srcPZ/
 wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
 } &> /dev/null
-echo "installing patch"
+echo "Installing patch"
 {
 unzip prostiezvonki_asterisk$astver.zip
 asterisk -rx"module unload cel_prostiezvonki.so"
@@ -44,12 +45,12 @@ rm -rf /usr/lib64/asterisk/modules/cel_prostiezvonki.so
 cp /root/srcPZ/prostiezvonki/so/64/libProtocolLib.so /usr/lib64/
 cp /root/srcPZ/prostiezvonki/so/64/cel_prostiezvonki.so /usr/lib64/asterisk/modules/
 } &> /dev/null
-echo "loading module and restart asterisk gracefully"}
+echo "Loading module and restart asterisk gracefully"
 {
 asterisk -rx"module load cel_prostiezvonki.so"
 asterisk -rx"core restart gracefully"
 } &> /dev/null
-sleep 5
+sleep 6
 pzver=`asterisk -rx"module show like cel_prostiezvonki.so"`
-echo "patch ok, new version $pzver"
+echo "Path installed. New version running $pzver"
 end
