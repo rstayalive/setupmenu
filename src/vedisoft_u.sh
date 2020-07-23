@@ -5,11 +5,20 @@ end()
 echo -e "Please press any key"
 read -s -n 1
 }
+mkbackup()
+{
+bash /root/setupmenu/src/vedisoft_b.sh
+}
 astver=$(asterisk -V | grep -woE [0-9]+\.)
 echo "make PZ new backup"
 {
+if ! [ -d "/backup_vedisoft" ];
+then
+mkbackup
+else
 mv /backup_vedisoft /backup_vedisoft_old
-bash /root/setupmenu/src/vedisoft_b.sh
+mkbackup
+fi
 } &> /dev/null
 echo "Downloading new vedisoft version"
 {
