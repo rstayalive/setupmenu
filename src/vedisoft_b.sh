@@ -1,4 +1,5 @@
 #!/bin/bash
+#vedisoft backup module
 #checking root privileges
 if [ ! `id -u` = 0 ]; then echo -en "\033[0;31mERROR: script should be started under superuser\n\033[0m"; exit 1; fi
 #Colors
