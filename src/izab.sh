@@ -10,7 +10,8 @@ system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 yum -y erase zabbix-release
 yum clean all
 rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-release-4.2-2.el6.noarch.rpm
-yum -y instal zabbix-agent     
+yum -y instal zabbix-agent
+sleep 5
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
 then 
