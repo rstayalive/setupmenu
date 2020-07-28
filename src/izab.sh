@@ -7,7 +7,10 @@ irule=$(iptables -vnL INPUT | grep -oE '$port')
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 	if [ "$system" == "6.6" ];
 		then
-            rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-agent-4.2.5-1.el6.x86_64.rpm
+yum -y erase zabbix-release
+yum clean all
+rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-release-4.2-2.el6.noarch.rpm
+yum -y instal zabbix-agent     
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
 then 
@@ -30,7 +33,10 @@ exit
                                                 service iptables save
                                     fi
         else
-            rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/7/x86_64/zabbix-agent-4.2.5-1.el7.x86_64.rpm
+yum -y erase zabbix-release
+yum clean all
+rpm -uvh http://repo.zabbix.com/zabbix/4.2/rhel/7/x86_64/zabbix-release-4.2-2.el7.noarch.rpm
+yum -y install zabbix-agent
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
 then echo "zabbix-agent installed for $system"
