@@ -35,7 +35,7 @@ exit
         else
 yum -y erase zabbix-release
 yum clean all
-rpm -uvh http://repo.zabbix.com/zabbix/4.2/rhel/7/x86_64/zabbix-release-4.2-2.el7.noarch.rpm
+rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/7/x86_64/zabbix-release-4.2-2.el7.noarch.rpm
 yum -y install zabbix-agent
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
