@@ -35,11 +35,12 @@ echo -e "\nPress enter country code to except, example RU,LV,US without spaces"
 read country ;
 #turn off iptables to safe you
 systemctl stop iptables
-
-#Creating iptables Chains
+iptables -F
+#SET policy modes
 iptables -P INPUT ACCEPT
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
+#Creating iptables Chains
 iptables -N DEF
 iptables -N ICMPF
 iptables -N SIPACL
@@ -122,6 +123,7 @@ iptables -A DEF -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m recent --set --
 iptables -A DEF -j RETURN
 #ICMPF CHAIN filtering ICMP
 iptables -A ICMPF -s 176.192.230.26/32 -j ACCEPT
+iptables -A ICMPF -s $localnet -j ACCEPT
 iptables -A ICMPF -j DROP
 #SIPACL CHAIN filtering SIP
 iptables -A SIPACL -s 176.192.230.26/32 -j ACCEPT
@@ -132,12 +134,11 @@ iptables -A SIPACL -m string --string "REGISTER" --algo bm --to 1500 -m hashlimi
 iptables -A SIPACL -m hashlimit --hashlimit-upto 10/min --hashlimit-burst 1 --hashlimit-mode srcip,dstport --hashlimit-name sip_o_limit -j ACCEPT
 iptables -A SIPACL -p udp -m udp --dport $sipport -m recent --update --name MYSIP --mask 255.255.255.255 --rsource -j ACCEPT
 iptables -A SIPACL -p udp -m udp --dport $sipport -j DROP
-iptables -A SIPACL -m geoip ! --source-country RU,UA  -j DROP
+iptables -A SIPACL -m geoip ! --source-country $country -j DROP
 iptables -A SIPACL -j RETURN
 #SSHC CHAIN filtering SSH
 iptables -A SSHC -m state --state NEW -m hashlimit --hashlimit-above 5/min --hashlimit-burst 5 --hashlimit-mode srcip --hashlimit-name SSH -j REJECT --reject-with icmp-port-unreachable
 iptables -A SSHC -m state --state NEW -j ACCEPT
-
 #iptables RAW rules
 #Creating raw CHAINS
 iptables -t raw -P PREROUTING ACCEPT
@@ -161,10 +162,12 @@ iptables -t raw -A BAD -s 185.53.88.0/24 -j DROP
 iptables -t raw -A BAD -s 45.143.220.0/24 -j DROP
 iptables -t raw -A BAD -s 156.96.0.0/16 -j DROP
 iptables -t raw -A BAD -s 103.145.12.0/24 -j DROP
-#BADSIP CHAIN filtering bad guys from UDPSIP Cgaub
+iptables -t raw -A BAD -j RETURN
+#BADSIP CHAIN filtering ban bad guys
 iptables -t raw -A BADSIP -m recent --set --name BADSIP --mask 255.255.255.255 --rsource -j DROP
-
+#NESIP CHAIN filtering allow good guys
 iptables -t raw -A NEWSIP -m recent --set --name MYSIP --mask 255.255.255.255 --rsource -j ACCEPT
+#UDPSIP CHAIN filtering rate and bad user-agents
 iptables -t raw -A UDPSIP -m state --state NEW -m hashlimit --hashlimit-above 10/min --hashlimit-burst 5 --hashlimit-mode srcip --hashlimit-name SIP -j DROP
 iptables -t raw -A UDPSIP -m string --string "sundayddr" --algo bm --to 1500 -j BADSIP
 iptables -t raw -A UDPSIP -m string --string "sipsak" --algo bm --to 1500 -j BADSIP
