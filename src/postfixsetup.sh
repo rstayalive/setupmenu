@@ -37,6 +37,8 @@ echo "
 	myread_yn ans
 	case "$ans" in
  y|Y)
+        replace "inet_protocols=all" "inet_protocols=ipv4" -- /etc/postfix/main.cf
+        service postfix restart
 		touch /etc/postfix/sasl_passwd
 		echo -e "\nВведите сгенерированный пароль почты!"
 		read epasswd ;
