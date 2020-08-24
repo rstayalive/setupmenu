@@ -51,6 +51,7 @@ asterisk -rx"module load cel_prostiezvonki.so"
 asterisk -rx"core restart gracefully"
 } &> /dev/null
 sleep 6
+ln -s /var/spool/asterisk/monitor/ /var/www/html/records
 pzver=`asterisk -rx"module show like cel_prostiezvonki.so"`
 echo "Path installed. New version of running $pzver"
 end
