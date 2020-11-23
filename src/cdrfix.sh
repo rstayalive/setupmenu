@@ -1,6 +1,8 @@
 #!/bin/bash
 #cdr codepage fix
 
+mysqldump -u root --all-databases | gzip > /root/database.sql.gz
+
 odbc=`rpm -qa | grep mysql-connector-odbc`
 rpm -e --nodeps $odbc
 yum install mariadb-connector-odbc -y

@@ -71,8 +71,7 @@ iptables -A INPUT -p tcp -m tcp ! --tcp-flags FIN,SYN,RST,ACK SYN -m state --sta
 iptables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN,SYN,RST,PSH,ACK,URG -j DROP
 iptables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP
 iptables -A INPUT -j SIPACL
-iptables -A INPUT -m geoip ! --source-country RU,UA,IT  -j DROP
-iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -m geoip ! --source-country $country -j DROP
 iptables -A INPUT -j DROP
 #OUTPUT rules
 iptables -A OUTPUT -m state --state INVALID -j DROP
@@ -147,21 +146,19 @@ iptables -t raw -N BAD
 iptables -t raw -N BADSIP
 iptables -t raw -N NEWSIP
 iptables -t raw -N UDPSIP
-#PREROUTING TABL
-iptables -t raw -A PREROUTING -s $localnet -j ACCEPT
-iptables -t raw -A PREROUTING -s 176.192.230.26/32 -j ACCEPT
+iptables -t raw -N whitelist
+#Whitelist
+iptables -t raw -A whitelist -s 176.192.230.26/32 -j ACCEPT
+iptables -t raw -A whitelist -s $localnet -j ACCEPT
+iptables -t raw -A whitelist -j RETURN
+#PREROUTING CHAIN
+iptables -t raw -A PREROUTING -j whitelist
 iptables -t raw -A PREROUTING -j BAD
 iptables -t raw -A PREROUTING -i eth+ -m recent --update --name MYSIP --mask 255.255.255.255 --rsource -j ACCEPT
 iptables -t raw -A PREROUTING -i eth+ -p udp -m udp --dport $sipport -m string --string "$hostname" --algo bm --to 1500 --icase -j NEWSIP
 iptables -t raw -A PREROUTING -i eth+ -m recent --update --name BADSIP --mask 255.255.255.255 --rsource -j DROP
 iptables -t raw -A PREROUTING -i eth+ -p udp -m udp --dport $sipport -j UDPSIP
 #BAD CHAIN filtering BAD guys manualy
-iptables -t raw -A BAD -s 106.12.175.0/24 -j DROP
-iptables -t raw -A BAD -s 103.253.42.0/24 -j DROP
-iptables -t raw -A BAD -s 185.53.88.0/24 -j DROP
-iptables -t raw -A BAD -s 45.143.220.0/24 -j DROP
-iptables -t raw -A BAD -s 156.96.0.0/16 -j DROP
-iptables -t raw -A BAD -s 103.145.12.0/24 -j DROP
 iptables -t raw -A BAD -j RETURN
 #BADSIP CHAIN filtering ban bad guys
 iptables -t raw -A BADSIP -m recent --set --name BADSIP --mask 255.255.255.255 --rsource -j DROP

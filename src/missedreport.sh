@@ -31,7 +31,7 @@ replace "myemail" "$toemail" -- /var/www/html/missed.php
 #Creating crong jobs
 echo "
 #missed report every midnight
-59 23 * * * php /var/www/html/missed.php
+59 23 * * * /usr/bin/php /var/www/html/missed.php
 #missed report 14:00
 01 14 * * * /usr/bin/php /var/www/html/missed.php
 #missed report 17:40

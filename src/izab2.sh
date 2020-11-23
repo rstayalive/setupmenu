@@ -7,7 +7,7 @@ irule=$(iptables -vnL INPUT | grep -oE '$port')
 system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
 	if [ "$system" == "6.6" ];
 		then
-        rpm -Uvh http://repo.zabbix.com/zabbix/4.2/rhel/6/x86_64/zabbix-release-4.2-2.el6.noarch.rpm
+        rpm -Uvh http://repo.zabbix.com/zabbix/5.2/rhel/6/x86_64/zabbix-release-5.2-1.el6.noarch.rpm
         yum install zabbix-agent -y
         Pak=$(yum list installed | grep -oE 'zabbix-agent')
                     if [ "$Pak" == "zabbix-agent" ]
