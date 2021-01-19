@@ -1,6 +1,6 @@
 #!/bin/bash
 # Скрипт настройки postfix для отправки уведомлений на почту
-
+# echo "This is the body of the email. Test. Test. Test." | mail -s "Direct email test 01" -r asterisk.maildelivery@gmail.com youremail@here
 #Алиасы
 RED=\\e[91m
 GRE=\\e[92m
@@ -54,6 +54,7 @@ echo "
         smtp_sasl_security_options = noanonymous
         smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
         " >> /etc/postfix/main.cf
+        postconf -e inet_protocols=ipv4
         service postfix restart
 		echo "Настройка завершена. Теперь проверим что все работает."
         echo -e "\nВведите Email куда отправить тестовое письмо"
@@ -82,6 +83,7 @@ echo "
         smtp_sasl_security_options = noanonymous
         smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
         " >> /etc/postfix/main.cf
+        postconf -e inet_protocols=ipv4
         service postfix restart
         echo "Настройка завершена. Теперь проверим что все работает."
         echo -e "\nВведите Email куда отправить тестовое письмо"
@@ -97,6 +99,7 @@ echo "
         smtp_sasl_security_options = noanonymous
         smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
         " >> /etc/postfix/main.cf
+        postconf -e inet_protocols=ipv4
         service postfix restart
         echo "Настройка завершена. Теперь проверим что все работает."
         echo -e "\nВведите Email куда отправить тестовое письмо"

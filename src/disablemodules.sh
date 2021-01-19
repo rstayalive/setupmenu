@@ -118,6 +118,16 @@ fwconsole ma remove hotelwakeup
 fwconsole ma remove irc
 fwconsole ma remove motif
 fwconsole ma remove pbdirectory
+fwconsole ma remove sangomaconnect
+fwconsole ma remove sms
+fwconsole ma remove ucp
+fwconsole ma remove callaccounting
+fwconsole ma remove cos
+fwconsole ma remove oracle_connector
+fwconsole ma remove pms
+fwconsole ma remove iotserver
+fwconsole ma remove queuemetrics
+fwconsole ma remove sng_mcu
 } &> /dev/null
 echo "Removing modules.Stage $count2 of 3"
 count2=$(( $count2 + 1 ))

@@ -36,6 +36,8 @@ echo "Installing software... Please relax"
     myinstall nmon
 	myinstall lz4
 	myinstall lz4-devel
+    myinstall glances
+    myinstall ncdu
 echo "Installing sngrep tool"
 cd /usr/src
 git clone https://github.com/irontec/sngrep
