@@ -47,7 +47,7 @@ sleep 3
 ./configure --with-openssl --enable-unicode
 sleep 3
 make
-speep 3
+sleep 3
 make install
 echo "alias sngrep='NCURSES_NO_UTF8_ACS=1 sngrep'" >> ~/.bashrc
 echo export NCURSES_NO_UTF8_ACS=1 >> /etc/environment
