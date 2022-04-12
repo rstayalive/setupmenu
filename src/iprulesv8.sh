@@ -116,9 +116,6 @@ iptables -t raw -A SIP -m string --string "sip-scan" --algo bm -j SIPB
 iptables -t raw -A SIP -m string --string "sipcli" --algo bm -j SIPB
 iptables -t raw -A SIP -m string --string "eyeBeam" --algo bm -j SIPB
 iptables -t raw -A SIP -m string --string "friendly-request" --algo bm -j SIPB
-iptables -t raw -A SIP -m string --string "sip-scan" --algo bm -j SIPB
-iptables -t raw -A SIP -m string --string "sipvicious" --algo bm -j SIPB
-iptables -t raw -A SIP -m string --string "sip-scan" --algo bm -j SIPB
 iptables -t raw -A SIP -m string --string "smap" --algo bm -j SIPB
 iptables -t raw -A SIP -m string --string "FPBX" --algo bm -j SIPB
 iptables -t raw -A SIP -m string --string "Zfree" --algo bm -j SIPB
