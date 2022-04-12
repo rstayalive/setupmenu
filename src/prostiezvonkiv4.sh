@@ -24,6 +24,21 @@ ln -s /var/spool/asterisk/monitor/ /var/www/html/records
 echo "PZ installed to asterisk $astver"
 end
 }
+ast18()
+{
+mkdir -p /root/src/
+cd /root/src/
+wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk18.zip
+unzip prostiezvonki_asterisk18.zip
+cd prostiezvonki
+bash install
+fwconsole ma install prostiezvonki
+fwconsole reload
+fwconsole chown
+ln -s /var/spool/asterisk/monitor/ /var/www/html/records
+echo "PZ installed to asterisk 18"
+end
+}
 ast16()
 {
 mkdir -p /root/src/
@@ -90,11 +105,11 @@ echo -e "
 ┌──────────────● Выберите Коннектор:
 │  Версия вашего астериска: $astver
 │ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ PZ Версия для 16 астериска           │
+├─┤$GRE 1 $DEF│ PZ Версия для 18 астериска           │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 2 $DEF│ PZ Версия для 13 астериска           │
+├─┤$GRE 2 $DEF│ PZ Версия для 16 астериска           │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 3 $DEF│ PZ Версия для 11 астериска           │
+├─┤$GRE 3 $DEF│ PZ Версия для 13 астериска           │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ PZ Автоопределение                   │
 │ ├───┼──────────────────────────────────────┤
@@ -115,9 +130,9 @@ echo -e "
     read -s -n 1 menu1
     echo ""
     case $menu1 in
-    1) ast16 ;;
-    2) ast13 ;;
-    3) ast11 ;;
+    1) ast18 ;;
+    2) ast16 ;;
+    3) ast13 ;;
     4) astauto ;;
     5) ITgro ;;
     6)  ;;
