@@ -29,7 +29,7 @@ mv privkey1.pem /etc/asterisk/oldkeys
 ln -s /etc/asterisk/keys/$(hostname)/cert.pem /etc/asterisk/newsert.pem
 ln -s /etc/asterisk/keys/$(hostname)/private.pem /etc/asterisk/privkey1.pem
 chown -R asterisk:asterisk /etc/asterisk
-service asterisk restart
+rasterisk -rx"core restart now"
 echo -e "Дата начала действия сертификата$startdate
 Дата окончания действия сертификата$expiredate"
 fi
