@@ -21,9 +21,10 @@ workdir='/root/setupmenu/src'
 
 clear
 echo "Начинаю установку модуля расширенной статистики звонков"
-cp $workdir/asternic_cdr-1.6.3.tgz /tmp
+#cp $workdir/asternic_cdr-1.6.3.tgz /tmp
 cd /tmp
-tar -zxvf asternic_cdr-1.6.3.tgz
+wget http://download.asternic.net/asternic_cdr-1.6.4.tgz
+tar -zxvf asternic_cdr-1.6.4.tgz
 cp -R asternic_cdr /var/www/html/admin/modules/
 fwconsole chown
 fwconsole moduleadmin install asternic_cdr
