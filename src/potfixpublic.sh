@@ -14,13 +14,13 @@ read login ;
 echo -e "\nВведите созданный пароль приложения"
 read passwd ;
 touch /etc/postfix/sasl_passwd
-echo "[smtp.$sender.com]:587 $login:$passwd" > /etc/postfix/sasl_passwd
+echo "smtp.$sender.com:587 $login:$passwd" > /etc/postfix/sasl_passwd
 chmod 400 /etc/postfix/sasl_passwd
 postmap /etc/postfix/sasl_passwd
 if [ "$sender" == "gmail" ]
 then
 echo "
-relayhost = [smtp.gmail.com]:587
+relayhost = smtp.gmail.com:587
 smtp_use_tls = yes
 smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
@@ -36,7 +36,7 @@ echo "Проверка тела письма." | mail -s "Проверка по�
 echo "отправлено тестовое письмо на $email проверьте почту"
 else
 echo "
-relayhost = [smtp.yandex.com]:587
+relayhost = smtp.yandex.com:587
 smtp_use_tls = yes
 smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
