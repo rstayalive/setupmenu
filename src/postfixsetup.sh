@@ -44,7 +44,7 @@ echo "
 		read epasswd ;
 		echo "smtp.gmail.com:587 asterisk.maildelivery@gmail.com:$epasswd" > /etc/postfix/sasl_passwd
 		chmod 400 /etc/postfix/sasl_passwd
-		postmap /etc/postfix/sasl_passwd ;
+		postmap /etc/postfix/sasl_passwd
         #main.cfg закидываем
         echo "
         smtp_sasl_auth_enable = yes
