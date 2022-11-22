@@ -18,7 +18,7 @@ $RM -rvf $PATH/itgrix_bx.log-*
 $RM -rvf $PATH/itgrix_amo.log-*
 $RM -rvf $PATH/fail2ban.log-*
 $RM -rvf $PATH/cron-*
-$RM -rvf $PATH/boot.log-
+$RM -rvf $PATH/boot.log-*
 } &> /dev/null
 echo "System log clean done"
 echo "Start cleaning asterisk logs job"
