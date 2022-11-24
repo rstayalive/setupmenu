@@ -3,7 +3,7 @@
 #This script work only with root priveleges
 if [ ! `id -u` = 0 ]; then echo -en "\033[0;31mERROR: script should be started under superuser\n\033[0m"; exit 1; fi
 title="Скрипт автоматизации развертывания freepbx"
-ver="v5.0"
+ver="v5.8"
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
@@ -11,7 +11,6 @@ workdir='/root/setupmenu'
 path='/root/setupmenu/src'
 scupd='setupmenu.sh'
 postfixsetup='postfixsetup.sh'
-xtablessetup='xtables_geoip.sh'
 autoupdatesys='autoupdatesys.sh'
 disablemodules='modules_udr.sh'
 freepbxupd='freepbxupd.sh'
@@ -40,6 +39,9 @@ sngrepupd='sngrepupd.sh'
 sql_cf='sql_cf.sh'
 cdrfix='cdrfix.sh'
 izab='izab.sh'
+bdoptimize='bdoptimize.sh'
+dbcheck='databasecheck.sh'
+logclean='logclean.sh'
 #####################################
 #Функционал разбитый на скрипты
 #Обновление скрипта
@@ -64,9 +66,7 @@ sh $postfixsetup
 #Скрипт установки geoip на iptables
 xtablessetup()
 {
-cd $path
-chmod 777 $xtablessetup
-sh $xtablessetup
+echo "deprecated. Больше не поддерживается"
 }
 #Скрипт настройки автообновления системы
 autoupdatesys()
@@ -228,30 +228,20 @@ izab()
 {
 bash $path/$izab
 }
-fwdel()
+#SQL database optimization
+bdoptimize()
 {
-echo "FBPX firewall module will be removed"
-fwconsole ma remove firewall
-fwconsole reload
-echo "Done!"
+   bash $path/$bdoptimize
 }
-fwopennip()
+#SQL database error check and fix
+dbcheck()
 {
-echo -e "\nEnter IP(8.8.8.8) or Netwrok(192.168.0.0/24) to allow"
-read prov ;
-iptables -A INPUT -s $prov -j ACCEPT
-save
-iptables -vnL
+   bash $path/$dbcheck
 }
-fwopenport()
+#System and asterisk log cleaner
+logclean()
 {
-echo -e "\nPlease enter the port range(1000:2000) or single port(1234) number to allow" 
-read openport ;
-echo -e "\nPlease enter protocol(udp/tcp)"
-read tcpudp ;
-iptables -A INPUT -p $tcpudp -m $tcpudp --dport $openport -j ACCEPT
-echo "Done!"
-iptables -vnL INPUT | grep $openport
+   bash $path/$logclean
 }
 ########################
 ########################
@@ -267,19 +257,6 @@ read -n 1 temp
 echo
 done
 eval $1=$temp
-}
-#Сохранить или нет (для блока Iptables)
-save()
-{
-echo "Применить изменения iptables?"
-myread_yn ans
-case "$ans" in
- y|Y)
- service iptables save
-echo -e "$GREПравила успешно добавлены в iptables и применены!$DEF" ;;
- n|N)
- echo -e "$REDИзменения сделаны, но не применены!$DEF" ;;
- esac
 }
 #Проверка, установлен пакет или нет
 myinstall()
@@ -365,7 +342,7 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 3 $DEF│ Дополнительно $RED* $DEF                     │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 4 $DEF│ Настройка безопасности $RED*$DEF             │
+├─┤$GRE 4 $DEF│ Полезные скрипты $RED*$DEF                   │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 5 $DEF│ ------------------------------------ │
 │ ├───┼──────────────────────────────────────┤
@@ -439,7 +416,7 @@ echo -e "
 ┌──────────────● Настройки:
 │
 │ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ Настроить автоадейт системы          │
+├─┤$GRE 1 $DEF│ Настроить автоапдейт системы         │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 2 $DEF│ Отключить модули FreePBX             │
 │ ├───┼──────────────────────────────────────┤
@@ -515,26 +492,26 @@ echo -e "
  until [ "$menu4" = "0" ]; do
  clear
     echo -e "
-┌──────────────● Настройка безопасности:
+┌──────────────● Полезные скрипты:
 │
 │ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ Удалить модуль Firewall из FreePBX   │
+├─┤$GRE 1 $DEF│ Провести оптимизацию БД              │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 2 $DEF│ Установить GeoIP для IPTABLES        │
+├─┤$GRE 2 $DEF│ Проверить БД на ошибки               │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 3 $DEF│ Сбросить правила IPTABLES            │
+├─┤$GRE 3 $DEF│ Почистить системные логи             │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 4 $DEF│ Прописать стандартные правила        │
+├─┤$GRE 4 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│ Прописать правила защиты             │
+├─┤$GRE 5 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 6 $DEF│ Открыть доступ для IP/Сети           │
+├─┤$GRE 6 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 7 $DEF│ Открыть Порт или диапазон портов     │
+├─┤$GRE 7 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 8 $DEF│ Сохранить изменения                  │
+├─┤$GRE 8 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 9 $DEF│ Вывести текущие правила              │
+├─┤$GRE 9 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
 └─┤$GRE 0 $DEF│ Выйти в главное меню                 │
   └───┴──────────────────────────────────────┘
@@ -543,27 +520,15 @@ echo -e "
     read -s -n 1 menu4
     echo ""
     case $menu4 in
- 1) fwdel
-    wait ;;
- 2) xtablessetup ;;
- 3) iptables -F
-    echo "Правила iptables сброшены!"
-    wait ;;
- 4) iprules ;;
- 5) iprulesgeoip ;;
- 6) fwopennip
-    wait ;;
- 7) fwopenport
-    wait ;;
- 8)
-    service iptables save && service iptables restart
-    echo "Применяю правила и перезапускаю iptables"
-    sleep 3
-    echo "Сделано!"
-    wait ;;
- 9)
-    iptables -vnL
-    wait ;;
+ 1) bdoptimize ;;
+ 2) dbcheck ;;
+ 3) logclean ;;
+ 4)  ;;
+ 5)  ;;
+ 6)  ;;
+ 7)  ;;
+ 8)  ;;
+ 9)  ;;
  0) mainmenu ;;
  *) echo "$REDОшибка, выберите 1-9 или 0$DEF"
     esac

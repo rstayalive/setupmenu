@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Checking corrupted SQL database tables "
 mysqlcheck --all-databases | grep Corrupt > /tmp/corrupt
 if [ -s "/tmp/corrupt" ];
 then
@@ -10,14 +11,13 @@ rm -rvf /tmp/corrupt
 mysqlcheck --all-databases | grep Corrupt > /tmp/corrupt
 if [ -s "/tmp/corrupt" ];
 then
-echo "bad. not fixed, sending email to sadmin"
-echo -e "enter your email"
-read admemail ;
-mysqlcheck --all-databases > /tmp/sqlfulllog
-mail -s "Mysql error, please fix me at $(hostname)" -a /tmp/sqlfulllog -r asterisk $admemail < /dev/null
+echo "Databased bad. not fixed!!!!!"
+echo "Mysql error, please fix sql database manualy"
 else
 echo "All ok"
 fi
 else
 echo "All ok"
 fi
+echo -e "$GRE press any key to continue $DEF"
+read -s -n 1
