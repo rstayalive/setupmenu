@@ -1,5 +1,5 @@
 #!/bin/bash
-#CRM and asterisk intgration menu
+#CRM intgeration master menu
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
@@ -84,17 +84,26 @@ ln -s /var/spool/asterisk/monitor/ /var/www/html/records
 echo "PZ installed to asterisk 11"
 end
 }
-ITgro()
+#itgrix for amoCRM
+ITgro_AMO()
 {
-yum install qt5-qtwebsockets.x86_64 qt5-qtwebsockets-devel.x86_64 qt5-qtbase-mysql.x86_64
 mkdir -p /root/src/
 cd /root/src/
-curl -k -O https://bx24asterisk.ru/download/autoinstaller_amo.sh
+wget https://itgrix.ru/download/autoinstaller_amo.sh
 bash autoinstaller_amo.sh
-echo "ITgro installed"
+echo "Itgrix for amoCRM installed"
 end
 }
-
+#itgrix for bitrix
+ITgro_BX()
+{
+  mkdir -p /root/src/
+  cd /root/src/
+  wget https://itgrix.ru/download/autoinstaller_bx.sh
+  bash autoinstaller_bx.sh
+  echo "Itgrix for Bitrix installed"
+  end
+}
 menu1=
 repeat=true
 while [ "$repeat" = "true" ];
@@ -113,9 +122,9 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ PZ Автоопределение                   │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│ ITgro                                │
+├─┤$GRE 5 $DEF│ Itgrix для amoCRM                    │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 6 $DEF│                                      │
+├─┤$GRE 6 $DEF│ itgrix для Bitrix                    │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 7 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
@@ -134,8 +143,8 @@ echo -e "
     2) ast16 ;;
     3) ast13 ;;
     4) astauto ;;
-    5) ITgro ;;
-    6)  ;;
+    5) ITgro_AMO ;;
+    6) ITgro_BX ;;
     7)  ;;
     8)  ;;
     9)  ;;
