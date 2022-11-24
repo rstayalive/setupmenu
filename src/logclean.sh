@@ -34,6 +34,7 @@ $RM -rvf $PATHA/secure.*
 $RM -rvf $PATHA/ucp_err.log-*
 $RM -rvf $PATHA/ucp_out.log-*
 $RM -rvf $PATHA/security.*
+$RM -rvf $PATHA/cel_prostiezvonki_*
 } &> /dev/null
 echo "Asterisk log clean done"
 #free some logs
