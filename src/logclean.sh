@@ -46,5 +46,8 @@ echo > $PATHA/security
 echo > $PATHA/secure
 echo > $PATH/secure
 echo > $PATH/fail2ban.log
+echo > $PATH/core-fastagi_out.log
+echo > $PATH/freepbx.log
+echo > $PATH/cron
 } &> /dev/null
 echo "All jobs done"
