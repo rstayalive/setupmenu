@@ -39,6 +39,8 @@ echo "
  y|Y)
         replace "inet_protocols=all" "inet_protocols=ipv4" -- /etc/postfix/main.cf
         service postfix restart
+        echo "@gmail.com asterisk.maildelivery@gmail.com" >> /etc/postfix/generic
+        postmap /etc/postfix/generic
 		touch /etc/postfix/sasl_passwd
 		echo -e "\nВведите сгенерированный пароль почты!"
 		read epasswd ;
@@ -73,12 +75,14 @@ echo "
 		read passwd ;
         echo -e "\nДля yandex напишите yandex, для google напишите $REDgmail$DEF(пожалуйста не пишите .com .ru etc.)"
         read sender;
-		touch /etc/postfix/sasl_passwd
+        		touch /etc/postfix/sasl_passwd
 		echo "smtp.$sender.com:587 $login:$passwd" > /etc/postfix/sasl_passwd
 		chmod 400 /etc/postfix/sasl_passwd
 		postmap /etc/postfix/sasl_passwd
         if [ "$sender" == "gmail" ]
         then
+        echo "@gmail.com $login" >> /etc/postfix/generic
+        postmap /etc/postfix/generic
         echo "
         smtp_sasl_auth_enable = yes
         smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
@@ -99,6 +103,8 @@ echo "
         echo "Проверка тела письма." | mail -s "Проверка почты" -r $login $email
         echo "отправлено тестовое письмо на $email проверьте почту"
         else
+        echo "@yandex.com $login" >> /etc/postfix/generic
+        postmap /etc/postfix/generic
         echo "
         relayhost = smtp.yandex.com:587
         smtp_use_tls = yes
