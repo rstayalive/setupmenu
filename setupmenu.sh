@@ -42,6 +42,7 @@ izab='izab.sh'
 bdoptimize='bdoptimize.sh'
 dbcheck='databasecheck.sh'
 logclean='logclean.sh'
+trunkalert='trunkalert.sh'
 #####################################
 #Функционал разбитый на скрипты
 #Обновление скрипта
@@ -242,6 +243,11 @@ dbcheck()
 logclean()
 {
    bash $path/$logclean
+}
+#trunk alert agi script for turnk failure monitoring
+trunkalert()
+{
+   bash $path/$trunkalert
 }
 ########################
 ########################
@@ -503,7 +509,7 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ Исправить кодировку CDR              │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│                                      │
+├─┤$GRE 5 $DEF│ Мониторинг транков Agi               │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 6 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
@@ -524,7 +530,7 @@ echo -e "
  2) dbcheck ;;
  3) logclean ;;
  4) cdrfix ;;
- 5)  ;;
+ 5) trunkalert ;;
  6)  ;;
  7)  ;;
  8)  ;;
