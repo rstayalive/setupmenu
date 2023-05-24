@@ -65,7 +65,7 @@ done
 echo "Unused modules uninstalled"
 #disabling modules may be needed
 echo "Disabling maybe needed modules"
-fwconsole ma disable configedit
+fwconsole ma uninstall configedit
 echo "Done."
 echo "Next job - Removing modules from hdd"
 count2=1
