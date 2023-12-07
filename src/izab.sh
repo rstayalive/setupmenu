@@ -38,6 +38,7 @@ exit
 yum -y erase zabbix-release
 yum clean all
 rpm -Uvh http://repo.zabbix.com/zabbix/6.4/rhel/7/x86_64/zabbix-agent-6.4.7-release1.el7.x86_64.rpm
+yum -y install pcre2.x86_64
 yum -y install zabbix-agent
 Pak=$(yum list installed | grep -oE 'zabbix-agent')
 if [ "$Pak" == "zabbix-agent" ]
