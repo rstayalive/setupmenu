@@ -45,10 +45,13 @@ fwconsole ma uninstall sangomaconnect
 fwconsole ma uninstall sangomacrm
 fwconsole ma uninstall sangomartapi
 fwconsole ma uninstall sipstation
+fwconsole ma uninstall smsplus
 fwconsole ma uninstall sms
+fwconsole ma uninstall pbxmfa
 fwconsole ma uninstall tts
 fwconsole ma uninstall ttsengines
 fwconsole ma uninstall ucp
+fwconsole ma uninstall missedcall
 fwconsole ma uninstall vega
 fwconsole ma uninstall vmnotify
 fwconsole ma uninstall voicemail_report
