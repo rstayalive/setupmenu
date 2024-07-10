@@ -48,13 +48,9 @@ echo "$cpu" >> $out
 echo "$mem" >> $out
 echo "$disk" >> $out
 echo "AMI check: $ami" >> $out
-
 echo "CEL status check: $cel" >> $out
-
 echo "CEL check $celcheck" >> $out
-
 echo "CDR check $cdrcheck" >> $out
-
 echo "$phpver" >> $out
 echo "PHP JSON check $phpjson" >> $out
 echo "PHP CURL check $phpcurl" >> $out
