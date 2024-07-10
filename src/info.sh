@@ -13,10 +13,10 @@ fi
 astver=$(asterisk -V | grep -woE [0-9]+\.)
 ami=$(asterisk -rx 'manager show settings')
 cel=$(asterisk -rx 'cel show status')
-celcheck=$(mysql asteriskcdrdb --execute= select id, eventtype, eventtime, cid_num, exten, uniqueid, linkedid, channame from cel order by id desc limit 10;)
-cdrcheck=$(mysql asteriskcdrdb --execute= select recordingfile from cdr order by calldate desc limit 10;)
+celcheck=$(mysql asteriskcdrdb --execute= "SELECT id, eventtype, eventtime, cid_num, exten, uniqueid, linkedid, channame from cel order by id desc limit 10" ;)
+cdrcheck=$(mysql asteriskcdrdb --execute= "SELECT recordingfile from cdr order by calldate desc limit 10" ;)
 phpver=$(php -v)
-phpjson=$(php -r)
+phpjson=$(php -r 'var_dump(function_exists("json_decode"));')
 phpcurl=$(php -r 'echo curl_version()["version"];')
 out="/tmp/outputinfo.txt"
 uname=`uname -r`
@@ -39,19 +39,19 @@ echo "$deb" >> $out
 else
 echo "$red" >> $out
 fi
-echo "$freepbx" >> $out
-echo "$pbxfirm" >> $out
+echo "freepbx rpm ver $freepbx" >> $out
+echo "freepbx firmware ver $pbxfirm" >> $out
 echo "asterisk $astver" >> $out
 echo "arch x$arc" >> $out
-echo "$ip" >> $out
+echo "EXT IP $ip" >> $out
 echo "$cpu" >> $out
 echo "$mem" >> $out
 echo "$disk" >> $out
-echo "ami $ami" >> $out
-echo "cel status $cel" >> $out
-echo "cel check $celcheck" >> $out
-echo "cdr check $cdrcheck" >> $out
-echo "php $phpver" >> $out
-echo "php json $phpjson" >> $out
-echo "php curl $phpcurl" >> $out
+echo "AMI check: $ami" >> $out
+echo "CEL status check $cel" >> $out
+echo "CEL check $celcheck" >> $out
+echo "CDR check $cdrcheck" >> $out
+echo "$phpver" >> $out
+echo "PHP JSON check $phpjson" >> $out
+echo "PHP CURL check $phpcurl" >> $out
 end
