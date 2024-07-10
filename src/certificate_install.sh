@@ -1,5 +1,4 @@
 #!/bin/bash
-#Скрипт настройки сертификата простых звонков.
 #Цвета
 RED=\\e[91m
 GRE=\\e[92m
@@ -12,8 +11,8 @@ read -s -n 1
 }
 #Делаем простым звонкам запрос
 domain=`hostname`
-startdate=$(curl --insecure -v https://127.0.0.1:10150 2>&1 | grep 'start date')
-expiredate=$(curl --insecure -v https://127.0.0.1:10150 2>&1 | grep 'expire date')
+startdate=$(curl --insecure -v https://127.0.0.1 2>&1 | grep 'start date' | cut -d':' -f2-)
+expiredate=$(curl --insecure -v https://127.0.0.1 2>&1 | grep 'expire date' | cut -d':' -f2-)
 #Проверяем настроен доменный сертификат или нет (тупо чекаем hostname, т.к при получении сертификата через certificate management нужно задавать hostname согласно сделанной A записи на домене)
 #соответственно если hostname localhost.localdomain ничего настроено не было и смысла выполнять скрипт нет.
 if [ "$domain" == "localhost.localdomain" ];
