@@ -4,7 +4,7 @@
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
-#end
+
 end()
 {
 echo -e "$GREДля продолжения нажмите любую клавишу $DEF"
