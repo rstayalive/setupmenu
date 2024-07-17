@@ -10,6 +10,7 @@ config_file=~/trkmon_config.sh
 hname=`hostname`
 #get external IP for message
 extip=`fwconsole extip`
+cronlist=`crontab -l`
 #check config file exists
 if [[ -e $config_file && -s $config_file ]];then
 #set config file
@@ -30,4 +31,16 @@ read -p "Enter Telegram chat ID: " tid
 echo "TELEGRAM_TOKEN=\"$ttoken\"" > $config_file
 echo "CHAT_ID=\"$tid\"" >> $config_file
 chmod 600 ~/trkmon_config.sh
+
+# Prompt the user to ask if they want to create a job
+read -p "Do you want to create a cron job to monitor trunk status? (yes/no): " CREATE_CRON
+
+if [[ $CREATE_CRON == "yes" ]]; then
+    #add the cron job
+    CRON_CMD="*/5 * * * * /root/setupmenu/src/trk_pjsip_monitoring.sh"
+    (crontab -l ; echo "$CRON_CMD") | crontab -
+    echo "Job created to run every 5 minutes. $cronlist"
+else
+    echo "Job not created."
+fi
 fi
