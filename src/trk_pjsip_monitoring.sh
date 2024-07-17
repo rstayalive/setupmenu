@@ -24,7 +24,7 @@ if [[ ! -z "$TRUNK_STATUS" ]]; then
     curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" -d chat_id=$CHAT_ID -d text="$MESSAGE"
 fi
 else
-#collect information and put to config file
+#collect information and put to config file for first setup
 read -p "Enter Telegram bot TOKEN: " ttoken
 read -p "Enter Telegram chat ID: " tid
 echo "TELEGRAM_TOKEN=\"$ttoken\"" > $config_file
