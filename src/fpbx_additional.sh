@@ -38,3 +38,4 @@ else
     fwconsole firewall sync
     fwconsole firewall restart
 fi
+fwconsole reload
