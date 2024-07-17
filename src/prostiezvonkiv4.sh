@@ -8,80 +8,12 @@ end()
 echo -e "Please press any key"
 read -s -n 1
 }
-astver=$(asterisk -V | grep -woE [0-9]+\.)
-astauto()
+#prostie zvonki new
+pzinstall()
 {
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk$astver.zip
-unzip prostiezvonki_asterisk$astver.zip
-cd prostiezvonki
-bash install
-fwconsole ma install prostiezvonki
-fwconsole reload
-fwconsole chown
+read -p "Пожалуйста вставьте комманду из личного кабинета простых звонков для установки модуля инетграции" PZnew
 ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-echo "PZ installed to asterisk $astver"
-end
-}
-ast18()
-{
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk18.zip
-unzip prostiezvonki_asterisk18.zip
-cd prostiezvonki
-bash install
-fwconsole ma install prostiezvonki
-fwconsole reload
-fwconsole chown
-ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-echo "PZ installed to asterisk 18"
-end
-}
-ast16()
-{
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk16.zip
-unzip prostiezvonki_asterisk16.zip
-cd prostiezvonki
-bash install
-fwconsole ma install prostiezvonki
-fwconsole reload
-fwconsole chown
-ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-echo "PZ installed to asterisk 16"
-end
-}
-ast13()
-{
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk13.zip
-unzip prostiezvonki_asterisk13.zip
-cd prostiezvonki
-bash install
-fwconsole ma install prostiezvonki
-fwconsole reload
-fwconsole chown
-ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-echo "PZ installed to asterisk 13"
-end
-}
-ast11()
-{
-mkdir -p /root/src/
-cd /root/src/
-wget http://prostiezvonki.ru/installs/prostiezvonki_asterisk11.zip
-unzip prostiezvonki_asterisk13.zip
-cd prostiezvonki
-bash install
-fwconsole ma install prostiezvonki
-fwconsole reload
-fwconsole chown
-ln -s /var/spool/asterisk/monitor/ /var/www/html/records
-echo "PZ installed to asterisk 11"
+$PZnew  
 end
 }
 #itgrix for amoCRM
@@ -114,17 +46,17 @@ echo -e "
 ┌──────────────● Выберите Коннектор:
 │  Версия вашего астериска: $astver
 │ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ PZ Версия для 18 астериска           │
+├─┤$GRE 1 $DEF│ Простые звонки (подписка)            │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 2 $DEF│ PZ Версия для 16 астериска           │
+├─┤$GRE 2 $DEF│ Itgrix для amoCRM                    │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 3 $DEF│ PZ Версия для 13 астериска           │
+├─┤$GRE 3 $DEF│ itgrix для Bitrix                    │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 4 $DEF│ PZ Автоопределение                   │
+├─┤$GRE 4 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│ Itgrix для amoCRM                    │
+├─┤$GRE 5 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 6 $DEF│ itgrix для Bitrix                    │
+├─┤$GRE 6 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 7 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
@@ -139,12 +71,12 @@ echo -e "
     read -s -n 1 menu1
     echo ""
     case $menu1 in
-    1) ast18 ;;
-    2) ast16 ;;
-    3) ast13 ;;
-    4) astauto ;;
-    5) ITgro_AMO ;;
-    6) ITgro_BX ;;
+    1) pzinstall ;;
+    2) ITgro_AMO ;;
+    3) ITgro_BX ;;
+    4)  ;;
+    5)  ;;
+    6)  ;;
     7)  ;;
     8)  ;;
     9)  ;;

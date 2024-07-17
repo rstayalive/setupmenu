@@ -18,12 +18,12 @@ done
 eval $1=$temp
 }
 clear
-cp $workdir/missed.php /var/www/html/
+cp $workdir/missed_new.php /var/www/html/
 cd /var/www/html/
-chown asterisk:asterisk /var/www/html/missed.php
+chown asterisk:asterisk /var/www/html/missed_new.php
 echo -e "\nPlease enter email for missed cals"
 read toemail ;
-replace "myemail" "$toemail" -- /var/www/html/missed.php
+replace "myemail" "$toemail" -- /var/www/html/missed_new.php
 #Creating user and grant privileges to sql
 	mysql -e "CREATE USER 'report'@'localhost' IDENTIFIED BY '2yCg6e8r5ng';"
     mysql -e "GRANT SELECT ON asteriskcdrdb.cdr TO 'report';"
@@ -31,18 +31,18 @@ replace "myemail" "$toemail" -- /var/www/html/missed.php
 #Creating crong jobs
 echo "
 #missed report every midnight
-59 23 * * * /usr/bin/php /var/www/html/missed.php
+59 23 * * * /usr/bin/php /var/www/html/missed_new.php
 #missed report 14:00
-01 14 * * * /usr/bin/php /var/www/html/missed.php
+01 14 * * * /usr/bin/php /var/www/html/missed_new.php
 #missed report 17:40
-40 17 * * * /usr/bin/php /var/www/html/missed.php
+40 17 * * * /usr/bin/php /var/www/html/missed_new.php
 " >> /etc/crontab
 #Asking for running test
 echo -e "Make test run? (Y)/(N)"
 	myread_yn ans
 	case "$ans" in
 		y|Y)
-		php /var/www/html/missed.php
+		php /var/www/html/missed_new.php
 		echo "Email sent to $toemail"
 		sleep 2 ;;
 		n|N)

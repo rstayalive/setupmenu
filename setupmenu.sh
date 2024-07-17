@@ -1,17 +1,19 @@
 #!/bin/bash
 #This script work with FPBX DISTRO with Centos 6.6+
-#This script work only with root priveleges
+#Check for root privileges
 if [ ! `id -u` = 0 ]; then echo -en "\033[0;31mERROR: script should be started under superuser\n\033[0m"; exit 1; fi
-title="Скрипт автоматизации развертывания freepbx"
-ver="v5.8"
+#Variables
+title="Скрипт автоматизации рутины с freepbx"
+ver="v6.0"
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
 workdir='/root/setupmenu'
 path='/root/setupmenu/src'
+versionpbx=`cat /etc/schmooze/pbx-version`
+astver=$(asterisk -V | grep -woE [0-9]+\.)
 scupd='setupmenu.sh'
 postfixsetup='postfixsetup.sh'
-autoupdatesys='autoupdatesys.sh'
 disablemodules='modules_udr.sh'
 freepbxupd='freepbxupd.sh'
 statmod='statmod.sh'
@@ -42,7 +44,9 @@ izab='izab.sh'
 bdoptimize='bdoptimize.sh'
 dbcheck='databasecheck.sh'
 logclean='logclean.sh'
-trunkalert='trunkalert.sh'
+trunkalert='trk_pjsip_monitoring.sh'
+fpbxpostconf='fpbx_additional.sh'
+clearrecords='audiofilesclean.sh'
 #####################################
 #Функционал разбитый на скрипты
 #Обновление скрипта
@@ -62,20 +66,9 @@ postfixsetup()
 {
 cd $path
 chmod 777 $postfixsetup
-sh $postfixsetup
+bash $postfixsetup
 }
-#Скрипт установки geoip на iptables
-xtablessetup()
-{
-echo "deprecated. Больше не поддерживается"
-}
-#Скрипт настройки автообновления системы
-autoupdatesys()
-{
-cd $path
-chmod 777 $autoupdatesys
-sh $autoupdatesys
-}
+
 #Скрипт отключения ненужных модулей freepbx
 disablemodules()
 {
@@ -144,11 +137,6 @@ callback()
 cd $path
 chmod 777 $callback
 bash $callback
-}
-#Defending system with additions iptables rules with geoip
-iprules()
-{
-bash $path/$iprules
 }
 #Реализация change log
 changelog()
@@ -249,6 +237,16 @@ trunkalert()
 {
    bash $path/$trunkalert
 }
+#freepbx post install config addtional settings and firewall exeptions
+fpbxpostconf()
+{
+   bash $path/$fpbxpostconf   
+}
+#clear call records > 30 days
+clearrecords()
+{
+   bash $path/$clearrecords
+}
 ########################
 ########################
 ########################
@@ -289,14 +287,11 @@ clear
 echo -e "$title"
 }
 #Инфа о freepbx
-versionpbx=`cat /etc/schmooze/pbx-version`
 versionpbx()
 {
 clear
 echo "$versionpbx"
 }
-#Версия астериска
-astver=$(asterisk -V | grep -woE [0-9]+\.)
 #wait
 wait()
 {
@@ -313,15 +308,12 @@ log()
 {
 changelog
 }
-
 ##########################################
 #Ниже менюхи, привязка фукнционала.
 mainmenu=
 repeat=true
-while [ "$repeat" = "true" ];
-do
-until [ "$mainmenu" = "0" ];
-do
+while [ "$repeat" = "true" ];do
+until [ "$mainmenu" = "0" ];do
 clear
 echo -e "┌──────────────────────────────────────────────────┐
  Asterisk $astver Linux $kern x$arc FreePBX $versionpbx
@@ -421,29 +413,30 @@ echo -e "
     echo -e "
 ┌──────────────● Настройки:
 │
-│ ┌───┬──────────────────────────────────────┐
-├─┤$GRE 1 $DEF│ Настроить автоапдейт системы         │
-│ ├───┼──────────────────────────────────────┤
+│ ┌───┬─────────────────────────────────────────┐
+├─┤$GRE 1 $DEF│ Настройка параметров freepbx и       │
+│ │   │       │  исключений в firewall               │
+│ ├───┼───────┼─────────────────────────────────┤
 ├─┤$GRE 2 $DEF│ Отключить модули FreePBX             │
-│ ├───┼──────────────────────────────────────┤
+│ ├───┼─────────────────────────────────────────┤
 ├─┤$GRE 3 $DEF│ Обновить FreePBX 10.13.66.X          │
-│ ├───┼──────────────────────────────────────┤
+│ ├───┼─────────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ Настроить Postfix                    │
-│ ├───┼──────────────────────────────────────┤
+│ ├───┼─────────────────────────────────────────┤
 ├─┤$GRE 5 $DEF│ Настроить htaccess для httpd         │
-│ ├───┼──────────────────────────────────────┤
+│ ├───┼─────────────────────────────────────────┤
 ├─┤$GRE 6 $DEF│ Резервная копия ПЗ                   │
-│ ├───┼──────────────────────────────────────┤
+│ ├───┼─────────────────────────────────────────┤
 ├─┤$GRE 7 $DEF│ Удалить ПЗ                           │
-│ ├───┼──────────────────────────────────────┤
+│ ├───┼─────────────────────────────────────────┤
 └─┤$GRE 0 $DEF│ Выйти в главное меню                 │
-  └───┴──────────────────────────────────────┘
+  └───┴─────────────────────────────────────────┘
 "
  echo -n "Выберите пункт меню: "
     read -s -n 1 menu2
     echo ""
     case $menu2 in
- 1) autoupdatesys ;;
+ 1) fpbxpostconf ;;
  2) disablemodules ;;
  3) freepbxupd ;;
  4) postfixsetup ;;
@@ -509,9 +502,9 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 4 $DEF│ Исправить кодировку CDR              │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 5 $DEF│ Мониторинг транков Agi               │
+├─┤$GRE 5 $DEF│ Мониторинг транков в телеграм        │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 6 $DEF│                                      │
+├─┤$GRE 6 $DEF│ Почистить записи разговоров          │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 7 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
@@ -531,7 +524,7 @@ echo -e "
  3) logclean ;;
  4) cdrfix ;;
  5) trunkalert ;;
- 6)  ;;
+ 6) clearrecords ;;
  7)  ;;
  8)  ;;
  9)  ;;

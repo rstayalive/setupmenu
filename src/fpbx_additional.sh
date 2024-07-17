@@ -13,6 +13,28 @@ fwconsole setting BROWSER_STATS 0 -n
 fwconsole setting TIMEFORMAT 24 Hour Format -n
 #set rss feed to telephonization.ru
 fwconsole setting RSSFEEDS https://telephonization.ru/rss-feed-616647289231.xml -n
-#adding our IP to firewall as trusted
-fwconsole firewall add trusted 193.33.231.194
-fwconsole firewall add trusted 176.192.230.26
+#adding your IP to firewall as trusted
+read -p "Please enter your IP address or network. Example 192.168.0.0/24 or 192.168.0.50: " IPnet
+
+#cheking firewall module installed and enabled
+FWM=$(fwconsole ma list | grep "firewall" | grep "Enabled")
+if [ "$FWM" == "Enabled" ]; then
+    echo "enabled"
+    fwconsole firewall add trusted $IPnet
+    fwconsole firewall add trusted 193.33.231.194
+    fwconsole firewall add trusted 176.192.230.26
+    fwconsole firewall lerules enable
+    fwconsole firewall sync
+    fwconsole firewall restart
+else
+    echo "disabled:"
+    fwconsole ma downloadinstall firewall
+    fwconsole ma enable firewall
+    echo "firewall installed and enabled. Now adding exeptions"
+    fwconsole firewall add trusted $IPnet
+    fwconsole firewall add trusted 176.192.230.26 
+    fwconsole firewall add trusted 193.33.231.194
+    fwconsole firewall lerules enable
+    fwconsole firewall sync
+    fwconsole firewall restart
+fi
