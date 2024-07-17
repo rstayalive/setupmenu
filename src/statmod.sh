@@ -21,7 +21,6 @@ workdir='/root/setupmenu/src'
 
 clear
 echo "Начинаю установку модуля расширенной статистики звонков"
-#cp $workdir/asternic_cdr-1.6.3.tgz /tmp
 cd /tmp
 wget http://download.asternic.net/asternic_cdr-1.6.4.tgz
 tar -zxvf asternic_cdr-1.6.4.tgz
