@@ -24,8 +24,6 @@ prostoupd='prostoupd.sh'
 missedivrtoemail='missedivrtoemail.sh'
 missedreport='missedreport.sh'
 callback='callback.sh'
-iprules='iprulesv7.sh'
-iprulesgeoip='iprulesgeoip.sh'
 zvonilka='zvonilka.sh'
 websecure='websecure.sh'
 selfcert='selfsignedsert.sh'
@@ -68,7 +66,6 @@ cd $path
 chmod 777 $postfixsetup
 bash $postfixsetup
 }
-
 #Скрипт отключения ненужных модулей freepbx
 disablemodules()
 {
