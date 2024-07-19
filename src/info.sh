@@ -39,7 +39,6 @@ cpu=$(cat /proc/cpuinfo)
 mem=$(free -m)
 disk=$(df -kh)
 #clear old out info
-echo 'Remove old out info file, if any...'
 rm -f "${out}"
 #gathering system and asterisk info
 {
