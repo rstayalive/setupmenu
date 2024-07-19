@@ -1,23 +1,27 @@
 #!/bin/bash
-echo "Checking corrupted SQL database tables "
-mysqlcheck --all-databases | grep Corrupt > /tmp/corrupt
-if [ -s "/tmp/corrupt" ];
-then
-echo "bad. Executing fix"
+#FreePBX mariadb database error check and repair
+# Define variables
+corrupt_file="/tmp/corrupt"
+echo "Checking corrupted SQL database tables..."
+mysqlcheck --all-databases | grep Corrupt > "$corrupt_file"
+if [ -s "$corrupt_file" ]; then
+echo "Corrupted tables found. Executing repair..."
+ # Repair corrupted tables
 mysqlcheck --repair --all-databases > /dev/null 2>&1
-echo "Fixed"
-#checking one more time
-rm -rvf /tmp/corrupt
-mysqlcheck --all-databases | grep Corrupt > /tmp/corrupt
-if [ -s "/tmp/corrupt" ];
-then
-echo "Databased bad. not fixed!!!!!"
-echo "Mysql error, please fix sql database manualy"
+ echo "Repair attempt completed."
+# Recheck for corrupted tables
+rm -f "$corrupt_file"
+mysqlcheck --all-databases | grep Corrupt > "$corrupt_file"
+if [ -s "$corrupt_file" ]; then
+ echo "Database is still corrupted. Manual intervention required."
+ echo "MySQL error: please fix the SQL database manually."
 else
-echo "All ok"
+ echo "All corrupted tables have been successfully repaired."
 fi
 else
-echo "All ok"
+echo "No corrupted tables found. All OK."
 fi
-echo -e "$GRE press any key to continue $DEF"
+# Clean up temporary file
+rm -f "$corrupt_file"
+echo -e "Press any key to continue..."
 read -s -n 1
