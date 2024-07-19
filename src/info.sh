@@ -1,10 +1,5 @@
 #!/bin/bash
 #asterisk info gather script
-end()
-{
-echo -e "файл с иформацией лежит $out, нажмите любую кнопку для продолжения"
-read -s -n 1
-}
 # Determine architecture
 arc=`arch`
 if [ "$arc" == "x86_64" ];then
@@ -78,4 +73,3 @@ rm -f "${out}"
     echo "PHP CURL Version: $phpcurl"
     echo ──────────────────────────────────────────────────────
 } > "$out"
-end
