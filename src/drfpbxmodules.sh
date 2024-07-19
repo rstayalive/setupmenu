@@ -72,6 +72,6 @@ for stage in {1..3}; do
 done
 
 fwconsole reload &> /dev/null
-log "Modules disabled and removed. FreePBX reloaded."
+echo "Modules disabled and removed. FreePBX reloaded."
 
 waitend
