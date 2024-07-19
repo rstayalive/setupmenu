@@ -41,7 +41,7 @@ while true; do
 done
 cpath='/var/www/html/website_callback.php'
 hpath='/var/www/html/websitecallform.html'
-#copying callback php templat
+#copying callback php template
 cp /root/setupmenu/src/website_callback.php /var/www/html/
 #setting parameters to website_callback.php
 replace "your.freepbx.ip" "$AIP" -- $cpath
@@ -51,7 +51,7 @@ replace "start_time" "$start_time" -- $cpath
 replace "end_time" "$end_time" -- $cpath
 replace "incomingextension" "$extension" -- $cpath
 
-#changing user for website_callback.php
+#changing user for website_callback.php file
 chown asterisk:asterisk $cpath
 #adding context for callback to /etc/asterisk/extensions_custom.conf
 echo "
@@ -77,5 +77,6 @@ echo "
     </form>
 </body>
 </html>" >> $hpath
+#changing user for websitecallform.html file
 chown asterisk:asterisk $hpath
 echo "All settings done"

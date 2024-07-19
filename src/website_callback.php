@@ -1,7 +1,7 @@
 <?php
 // Database connection
-$link = mysqli_connect("localhost", "report", "2yCg6e8r5ng");
-mysqli_select_db($link, "asteriskcdrdb");
+//$link = mysqli_connect("localhost", "report", "2yCg6e8r5ng");
+//mysqli_select_db($link, "asteriskcdrdb");
 
 // Get the current date and time
 $today = date('Y-m-d');
