@@ -32,7 +32,7 @@ remove_modules=(
     freepbx_ha pagingpro parkpro pinsetspro queuestats qxact_reports
     recording_report restapps sangomacrm sipstation sms tts ttsengines
     vega vmnotify voicemail_report vqplus webcallback webrtc xmpp zulu
-    areminder broadcast callerid calllimit conferencespro configedit
+    areminder broadcast callerid calllimit conferencespro
     contactmanager cos cxpanel dahdiconfig daynight directory digium_phones
     dundicheck hotelwakeup irc motif pbdirectory sangomaconnect pbxmfa
     smsplus ucp callaccounting cos oracle_connector pms iotserver
