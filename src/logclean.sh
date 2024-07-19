@@ -51,5 +51,5 @@ echo > $PATH/freepbx.log
 echo > $PATH/cron
 } &> /dev/null
 echo "All jobs done"
-echo -e "$GRE press any key to continue $DEF"
+echo -e "press any key to continue"
 read -s -n 1
