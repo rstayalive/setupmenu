@@ -36,7 +36,7 @@ pbxfirm=$(cat /etc/schmooze/pbx-version 2>/dev/null)
 ip=$(fwconsole extip 2>/dev/null)
 freepbx=$(rpm -qa | grep freepbx)
 cpu=$(cat /proc/cpuinfo)
-mem=$(free -m)
+mem=$(free -h)
 disk=$(df -kh)
 #clear old out info
 rm -f "${out}"
