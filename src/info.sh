@@ -21,11 +21,9 @@ out="/tmp/outputinfo.txt"
 # Gather additional system information
 uname=$(uname -r)
 if [ -f /etc/redhat-release ]; then
-    red=$(cat /etc/redhat-release)
-    os_version="$red"
+    os_version=$(cat /etc/redhat-release)
 else
-    deb=$(cat /etc/debian_version)
-    os_version="$deb"
+    os_version=$(cat /etc/debian_version)
 fi
 pbxfirm=$(cat /etc/schmooze/pbx-version 2>/dev/null)
 ip=$(fwconsole extip 2>/dev/null)
@@ -37,40 +35,49 @@ disk=$(df -kh)
 rm -f "${out}"
 #gathering system and asterisk info
 {
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
     echo "Linux Kernel Version: $uname"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
     echo "OS Version: $os_version"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
     echo "Architecture: x$arc"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
     echo "External IP: $ip"
-    echo ──────────────────────────────────────────────────────
-    echo "CPU Info: $cpu"
-    echo ──────────────────────────────────────────────────────
-    echo "Memory Info: $mem"
-    echo ──────────────────────────────────────────────────────
-    echo "Disk Usage: $disk"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
+    echo "CPU Info:"
+    echo "$cpu"
+    echo "──────────────────────────────────────────────────────"
+    echo "Memory Info:"
+    echo "$mem"
+    echo "──────────────────────────────────────────────────────"
+    echo "Disk Usage:"
+    echo "$disk"
+    echo "──────────────────────────────────────────────────────"
     echo "FreePBX RPM Version: $freepbx"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
     echo "FreePBX Firmware Version: $pbxfirm"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
     echo "Asterisk Version: $astver"
-    echo ──────────────────────────────────────────────────────
-    echo "AMI Settings: $ami"
-    echo ──────────────────────────────────────────────────────
-    echo "CEL Status: $cel"
-    echo ──────────────────────────────────────────────────────
-    echo "CEL Check: $celcheck"
-    echo ──────────────────────────────────────────────────────
-    echo "CDR Check: $cdrcheck"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
+    echo "AMI Settings:"
+    echo "$ami"
+    echo "──────────────────────────────────────────────────────"
+    echo "CEL Status:"
+    echo "$cel"
+    echo "──────────────────────────────────────────────────────"
+    echo "CEL Check:"
+    echo "$celcheck"
+    echo "──────────────────────────────────────────────────────"
+    echo "CDR Check:"
+    echo "$cdrcheck"
+    echo "──────────────────────────────────────────────────────"
     echo "PHP Version: $phpver"
-    echo ──────────────────────────────────────────────────────
-    echo "PHP JSON Check: $phpjson"
-    echo ──────────────────────────────────────────────────────
-    echo "PHP CURL Version: $phpcurl"
-    echo ──────────────────────────────────────────────────────
+    echo "──────────────────────────────────────────────────────"
+    echo "PHP JSON Check:"
+    echo "$phpjson"
+    echo "──────────────────────────────────────────────────────"
+    echo "PHP CURL Version:"
+    echo "$phpcurl"
+    echo "──────────────────────────────────────────────────────"
 } > "$out"
 echo -e "Файл отчета лежит по пути: $out"
