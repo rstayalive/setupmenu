@@ -4,7 +4,7 @@
 if [ ! `id -u` = 0 ]; then echo -en "\033[0;31mERROR: script should be started under superuser\n\033[0m"; exit 1; fi
 #Variables
 title="Скрипт автоматизации рутины с freepbx"
-ver="v6.0"
+ver="v6.1"
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
@@ -45,6 +45,7 @@ logclean='logclean.sh'
 trunkalert='trk_pjsip_monitoring.sh'
 fpbxpostconf='fpbx_additional.sh'
 clearrecords='audiofilesclean.sh'
+disk_health_check='hddhealthcheck.sh'
 #####################################
 #Функционал разбитый на скрипты
 #Обновление скрипта
@@ -243,6 +244,10 @@ fpbxpostconf()
 clearrecords()
 {
    bash $path/$clearrecords
+}
+#HDD/SSD etc disk smart check
+disk_health_check(){
+   bash $path/$disk_health_check
 }
 ########################
 ########################
@@ -503,7 +508,7 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 6 $DEF│ Почистить записи разговоров          │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 7 $DEF│                                      │
+├─┤$GRE 7 $DEF│ Проверить диски на ошибки            │
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 8 $DEF│                                      │
 │ ├───┼──────────────────────────────────────┤
@@ -522,7 +527,7 @@ echo -e "
  4) cdrfix ;;
  5) trunkalert ;;
  6) clearrecords ;;
- 7)  ;;
+ 7) disk_health_check ;;
  8)  ;;
  9)  ;;
  0) mainmenu ;;
