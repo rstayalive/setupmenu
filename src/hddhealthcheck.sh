@@ -68,3 +68,5 @@ done
 
 # Clean up
 rm -f /tmp/relocated_sectors.txt
+echo -e "press any key to continue"
+read -s -n 1
