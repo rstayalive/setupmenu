@@ -4,7 +4,7 @@
 if [ ! `id -u` = 0 ]; then echo -en "\033[0;31mERROR: script should be started under superuser\n\033[0m"; exit 1; fi
 #Variables
 title="Скрипт автоматизации рутины с freepbx"
-ver="v6.1"
+ver="v6.2"
 RED=\\e[91m
 GRE=\\e[92m
 DEF=\\e[0m
@@ -57,7 +57,7 @@ git reset --hard origin
 git pull
 chmod 777 $workdir/$scupd
 repeat=false
-sh $0
+bash $0
 exit 0
 }
 #Скрипт настройки postfix для отправки писем с астера
@@ -72,35 +72,35 @@ disablemodules()
 {
 cd $path
 chmod 777 $disablemodules
-sh $disablemodules
+bash $disablemodules
 }
 # Скрипт обновления freepbx
 freepbxupd()
 {
 cd $path
 chmod 777 $freepbxupd
-sh $freepbxupd
+bash $freepbxupd
 }
 # Скрипт установки модуля статистики asternic
 statmod()
 {
 cd $path
 chmod 777 $statmod
-sh $statmod
+bash $statmod
 }
 #Скрипт который переписывает cel.conf
 celoverwrite()
 {
 cd $path
 chmod 777 $celoverwrite
-sh $celoverwrite
+bash $celoverwrite
 }
 # Скрипт установки софта
 isoft()
 {
 cd $path
 chmod 777 $isoft
-sh $isoft
+bash $isoft
 }
 #Скрипт установки простых звонков
 prostiezvonki()
@@ -383,9 +383,9 @@ echo -e "
 │ ├───┼──────────────────────────────────────┤
 ├─┤$GRE 7 $DEF│ Проверить ssl сертификат             │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 8 $DEF│ Интеграция с Slack                   │
+├─┤$GRE 8 $DEF│                              │
 │ ├───┼──────────────────────────────────────┤
-├─┤$GRE 9 $DEF│ Интеграция с Slack и yandex          │
+├─┤$GRE 9 $DEF│                              │
 │ ├───┼──────────────────────────────────────┤
 └─┤$GRE 0 $DEF│ Выйти в главное меню                 │
   └───┴──────────────────────────────────────┘
@@ -401,8 +401,8 @@ echo -e "
     5) zvonilka ;;
     6) certinst ;;
     7) certcheck ;;
-    8) slackint ;;
-    9) slackintwya ;;
+    8)  ;;
+    9)  ;;
     0) mainmenu ;;
     *) echo -e "$REDОшибка, выберите 1-9 или 0$DEF"
     esac
