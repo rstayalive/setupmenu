@@ -13,5 +13,5 @@ usage:
 2. yum install git -y
 3. git clone https://github.com/rstayalive/setupmenu
 4. cd setupmenu
-5. chmod 777 setupmenu.sh
+5. chmod +x setupmenu.sh
 6. bash setupmenu.sh
