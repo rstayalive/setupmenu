@@ -5,7 +5,7 @@ Language: RU/EN
 
 Script work with FreePBX 13-16 asterisk 13/20 CentOS 6.X/7.X under root
 
-2024 testing FreePBX 17 asterisk 21. 90% scripts work. If you found any errors please send me feedback to https://t.me/rstayalive
+2024 testing FreePBX 17 (debian 12) asterisk 21. 90% scripts work. If you found any errors please send me feedback to https://t.me/rstayalive
 
 usage:
 
