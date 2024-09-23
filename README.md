@@ -1,7 +1,7 @@
 # setupmenu
 FreePBX deployment script
 
-Language: only RU
+Language: RU/EN
 
 Script work with FreePBX 13-16 asterisk 13/20 CentOS 6.X/7.X under root
 
