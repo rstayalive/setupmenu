@@ -11,6 +11,7 @@ fi
 astver=$(asterisk -V | grep -woE [0-9]+\.)
 ami=$(asterisk -rx 'manager show settings')
 cel=$(asterisk -rx 'cel show status')
+odbc=$(asterisk -rx 'odbc show')
 celcheck=$(mysql asteriskcdrdb --execute="SELECT id, eventtype, eventtime, cid_num, exten, uniqueid, linkedid, channame FROM cel ORDER BY id DESC LIMIT 10;" 2>/dev/null)
 cdrcheck=$(mysql asteriskcdrdb --execute="SELECT recordingfile FROM cdr ORDER BY calldate DESC LIMIT 10;" 2>/dev/null)
 phpver=$(php -v)
@@ -64,6 +65,9 @@ rm -f "${out}"
     echo "──────────────────────────────────────────────────────"
     echo "CEL Status:"
     echo "$cel"
+    echo "──────────────────────────────────────────────────────"
+    echo "ODBC Status:"
+    echo "$odbc"
     echo "──────────────────────────────────────────────────────"
     echo "CEL Check:"
     echo "$celcheck"
