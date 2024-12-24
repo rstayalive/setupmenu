@@ -24,6 +24,25 @@ DB_HOST=$(grep -oP '\$amp_conf\["AMPDBHOST"\]\s*=\s*"\K[^"]+' $CONFIG_FILE)
 DB_PORT=$(grep -oP '\$amp_conf\["AMPDBPORT"\]\s*=\s*"\K[^"]+' $CONFIG_FILE)
 DB_NAME=$(grep -oP '\$amp_conf\["AMPDBNAME"\]\s*=\s*"\K[^"]+' $CONFIG_FILE)
 
+# Проверка подключения к базе данных
+if mysql -u"$DB_USER" -p"$DB_PASS" -e "USE asteriskcdrdb;" >/dev/null 2>&1; then
+    echo "Подключение к базе данных $DB_NAME успешно!"
+else
+    echo "Ошибка подключения к базе данных $DB_NAME."
+    exit 1
+fi
+
+# SQL в asterisk
+run_mysql_query() {
+  mysql -u$DB_USER -p$DB_PASS asterisk -e "$1" 2>/dev/null | column -t >> $REPORT_FILE
+}
+
+# SQL в asteriskcdrdb
+run_mysql_querya() {
+  mysql -u$DB_USER -p$DB_PASS asteriskcdrdb -e "$1" 2>/dev/null | column -t >> $REPORT_FILE
+}
+
+
 # Очистка файла отчета
 > $REPORT_FILE
 
@@ -76,10 +95,10 @@ write_to_report "\n==================================\n"
 
 # Последние записи из баз данных
 write_to_report "\nLast 10 CEL Records:\n"
-mysql -u$DB_USER -p$DB_PASS asteriskcdrdb -e "SELECT id, eventtype, eventtime, cid_num, exten, uniqueid, linkedid, channame FROM cel ORDER BY id DESC LIMIT 10;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_querya "SELECT id, eventtype, eventtime, cid_num, exten, uniqueid, linkedid, channame FROM cel ORDER BY id DESC LIMIT 10;"
 
 write_to_report "\nLast 10 CDR Records:\n"
-mysql -u$DB_USER -p$DB_PASS asteriskcdrdb -e "SELECT recordingfile FROM cdr ORDER BY calldate DESC LIMIT 10;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_querya "SELECT recordingfile FROM cdr ORDER BY calldate DESC LIMIT 10;"
 
 # Используемые extensions
 write_to_report "\nSIP Extensions:\n"
@@ -90,18 +109,18 @@ rasterisk -rx "pjsip list endpoints" 2>/dev/null | awk '/Endpoint:/ {print $2}' 
 
 # Используемые ringgroups
 write_to_report "\nRing Groups:\n"
-mysql -u$DB_USER -p$DB_PASS -h$DB_HOST -P$DB_PORT $DB_NAME -e "SELECT grpnum, strategy, grptime, grplist, postdest, recording FROM ringgroups;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "SELECT grpnum, strategy, grptime, grplist, postdest, recording FROM ringgroups;"
 
 # Используемые queues
 write_to_report "\nQueues Config:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "SELECT extension, descr, dest FROM queues_config;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "SELECT extension, descr, dest FROM queues_config;"
 
 write_to_report "\nQueues Details:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "SELECT id, keyword, data FROM queues_details;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "SELECT id, keyword, data FROM queues_details;"
 
 # Используемые IVR
 write_to_report "\nIVR Details:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "SELECT id, name, invalid_destination, timeout_time, timeout_destination FROM ivr_details;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "SELECT id, name, invalid_destination, timeout_time, timeout_destination FROM ivr_details;"
 
 # Используемые trunks
 write_to_report "\nSIP Trunks:\n"
@@ -112,16 +131,16 @@ write_to_report "$(asterisk -rx "pjsip list registrations" 2>/dev/null || echo "
 write_to_report "\n==================================\n"\
 
 write_to_report "\nTrunks from DB:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "select trunkid, channelid, name, tech from trunks;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "select trunkid, channelid, name, tech from trunks;"
 
 write_to_report "\nOUT routes:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "select route_id, name from outbound_routes;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "select route_id, name from outbound_routes;"
 
 write_to_report "\nOUT routes trunks:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "select route_id, trunk_id from outbound_route_trunks;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "select route_id, trunk_id from outbound_route_trunks;"
 
 write_to_report "\nIN routes:\n"
-mysql -u$DB_USER -p$DB_PASS asterisk -e "select extension, description, destination from incoming;" 2>/dev/null | column -t >> $REPORT_FILE
+run_mysql_query "select extension, description, destination from incoming;"
 
 # Печать пути к отчету
 echo "Отчет сформирован и сохранен в $REPORT_FILE"
