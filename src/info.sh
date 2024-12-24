@@ -109,6 +109,19 @@ write_to_report "$(asterisk -rx "sip show registry" 2>/dev/null || echo "Unavail
 
 write_to_report "\nPJSIP Trunks:\n"
 write_to_report "$(asterisk -rx "pjsip list registrations" 2>/dev/null || echo "Unavailable")"
+write_to_report "\n==================================\n"\
+
+write_to_report "\nTrunks from DB:\n"
+mysql -u$DB_USER -p$DB_PASS asterisk -e "select trunkid, channelid, name, tech from trunks;" 2>/dev/null | column -t >> $REPORT_FILE
+
+write_to_report "\nOUT routes:\n"
+mysql -u$DB_USER -p$DB_PASS asterisk -e "select route_id, name from outbound_routes;" 2>/dev/null | column -t >> $REPORT_FILE
+
+write_to_report "\nOUT routes trunks:\n"
+mysql -u$DB_USER -p$DB_PASS asterisk -e "select route_id, trunk_id from outbound_route_trunks;" 2>/dev/null | column -t >> $REPORT_FILE
+
+write_to_report "\nIN routes:\n"
+mysql -u$DB_USER -p$DB_PASS asterisk -e "select extension, description, destination from incoming;" 2>/dev/null | column -t >> $REPORT_FILE
 
 # Печать пути к отчету
-echo "Отчет сформирован и сохранен в | Report generated and saved to $REPORT_FILE"
+echo "Отчет сформирован и сохранен в $REPORT_FILE"
