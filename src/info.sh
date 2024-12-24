@@ -42,7 +42,6 @@ run_mysql_querya() {
   mysql -u$DB_USER -p$DB_PASS asteriskcdrdb -e "$1" 2>/dev/null | column -t >> $REPORT_FILE
 }
 
-
 # Очистка файла отчета
 > $REPORT_FILE
 
