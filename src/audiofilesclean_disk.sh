@@ -1,5 +1,6 @@
 #!/bin/bash
 # freepbx Find and clean files more than 365 days old from the current date based on disk filling more than 85%
+# add crontab job - 10 01 * * * /bin/bash /root/setupmenu/src/audiofilesclean_disk.sh
 
 # Setting disk / usage threshold
 THRESHOLD=85
