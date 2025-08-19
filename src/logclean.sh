@@ -19,6 +19,7 @@ $RM -rvf $PATH/itgrix_amo.log-*
 $RM -rvf $PATH/fail2ban.log-*
 $RM -rvf $PATH/cron-*
 $RM -rvf $PATH/boot.log-*
+> $PATH/messages
 } &> /dev/null
 echo "System log clean done"
 echo "Start cleaning asterisk logs job"
@@ -29,12 +30,14 @@ $RM -rvf $PATHA/fail2ban-*
 $RM -rvf $PATHA/freepbx.log-*
 $RM -rvf $PATHA/firewall.log.*
 $RM -rvf $PATHA/full-*
+$RM -rvf $PATHA/full.*
 $RM -rvf $PATHA/queue_log-*
 $RM -rvf $PATHA/secure.*
 $RM -rvf $PATHA/ucp_err.log-*
 $RM -rvf $PATHA/ucp_out.log-*
 $RM -rvf $PATHA/security.*
 $RM -rvf $PATHA/cel_prostiezvonki_*
+> $PATHA/freepbx.log 
 } &> /dev/null
 echo "Asterisk log clean done"
 #free some logs
