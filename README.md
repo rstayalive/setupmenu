@@ -10,7 +10,7 @@ If you found any errors please send me feedback to https://t.me/rstayalive
 usage:
 
 1. cd /root
-2. yum install git -y
+2. yum/apt install git -y
 3. git clone https://github.com/rstayalive/setupmenu
 4. cd setupmenu
 5. chmod +x setupmenu.sh
