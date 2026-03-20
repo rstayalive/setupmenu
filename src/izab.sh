@@ -1,62 +1,91 @@
 #!/bin/bash
-#This script setup Zabbix-agent to Centos 7 and configure to our zabbix-server.
-hname=`hostname`
-echo -e "\nPlease enter the zabbix-agent port.(not zabbix-server port)"
-read port;
-irule=$(iptables -vnL INPUT | grep -oE '$port')
-system=$(grep -oE '[0-9]+\.[0-9]+' /etc/redhat-release)
-	if [ "$system" == "6.6" ];
-		then
-yum -y erase zabbix-release
-yum clean all
-#rpm -Uvh http://repo.zabbix.com/zabbix/5.2/rhel/6/x86_64/zabbix-release-5.2-1.el6.noarch.rpm
-rpm -Uvh http://repo.zabbix.com/zabbix/6.4/rhel/6/x86_64/zabbix-agent-6.4.7-release1.el6.x86_64.rpm
-yum -y instal zabbix-agent
-sleep 5
-Pak=$(yum list installed | grep -oE 'zabbix-agent')
-if [ "$Pak" == "zabbix-agent" ]
-then 
-echo "zabbix-agent installed for $system"
-else 
-echo "Package not installed! Trying start another setup script"
-bash /root/setupmenu/src/izab2.sh
-exit
-                fi
-                    replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
-                        replace "ServerActive=127.0.0.1" "ServerActive=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
-                            replace "Hostname=Zabbix server" "Hostname=$hname" -- /etc/zabbix/zabbix_agentd.conf                    
-                                replace "# ListenPort=10050" "ListenPort=$port" -- /etc/zabbix/zabbix_agentd.conf
-                                    service zabbix-agent restart
-                                    chkconfig zabbix-agent on
-                                    if [ "$irule" == "$port" ]
-                                        then echo "This $irule already exists"
-                                        else 
-                                            iptables -A INPUT -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
-                                                service iptables save
-                                    fi
-        else
-yum -y erase zabbix-release
-yum clean all
-rpm -Uvh http://repo.zabbix.com/zabbix/6.4/rhel/7/x86_64/zabbix-agent-6.4.7-release1.el7.x86_64.rpm
-yum -y install pcre2.x86_64
-yum -y install zabbix-agent
-Pak=$(yum list installed | grep -oE 'zabbix-agent')
-if [ "$Pak" == "zabbix-agent" ]
-then echo "zabbix-agent installed for $system"
-else echo "Package not installed! Trying start another setup script"
-exit
+# Centos 7 and Debian 12 supported
+# zabbix-agent installation script
+
+echo "Preparing to install Zabbix Agent 2"
+
+# OS detection
+if grep -q -E "CentOS Linux 7|Red Hat Enterprise Linux 7|CentOS Linux release 7" /etc/redhat-release 2>/dev/null || [ -f /etc/centos-release ]; then
+    OS="centos7"
+    echo "detected CentOS 7"
+elif [ -f /etc/debian_version ] && grep -q "12" /etc/debian_version 2>/dev/null; then
+    OS="debian12"
+    echo "detected Debian 12"
+else
+    echo "❌ Error. Supported onely CentOS 7 и Debian 12 (FreePBX 16/17)"
+    exit 1
 fi
-                            replace "Server=127.0.0.1" "Server=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
-                                replace "ServerActive=127.0.0.1" "ServerActive=176.192.230.26" -- /etc/zabbix/zabbix_agentd.conf
-                                    replace "Hostname=Zabbix server" "Hostname=$hname" -- /etc/zabbix/zabbix_agentd.conf
-                                        replace "# ListenPort=10050" "ListenPort=$port" -- /etc/zabbix/zabbix_agentd.conf
-                                            systemctl restart zabbix-agent
-                                            systemctl enable zabbix-agent
-                                            if [ "$irule" == "$port" ]
-                                                then echo "This $irule already exists"
-                                                else 
-                                                    iptables -A INPUT -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
-                                                        service iptables save
-                                            fi
+
+# some questions
+read -p "Enter IP Zabbix-server [z.telephonization.ru]: " SERVER_IP
+SERVER_IP=${SERVER_IP:-z.telephonization.ru}
+
+read -p "Enter zabbix-agent listen port [10050]: " AGENT_PORT
+AGENT_PORT=${AGENT_PORT:-10050}
+
+HOSTNAME=$(hostname)
+
+# installing zabbix repo
+echo "Installing zabbix repozitory"
+
+if [ "$OS" = "centos7" ]; then
+    rpm -Uvh --force https://repo.zabbix.com/zabbix/7.2/release/rhel/7/noarch/zabbix-release-latest-7.2.el7.noarch.rpm
+    yum clean all
+elif [ "$OS" = "debian12" ]; then
+    wget -q https://repo.zabbix.com/zabbix/7.2/release/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.2+debian12_all.deb -O /tmp/zabbix-release.deb
+    dpkg -i /tmp/zabbix-release.deb
+    apt update -qq
+fi
+
+# installing zabbix-agent2
+echo "setup zabbix-agent2 start"
+if [ "$OS" = "centos7" ]; then
+    yum install -y zabbix-agent2
+elif [ "$OS" = "debian12" ]; then
+    apt install -y zabbix-agent2
+fi
+
+# configuring conf
+CONF="/etc/zabbix/zabbix_agent2.conf"
+cp "$CONF" "$CONF.bak.$(date +%F_%H-%M)"
+
+echo "Configuring zabbix $CONF (replace → sed fallback)..."
+
+# replacing
+replace_string() {
+    local old="$1"
+    local new="$2"
+    local file="$3"
+    if command -v replace >/dev/null 2>&1; then
+        replace "$old" "$new" -- "$file"
+    else
+        sed -i "s|^$old|$new|" "$file"
     fi
-    
+}
+
+replace_string "Server=127.0.0.1" "Server=$SERVER_IP" "$CONF"
+replace_string "ServerActive=127.0.0.1" "ServerActive=$SERVER_IP" "$CONF"
+replace_string "Hostname=Zabbix server" "Hostname=$HOSTNAME" "$CONF"
+replace_string "# ListenPort=10050" "ListenPort=$AGENT_PORT" "$CONF"
+
+# configuring autostart
+echo "Enabling autostart zabbix-agent"
+if [ "$OS" = "centos7" ]; then
+    systemctl daemon-reload
+    systemctl enable --now zabbix-agent2
+else
+    systemctl enable --now zabbix-agent2
+fi
+#restarting 
+systemctl restart zabbix-agent2
+echo "Setup Done"
+
+# Some checks
+echo "Changes in config please check for errors"
+systemctl status zabbix-agent2 --no-pager | head -n 12
+echo "Hostname: $(grep '^Hostname=' $CONF)"
+echo "Server: $(grep '^Server=' $CONF)"
+echo "ListenPort: $(grep '^ListenPort=' $CONF)"
+
+echo -e "\n✅ All done, zabbix-agent succesfuly installed and configured"
+echo "   check new zabbix host: $HOSTNAME"
