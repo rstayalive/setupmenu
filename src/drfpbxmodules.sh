@@ -25,6 +25,7 @@ uninstall_modules=(
     qxact_reports vega pbxmfa smsplus ucpnode ucp missedcall superfecta
     presencestate vmblast phonebook donotdisturb cidlookup callback
     sangomaconnect callaccounting oracle_connector queuemetrics sng_mcu
+    scribe cdrpro
 )
 
 remove_modules=(
@@ -36,7 +37,7 @@ remove_modules=(
     contactmanager cos cxpanel dahdiconfig daynight directory digium_phones
     dundicheck hotelwakeup irc motif pbdirectory sangomaconnect pbxmfa
     smsplus ucp callaccounting cos oracle_connector pms iotserver
-    queuemetrics sng_mcu
+    queuemetrics sng_mcu scribe cdrpro
 )
 
 echo "Job started. Please wait."
